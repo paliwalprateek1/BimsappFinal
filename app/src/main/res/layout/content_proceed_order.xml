@@ -13,4 +13,11 @@
     tools:context="com.example.prateek.bimsapp.ProceedOrder"
     tools:showIn="@layout/activity_proceed_order">
 
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_proceed_order"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="280dp" />
+
 </RelativeLayout>

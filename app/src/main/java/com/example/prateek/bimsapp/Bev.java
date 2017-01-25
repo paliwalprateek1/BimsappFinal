@@ -95,8 +95,8 @@ public class Bev extends Fragment {
                     Object value = snapshot.child("f").getValue();
                     Object valueF = snapshot.child("p").getValue();
                     //prepareFoodData(value.toString(), valueF.toString());
-                    Food food = new Food(value.toString(), valueF.toString(), null);
-                    foodList.add(food);
+//                    Food food = new Food(value.toString(), valueF.toString(), valueU.toString(), null, null);
+  //                  foodList.add(food);
                     mAdapter.notifyDataSetChanged();
                     Log.d("food "+value.toString(), "price "+valueF.toString());
                 }

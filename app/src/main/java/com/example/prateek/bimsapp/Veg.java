@@ -75,6 +75,10 @@ public class Veg extends Fragment {
         }
         View view = inflater.inflate(R.layout.fragment_veg, container, false);
 
+        Food food = new Food("Maggie", "30", null, null, null);
+        foodList.add(food);
+
+
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mAdapter = new FoodAdapter(foodList);
@@ -121,7 +125,7 @@ public class Veg extends Fragment {
                     Object valueF = snapshot.child("p").getValue();
                     Object valueU = snapshot.child("url").getValue();
                     Log.d(valueU.toString(), "url che");
-                    Food food = new Food(value.toString(), valueF.toString(), valueU.toString());
+                    Food food = new Food(value.toString(), valueF.toString(), valueU.toString(), null, null);
                     foodList.add(food);
                     mAdapter.notifyDataSetChanged();
                     Log.d("food "+value.toString(), "price "+valueF.toString());

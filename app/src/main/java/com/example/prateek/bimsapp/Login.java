@@ -1,6 +1,7 @@
 package com.example.prateek.bimsapp;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -97,9 +98,6 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.d("Reached", "2");
                             Log.w(TAG, "signInWithCredential", task.getException());
@@ -132,8 +130,29 @@ public class Login extends AppCompatActivity {
             } else {
                 Log.d("failed", "1");
                 // Google Sign In failed, update UI appropriately
-                // ...
             }
+        }
+        GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+        GoogleSignInAccount acct = result.getSignInAccount();
+        String personName = acct.getDisplayName();
+        String personGivenName = acct.getGivenName();
+        String personFamilyName = acct.getFamilyName();
+        String personEmail = acct.getEmail();
+        String personId = acct.getId();
+        Uri personPhoto = acct.getPhotoUrl();
+        String s = personPhoto.toString();
+        Log.d("here is", "  " + personName);
+        Log.d("here is", "  " + personGivenName);
+        Log.d("here is", "  " + personFamilyName);
+        Log.d("here is", "  " + personEmail);
+        Log.d("here is", "  " + personId);
+
+        StoreSharedPreferences.setUserEmail(this, personEmail);
+        StoreSharedPreferences.setUserName(this, personGivenName);
+        if(StoreSharedPreferences.getUserEmail(this)!=null) {
+//                Intent intent = new Intent(Login.this, NumberAndLocation.class);
+//                startActivity(intent);
+//                finish();
         }
     }
 
