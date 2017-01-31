@@ -29,18 +29,9 @@ public class ProceedOrder extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
 
         foodList = storeSharedPreferences.loadFoodQuantity(this);
-
-
+        //storeSharedPreferences.removeAllQuant(this);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_proceed_order);
         mAdapter = new ProceedFoodAdapter(foodList);
@@ -53,9 +44,14 @@ public class ProceedOrder extends AppCompatActivity {
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                storeSharedPreferences.removeFavoriteQuantity(getApplication(), foodList.get(position));
-                mAdapter.notifyDataSetChanged();
-
+                FoodQuantity fq = new FoodQuantity();
+                fq = foodList.get(position);
+                FoodQuantity e = new FoodQuantity();
+                e.setQuantity("44");
+                e.setPrice("33");
+                e.setFood("maaa");
+                foodList.add(2, e);
+                fq.getQuantity();
             }
 
             @Override
@@ -63,5 +59,6 @@ public class ProceedOrder extends AppCompatActivity {
 
             }
         }));
+
     }
 }

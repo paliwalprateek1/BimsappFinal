@@ -14,6 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.DataSnapshot;
@@ -32,10 +35,8 @@ public class Veg extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
     private String mParam1;
     private String mParam2;
-
     private OnFragmentInteractionListener mListener;
 
     public Veg() {
@@ -58,15 +59,17 @@ public class Veg extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+
     RecyclerView recyclerView;
     private FoodAdapter mAdapter;
     private List<Food> foodList = new ArrayList<>();
     Firebase ref;
     Food food = new Food();
-    Button dialogOk;
-
-
-
+    Button dialogOk, ua, da;
+    TextView count;
+    FoodQuantity fa = new FoodQuantity();
+    NumberPicker np;
+    RelativeLayout rl;
     StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
 
     @Override
@@ -96,11 +99,9 @@ public class Veg extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 Food f = new Food();
-                FoodQuantity fa = new FoodQuantity();
                 f = foodList.get(position);
                 fa.setPrice(f.getPrice());
                 fa.setFood(f.getFood());
-                fa.setQuantity("77");
 
                 final Dialog dialog = new Dialog(getActivity());
                 dialog.setContentView(R.layout.dialog_counter);
@@ -110,20 +111,47 @@ public class Veg extends Fragment {
 
                 Log.d("her image url is", f.getImageUrl()+"");
 
+                count = (TextView) dialog.findViewById(R.id.count);
+                count.setText("0");
+                ua = (Button) dialog.findViewById(R.id.buttonUp);
+                da = (Button) dialog.findViewById(R.id.buttonDown);
+
+                ua.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        int s = Integer.parseInt(count.getText().toString());
+                        s++;
+                        count.setText(Integer.toString(s));
+                    }
+                });
+
+                da.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        int s = Integer.parseInt(count.getText().toString());
+                        if(s>0) {
+                            s--;
+                            count.setText(Integer.toString(s));
+                        }
+                    }
+                });
+
                 Picasso.with(dialogImage.getContext())
                         .load(f.getImageUrl())
                         .transform(new CircleTransform())
                         .into(dialogImage);
-
-                storeSharedPreferences.addFoodQuantity(getActivity(), fa);
 
                 dialogOk = (Button) dialog.findViewById(R.id.counterOk);
 
                 dialogOk.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //Toast.makeText(getActivity(), count.getText().toString(), Toast.LENGTH_SHORT).show();
 
+
+                        if(!(count.getText().toString()).equals("0")) {
+                            setValue(count.getText().toString());
+                            storeData(fa);
+                        }
                         dialog.dismiss();
                     }
                 });
@@ -133,13 +161,22 @@ public class Veg extends Fragment {
             @Override
             public void onLongClick(View view, int position) {
                 StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
-                List a = storeSharedPreferences.loadFavorites(getActivity());
-                int n = a.size();
-                Toast.makeText(getActivity(), n+"", Toast.LENGTH_SHORT).show();
+                storeSharedPreferences.removeAllQuant(getActivity());
+
             }
         }));
         return view;
     }
+    public void setValue(String str){
+        fa.setQuantity(str);
+    }
+
+    public void storeData(FoodQuantity fq){
+        StoreSharedPreferences s = new StoreSharedPreferences();
+        s.addFoodQuantity(getActivity(), fq);
+
+    }
+
 
     private void getVegMenu(){
         Firebase objRef = ref.child("Menu");

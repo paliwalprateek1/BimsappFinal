@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.prateek.bimsapp.Food;
 import com.firebase.client.DataSnapshot;
@@ -71,7 +72,9 @@ public class NonVeg extends Fragment {
     private List<Food> foodList = new ArrayList<>();
     private RecyclerView recyclerView;
     StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
-    Button dialogOk;
+    Button dialogOk, ua, da;
+    TextView count;
+    FoodQuantity fa = new FoodQuantity();
     private FoodAdapter mAdapter;
     //just a comment to chech githib settings
 
@@ -96,11 +99,9 @@ public class NonVeg extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 Food f = new Food();
-                FoodQuantity fa = new FoodQuantity();
                 f = foodList.get(position);
                 fa.setPrice(f.getPrice());
                 fa.setFood(f.getFood());
-                fa.setQuantity("77");
 
                 final Dialog dialog = new Dialog(getActivity());
                 dialog.setContentView(R.layout.dialog_counter);
@@ -110,20 +111,47 @@ public class NonVeg extends Fragment {
 
                 Log.d("her image url is", f.getImageUrl()+"");
 
+                count = (TextView) dialog.findViewById(R.id.count);
+                count.setText("0");
+                ua = (Button) dialog.findViewById(R.id.buttonUp);
+                da = (Button) dialog.findViewById(R.id.buttonDown);
+
+                ua.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        int s = Integer.parseInt(count.getText().toString());
+                        s++;
+                        count.setText(Integer.toString(s));
+                    }
+                });
+
+                da.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        int s = Integer.parseInt(count.getText().toString());
+                        if(s>0) {
+                            s--;
+                            count.setText(Integer.toString(s));
+                        }
+                    }
+                });
+
                 Picasso.with(dialogImage.getContext())
                         .load(f.getImageUrl())
                         .transform(new CircleTransform())
                         .into(dialogImage);
-
-                storeSharedPreferences.addFoodQuantity(getActivity(), fa);
 
                 dialogOk = (Button) dialog.findViewById(R.id.counterOk);
 
                 dialogOk.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //Toast.makeText(getActivity(), count.getText().toString(), Toast.LENGTH_SHORT).show();
 
+
+                        if(!(count.getText().toString()).equals("0")) {
+                            setValue(count.getText().toString());
+                            storeData(fa);
+                        }
                         dialog.dismiss();
                     }
                 });
@@ -134,6 +162,15 @@ public class NonVeg extends Fragment {
             }
         }));
         return view;
+    }
+    public void setValue(String str){
+        fa.setQuantity(str);
+    }
+
+    public void storeData(FoodQuantity fq){
+        StoreSharedPreferences s = new StoreSharedPreferences();
+        s.addFoodQuantity(getActivity(), fq);
+
     }
 
     Firebase ref;
