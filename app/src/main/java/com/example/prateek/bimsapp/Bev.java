@@ -1,5 +1,6 @@
 package com.example.prateek.bimsapp;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,16 +10,20 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.util.SortedListAdapterCallback;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +51,8 @@ public class Bev extends Fragment {
         return fragment;
     }
 
+    StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
+    Button dialogOk;
 
 
     private List<Food> foodList = new ArrayList<>();
@@ -75,6 +82,39 @@ public class Bev extends Fragment {
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
+                Food f = new Food();
+                FoodQuantity fa = new FoodQuantity();
+                f = foodList.get(position);
+                fa.setPrice(f.getPrice());
+                fa.setFood(f.getFood());
+                fa.setQuantity("77");
+
+                final Dialog dialog = new Dialog(getActivity());
+                dialog.setContentView(R.layout.dialog_counter);
+                dialog.setTitle(f.getFood());
+                ImageView image = (ImageView) dialog.findViewById(R.id.image);
+                ImageView dialogImage = (ImageView) dialog.findViewById(R.id.dialogImage);
+
+                Log.d("her image url is", f.getImageUrl()+"");
+
+                Picasso.with(dialogImage.getContext())
+                        .load(f.getImageUrl())
+                        .transform(new CircleTransform())
+                        .into(dialogImage);
+
+                storeSharedPreferences.addFoodQuantity(getActivity(), fa);
+
+                dialogOk = (Button) dialog.findViewById(R.id.counterOk);
+
+                dialogOk.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Toast.makeText(getActivity(), count.getText().toString(), Toast.LENGTH_SHORT).show();
+
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
             }
             @Override
             public void onLongClick(View view, int position) {
@@ -94,9 +134,15 @@ public class Bev extends Fragment {
                 for (DataSnapshot snapshot: tasksSnapshot.getChildren()) {
                     Object value = snapshot.child("f").getValue();
                     Object valueF = snapshot.child("p").getValue();
-                    //prepareFoodData(value.toString(), valueF.toString());
-//                    Food food = new Food(value.toString(), valueF.toString(), valueU.toString(), null, null);
-  //                  foodList.add(food);
+                    Object valueU = snapshot.child("url").getValue();
+                    Log.d(valueU.toString(), "url che");
+                    Food food = new Food();
+                    food.setPrice(valueF.toString());
+                    food.setFood(value.toString());
+                    food.setImageUrl(valueU.toString());
+                    food.setAvailability(null);
+                    food.setRating(null);
+                    foodList.add(food);
                     mAdapter.notifyDataSetChanged();
                     Log.d("food "+value.toString(), "price "+valueF.toString());
                 }

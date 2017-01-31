@@ -1,5 +1,6 @@
 package com.example.prateek.bimsapp;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.firebase.client.DataSnapshot;
@@ -18,6 +21,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +62,9 @@ public class Veg extends Fragment {
     private FoodAdapter mAdapter;
     private List<Food> foodList = new ArrayList<>();
     Firebase ref;
+    Food food = new Food();
+    Button dialogOk;
+
 
 
     StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
@@ -75,10 +82,7 @@ public class Veg extends Fragment {
         }
         View view = inflater.inflate(R.layout.fragment_veg, container, false);
 
-        Food food = new Food("Maggie", "30", null, null, null);
-        foodList.add(food);
-
-
+       // foodList.add(food);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mAdapter = new FoodAdapter(foodList);
@@ -98,9 +102,32 @@ public class Veg extends Fragment {
                 fa.setFood(f.getFood());
                 fa.setQuantity("77");
 
-                Toast.makeText(getActivity(), "ola amigoes"+fa.getFood()+ fa.getPrice()+fa.getQuantity(),
-                        Toast.LENGTH_SHORT).show();
+                final Dialog dialog = new Dialog(getActivity());
+                dialog.setContentView(R.layout.dialog_counter);
+                dialog.setTitle(f.getFood());
+                ImageView image = (ImageView) dialog.findViewById(R.id.image);
+                ImageView dialogImage = (ImageView) dialog.findViewById(R.id.dialogImage);
+
+                Log.d("her image url is", f.getImageUrl()+"");
+
+                Picasso.with(dialogImage.getContext())
+                        .load(f.getImageUrl())
+                        .transform(new CircleTransform())
+                        .into(dialogImage);
+
                 storeSharedPreferences.addFoodQuantity(getActivity(), fa);
+
+                dialogOk = (Button) dialog.findViewById(R.id.counterOk);
+
+                dialogOk.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Toast.makeText(getActivity(), count.getText().toString(), Toast.LENGTH_SHORT).show();
+
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
             }
 
             @Override
@@ -125,7 +152,12 @@ public class Veg extends Fragment {
                     Object valueF = snapshot.child("p").getValue();
                     Object valueU = snapshot.child("url").getValue();
                     Log.d(valueU.toString(), "url che");
-                    Food food = new Food(value.toString(), valueF.toString(), valueU.toString(), null, null);
+                    Food food = new Food();
+                    food.setPrice(valueF.toString());
+                    food.setFood(value.toString());
+                    food.setImageUrl(valueU.toString());
+                    food.setAvailability(null);
+                    food.setRating(null);
                     foodList.add(food);
                     mAdapter.notifyDataSetChanged();
                     Log.d("food "+value.toString(), "price "+valueF.toString());

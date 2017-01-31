@@ -15,6 +15,8 @@ public class FirstPage extends AppCompatActivity {private static int SPLASH_TIME
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //this one is the real shit
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_page);
         Toast.makeText(this, "3", Toast.LENGTH_SHORT).show();
