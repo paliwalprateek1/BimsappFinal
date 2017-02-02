@@ -47,7 +47,4 @@ public class Food {
 
         public String getAvailability(){ return availability;}
 
-
-
-
 }

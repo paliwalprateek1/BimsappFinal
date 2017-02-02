@@ -55,6 +55,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
         holder.food.setText(food.getFood());
         holder.price.setText(food.getPrice()+" Rs");
 
+
         Picasso.with(holder.foodItemIcon.getContext())
                 .load(food.getImageUrl())
                 .transform(new CircleTransform())

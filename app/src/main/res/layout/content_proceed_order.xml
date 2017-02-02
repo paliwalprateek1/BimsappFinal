@@ -21,5 +21,18 @@
         android:layout_height="280dp" />
 
 
+    <Button
+        android:id="@+id/pickLocation"
+
+        android:text="Pick Location"
+        android:textColor="#1CA4AD"
+        android:textSize="18sp"
+        android:onClick="pickLocation"
+
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:background="@drawable/buttonshape"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
