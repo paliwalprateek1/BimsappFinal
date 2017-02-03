@@ -116,6 +116,9 @@ public class ProceedOrder extends AppCompatActivity {
             }
             @Override
             public void onLongClick(View view, int position) {
+                foodList.remove(position);
+                storeSharedPreferences.removeFavoriteQuantity(getApplicationContext(), foodList.get(position-1));
+                mAdapter.notifyDataSetChanged();
             }
         }));
     }
@@ -172,11 +175,17 @@ public class ProceedOrder extends AppCompatActivity {
         if (requestCode == 199) {
             if (data != null) {
                 place = PlacePicker.getPlace(data, this);
-                String toastMsg = String.format("Place: %s", place.getAddress());
+                LatLngBounds place2 = PlacePicker.getLatLngBounds(data);
+                String toastMsg = String.format("Place: %s", place.getAddress()+" sfd"+place2.toString());
                 Toast.makeText(getApplication(), toastMsg, Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getApplicationContext(), OrderFoodFinal.class);
+                intent.putExtra("address", place.getAddress().toString());
+                intent.putExtra("coordinates", place.getLatLng().toString());
+                intent.putExtra("remarks", "hello");
+                startActivity(intent);
 
             } else {
-                Toast.makeText(this, "Select your location", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Select your location", Toast.LENGTH_LONG).show();
             }
         }
     }

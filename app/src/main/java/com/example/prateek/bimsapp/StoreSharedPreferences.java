@@ -188,15 +188,13 @@ public class StoreSharedPreferences {
         }
     }
 
-    public static void setImageUri(Context ctx, String imageUri)
-    {
+    public static void setImageUri(Context ctx, String imageUri) {
         SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();
         editor.putString(IMAGEURI, imageUri);
         editor.commit();
     }
 
-    public static String getImageuri(Context ctx)
-    {
+    public static String getImageuri(Context ctx) {
         return getSharedPreferences(ctx).getString("imageUri", "");
     }
 }
