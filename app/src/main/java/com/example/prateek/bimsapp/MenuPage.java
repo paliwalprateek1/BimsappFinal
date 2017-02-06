@@ -62,9 +62,6 @@ public class MenuPage extends AppCompatActivity
 //        imageView = (ImageView)findViewById(R.id.imageView);
 
 
-
-
-
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
@@ -149,16 +146,16 @@ public class MenuPage extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_profile) {
+        } else if (id == R.id.nav_location) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_offers) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.sign_out) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_feedback) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_settings) {
 
         }
 

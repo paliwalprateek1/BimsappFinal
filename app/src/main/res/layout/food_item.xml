@@ -21,7 +21,8 @@
             android:layout_height="match_parent"
             android:id="@+id/foodItemIcon"
             android:layout_centerVertical="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:src="@drawable/fp"/>
 
         <TextView
             android:id="@+id/food"

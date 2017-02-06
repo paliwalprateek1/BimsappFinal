@@ -12,15 +12,18 @@ import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderFoodFinal extends AppCompatActivity {
 
     private String address, coordinates, remarks;
-    TextView nameTv, addressTv, totalTv, remarksTv;
-    Order order;
+    TextView nameTv, addressTv, totalTv, remarksTv, foodItemList;
+    Order order = new Order();
     Firebase ref;
-
+    StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
+    List<FoodQuantity> l = new ArrayList<>();
+    String itemString = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,22 +31,31 @@ public class OrderFoodFinal extends AppCompatActivity {
         setContentView(R.layout.activity_order_food_final);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         Firebase.setAndroidContext(this);
         ref = new Firebase(Server.URL);
 
+        l = storeSharedPreferences.loadFoodQuantity(this);
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         address = extras.getString("address");
         coordinates = extras.getString("coordinates");
         remarks = extras.getString("remarks");
 
-        StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
-        List l = storeSharedPreferences.loadFoodQuantity(this);
-
         order.setAddress(address);
         order.setAmount("thats");
         order.setCoordinates(coordinates);
-        order.setItem(l);
+
+        for (int i=0;i<l.size();i++){
+            itemString = itemString + l.get(i).getFood() +"          "+
+                    l.get(i).getQuantity() +"          "+ l.get(i).getPrice() +","+"\n";
+        }
+
+        foodItemList = (TextView)findViewById(R.id.foodItemList);
+        foodItemList.setText(itemString);
+        order.setItem(itemString);
+
+
         order.setName(storeSharedPreferences.getUserName(this));
         order.setMail(storeSharedPreferences.getUserEmail(this));
         order.setNumber("9571314094");
@@ -59,8 +71,6 @@ public class OrderFoodFinal extends AppCompatActivity {
 
         remarksTv = (TextView) findViewById(R.id.remarksTv);
         remarksTv.setText(remarks);
-
-
     }
 
     @Override
@@ -68,7 +78,6 @@ public class OrderFoodFinal extends AppCompatActivity {
         super.onBackPressed();
         Toast.makeText(this, "Kutte order kyon cancel kiya", Toast.LENGTH_SHORT).show();
     }
-
 
     public void order(View view) {
         Firebase.setAndroidContext(getApplicationContext());

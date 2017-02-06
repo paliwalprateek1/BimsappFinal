@@ -34,11 +34,17 @@ public class FirstPage extends AppCompatActivity {private static int SPLASH_TIME
                 public void run() {
                     // This method will be executed once the timer is over
                     // Start your app main activity
-                    Intent i = new Intent(FirstPage.this, MenuPage.class);
-                    startActivity(i);
+                    if(StoreSharedPreferences.getUserEmail(getApplicationContext())!=null) {
+                        Intent i = new Intent(FirstPage.this, MenuPage.class);
+                        startActivity(i);
+                    }
+                    else{
+                        Intent i = new Intent(FirstPage.this, Login.class);
+                        startActivity(i);
+                    }
 
                     // close this activity
-                    //finish();
+                    finish();
                 }
             }, SPLASH_TIME_OUT);
 //        }

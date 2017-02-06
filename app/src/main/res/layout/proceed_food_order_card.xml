@@ -11,14 +11,13 @@
         android:id="@+id/card_view"
         android:layout_gravity="center"
         android:layout_width="fill_parent"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:layout_margin="5dp"
-        card_view:cardCornerRadius="2dp"
+        card_view:cardCornerRadius="20dp"
         android:foreground="?android:attr/selectableItemBackground"
         android:clickable="true"
+        android:paddingBottom="12dp"
         card_view:contentPadding="10dp">
-
-
 
         <TextView
             android:id="@+id/food_quant"
@@ -30,7 +29,6 @@
             android:layout_alignStart="@+id/card_view"
             android:layout_marginStart="16dp" />
 
-
         <TextView
             android:id="@+id/price_quant"
             android:textAlignment="textStart"
@@ -40,8 +38,6 @@
             android:layout_alignTop="@+id/card_view"
             android:layout_alignStart="@+id/card_view"
             android:layout_marginStart="120dp" />
-
-
 
         <TextView
             android:id="@+id/quantity"
@@ -53,10 +49,7 @@
             android:layout_alignStart="@+id/card_view"
             android:layout_marginStart="252dp" />
 
-
     </android.support.v7.widget.CardView>
-
-
 
 
 </RelativeLayout>

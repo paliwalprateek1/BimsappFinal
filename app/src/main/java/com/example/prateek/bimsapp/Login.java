@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;
 
@@ -150,9 +151,9 @@ public class Login extends AppCompatActivity {
         StoreSharedPreferences.setUserEmail(this, personEmail);
         StoreSharedPreferences.setUserName(this, personGivenName);
         if(StoreSharedPreferences.getUserEmail(this)!=null) {
-//                Intent intent = new Intent(Login.this, NumberAndLocation.class);
-//                startActivity(intent);
-//                finish();
+                Intent intent = new Intent(Login.this, MenuPage.class);
+                startActivity(intent);
+                finish();
         }
     }
 
