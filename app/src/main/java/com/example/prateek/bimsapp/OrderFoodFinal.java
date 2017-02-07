@@ -35,7 +35,7 @@ public class OrderFoodFinal extends AppCompatActivity {
         Firebase.setAndroidContext(this);
         ref = new Firebase(Server.URL);
 
-        l = storeSharedPreferences.loadFoodQuantity(this);
+        l = storeSharedPreferences.loadFavorites(this);
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         address = extras.getString("address");

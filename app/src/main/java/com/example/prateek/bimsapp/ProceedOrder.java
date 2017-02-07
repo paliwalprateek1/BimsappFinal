@@ -48,7 +48,7 @@ public class ProceedOrder extends AppCompatActivity {
         setContentView(R.layout.activity_proceed_order);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        foodList = storeSharedPreferences.loadFoodQuantity(this);
+        foodList = storeSharedPreferences.loadFavorites(this);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_proceed_order);
         mAdapter = new ProceedFoodAdapter(foodList);
         recyclerView.setHasFixedSize(true);
@@ -60,73 +60,18 @@ public class ProceedOrder extends AppCompatActivity {
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, final int position) {
-//                FoodQuantity foodQuantity = new FoodQuantity();
-//                foodQuantity = foodList.get(position);
-//
-//                fa.setFood(foodQuantity.getFood());
-//                fa.setPrice(foodQuantity.getPrice());
-//                fa.setQuantity(foodQuantity.getQuantity());
-//
-//                Toast.makeText(ProceedOrder.this, fa.getFood()+"", Toast.LENGTH_SHORT).show();
-//
-//
-//                final Dialog dialog = new Dialog(ProceedOrder.this);
-//                dialog.setContentView(R.layout.dialog_order);
-//                dialog.setTitle(foodQuantity.getFood());
-//
-//                count = (TextView) dialog.findViewById(R.id.count);
-//                count.setText(foodQuantity.getQuantity());
-//                ua = (Button) dialog.findViewById(R.id.buttonUp);
-//                da = (Button) dialog.findViewById(R.id.buttonDown);
-//
-//                ua.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        int s = Integer.parseInt(count.getText().toString());
-//                        s++;
-//                        count.setText(Integer.toString(s));
-//                    }
-//                });
-//                da.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        int s = Integer.parseInt(count.getText().toString());
-//                        if(s>0) {
-//                            s--;
-//                            count.setText(Integer.toString(s));
-//                        }
-//                    }
-//                });
-//                amount = (TextView) dialog.findViewById(R.id.amount);
-//                amount.setText("33");
-//                dialogOk = (Button) dialog.findViewById(R.id.dialogOk);
-//                dialogOk.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        fa.setQuantity(count.getText().toString());
-//
-//                        addNewItem(fa, position);
-////                        foodList.set(position, fa);
-////                        //foodList.add(position, fa);
-////                        mAdapter.notifyDataSetChanged();
-//                        dialog.dismiss();
-//                    }
-//                });
-//                dialog.show();
+
             }
             @Override
             public void onLongClick(View view, int position) {
                 foodList.remove(position);
-                storeSharedPreferences.removeFavoriteQuantity(getApplicationContext(), foodList.get(position-1));
+                storeSharedPreferences.removeAllQuant(getApplicationContext());
+                storeSharedPreferences.storeFavorites(getApplicationContext(), foodList);
                 mAdapter.notifyDataSetChanged();
             }
         }));
     }
 
-    public void addNewItem(FoodQuantity f, int p){
-        foodList.set(p, f);
-        mAdapter.notifyDataSetChanged();
-    }
 
     public void pickLocation(View view) {
 

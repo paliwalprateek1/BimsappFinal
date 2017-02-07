@@ -156,7 +156,7 @@ public class Bev extends Fragment {
 
     public void storeData(FoodQuantity fq){
         StoreSharedPreferences s = new StoreSharedPreferences();
-        s.addFoodQuantity(getActivity(), fq);
+        s.addFavorite(getActivity(), fq);
 
     }
     Firebase ref;

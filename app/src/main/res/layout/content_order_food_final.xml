@@ -76,14 +76,14 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:id="@+id/relativeLayout"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true">
 
 <TextView
-    android:layout_width="191dp"
+    android:layout_width="0dp"
     android:layout_height="50dp"
     android:text="CANCEL"
 
@@ -93,7 +93,7 @@
     android:background="#aaa"/>
 
         <TextView
-            android:layout_width="191dp"
+            android:layout_width="0dp"
             android:textColor="#fff"
             android:textSize="18sp"
             android:onClick="order"

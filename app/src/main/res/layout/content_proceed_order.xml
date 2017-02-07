@@ -36,12 +36,12 @@
     <Button
         android:id="@+id/reset"
         android:text="Reset Order"
-        android:textColor="#4895ff"
+        android:textColor="#fff"
         android:textSize="12sp"
         android:onClick="pickLocation"
         android:layout_width="160dp"
         android:layout_height="60dp"
-        android:background="@drawable/buttonshape"
+        android:background="@drawable/buttonreset"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
 
@@ -51,6 +51,16 @@
         android:layout_below="@+id/recycler_view_proceed_order"
         android:layout_alignParentStart="true"
         android:layout_marginTop="13dp">
+
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="REMARKS"
+            android:background="#000"
+            android:textColor="#fff"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/button2" />
     </RelativeLayout>
 
 </RelativeLayout>
