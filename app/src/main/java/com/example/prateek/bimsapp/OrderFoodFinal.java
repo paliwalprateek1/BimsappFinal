@@ -54,7 +54,7 @@ public class OrderFoodFinal extends AppCompatActivity {
 
         foodItemList = (TextView)findViewById(R.id.foodItemList);
         foodItemList.setText(itemString);
-        order.setItem(itemString);
+        order.setItem(storeSharedPreferences.loadFavorites(this));
 
 
         order.setName(storeSharedPreferences.getUserName(this));
@@ -86,6 +86,9 @@ public class OrderFoodFinal extends AppCompatActivity {
         ref = new Firebase(Server.URL);
         Firebase newRef = ref.child("Order").push();
         newRef.setValue(order);
+        Intent intent = new Intent(this, MenuPage.class);
+        startActivity(intent);
+        finish();
     }
 
     public void cancelOrder(View view) {

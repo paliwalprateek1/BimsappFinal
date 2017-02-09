@@ -57,11 +57,11 @@ public class Order {
         this.coordinates = coordinates;
     }
 
-    public String getItem() {
+    public List<Food> getItem() {
         return item;
     }
 
-    public void setItem(String item) {
+    public void setItem(List item) {
         this.item = item;
     }
 
@@ -70,5 +70,5 @@ public class Order {
     private String number;
     private String mail;
     private String coordinates;
-    private String item;
+    private List<Food> item;
 }

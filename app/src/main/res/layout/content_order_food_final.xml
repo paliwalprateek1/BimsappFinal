@@ -33,6 +33,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:paddingLeft="15sp"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginBottom="13dp"
@@ -83,7 +84,7 @@
         android:layout_alignParentEnd="true">
 
 <TextView
-    android:layout_width="0dp"
+    android:layout_width="191.8dp"
     android:layout_height="50dp"
     android:text="CANCEL"
     android:gravity="center"
@@ -92,13 +93,13 @@
     android:background="#aaa"/>
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="191.8dp"
             android:textColor="#fff"
             android:textSize="18sp"
             android:onClick="order"
             android:text="ORDER"
             android:layout_height="50dp"
-            android:background="#458"
+            android:background="#4f4aaa"
             android:id="@+id/textView3"
             android:gravity="center"
             android:layout_alignParentEnd="true" />

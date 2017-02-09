@@ -151,7 +151,7 @@ public class Login extends AppCompatActivity {
         StoreSharedPreferences.setUserEmail(this, personEmail);
         StoreSharedPreferences.setUserName(this, personGivenName);
         if(StoreSharedPreferences.getUserEmail(this)!=null) {
-                Intent intent = new Intent(Login.this, MenuPage.class);
+                Intent intent = new Intent(Login.this, NumberLocation.class);
                 startActivity(intent);
                 finish();
         }
