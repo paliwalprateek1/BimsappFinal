@@ -39,7 +39,8 @@
         <activity
             android:name=".OrderFoodFinal"
             android:label="@string/title_activity_order_food_final"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".NumberLocation"></activity>
     </application>
 
 </manifest>

@@ -35,7 +35,7 @@ public class FirstPage extends AppCompatActivity {private static int SPLASH_TIME
                     // This method will be executed once the timer is over
                     // Start your app main activity
                     if(StoreSharedPreferences.getUserEmail(getApplicationContext())!=null) {
-                        Intent i = new Intent(FirstPage.this, MenuPage.class);
+                        Intent i = new Intent(FirstPage.this, NumberLocation.class);
                         startActivity(i);
                     }
                     else{

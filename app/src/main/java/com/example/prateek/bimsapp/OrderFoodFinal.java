@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.MenuPopupWindow;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
@@ -58,7 +59,8 @@ public class OrderFoodFinal extends AppCompatActivity {
 
         order.setName(storeSharedPreferences.getUserName(this));
         order.setMail(storeSharedPreferences.getUserEmail(this));
-        order.setNumber("9571314094");
+        order.setNumber(storeSharedPreferences.getUserNumber(this));
+        Toast.makeText(this, storeSharedPreferences.getUserNumber(this), Toast.LENGTH_SHORT).show();
 
         nameTv = (TextView)findViewById(R.id.nameTv);
         nameTv.setText(storeSharedPreferences.getUserName(this));
@@ -84,5 +86,10 @@ public class OrderFoodFinal extends AppCompatActivity {
         ref = new Firebase(Server.URL);
         Firebase newRef = ref.child("Order").push();
         newRef.setValue(order);
+    }
+
+    public void cancelOrder(View view) {
+        Intent intent = new Intent(this, MenuPage.class);
+        startActivity(intent);
     }
 }
