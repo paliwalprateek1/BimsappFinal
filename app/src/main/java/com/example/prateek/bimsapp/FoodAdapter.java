@@ -93,7 +93,6 @@ class CircleTransform implements Transformation {
 
         float r = size / 2f;
         canvas.drawCircle(r, r, r, paint);
-
         squaredBitmap.recycle();
         return bitmap;
     }
