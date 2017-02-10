@@ -50,6 +50,7 @@ public class MenuPage extends AppCompatActivity
                 else {
                     Intent intent = new Intent(MenuPage.this, ProceedOrder.class);
                     startActivity(intent);
+                    overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
                     //Toast.makeText(MenuPage.this, a.size()+"Items to order", Toast.LENGTH_SHORT).show();
                 }
             }

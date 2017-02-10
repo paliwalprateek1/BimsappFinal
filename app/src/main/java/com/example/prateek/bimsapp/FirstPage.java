@@ -36,6 +36,7 @@ public class FirstPage extends AppCompatActivity {private static int SPLASH_TIME
                     // Start your app main activity
                     if(StoreSharedPreferences.getUserEmail(getApplicationContext())!=null) {
                         Intent i = new Intent(FirstPage.this, MenuPage.class);
+                        overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
                         startActivity(i);
                     }
                     else{

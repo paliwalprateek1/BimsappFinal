@@ -128,10 +128,18 @@ public class ProceedOrder extends AppCompatActivity {
                 intent.putExtra("coordinates", place.getLatLng().toString());
                 intent.putExtra("remarks", "hello");
                 startActivity(intent);
+                overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
 
             } else {
                 Toast.makeText(this, "Select your location", Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    public void addRemarks(View view) {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.remarks_dialog);
+        setTitle("Remarks");
+        dialog.show();
     }
 }
