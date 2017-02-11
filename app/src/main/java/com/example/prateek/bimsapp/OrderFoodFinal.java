@@ -1,7 +1,10 @@
 package com.example.prateek.bimsapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,9 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
+import com.firebase.client.core.ThreadBackgroundExecutor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Exchanger;
 
 public class OrderFoodFinal extends AppCompatActivity {
 
@@ -48,9 +53,15 @@ public class OrderFoodFinal extends AppCompatActivity {
         order.setCoordinates(coordinates);
 
         for (int i=0;i<l.size();i++){
-            itemString = itemString + l.get(i).getFood() +"          "+
-                    l.get(i).getQuantity() +"          "+ l.get(i).getPrice() +","+"\n";
+
+            int k = Integer.parseInt(l.get(i).getQuantity());
+            int j = Integer.parseInt(l.get(i).getPrice());
+            int m = k*j;
+
+            itemString = itemString + l.get(i).getFood() +"     X     "+
+                    l.get(i).getQuantity() +"     =     "+ Integer.toString(m) +","+"\n";
         }
+        itemString = itemString.substring(0, itemString.length()-2);
 
         foodItemList = (TextView)findViewById(R.id.foodItemList);
         foodItemList.setText(itemString);
@@ -82,17 +93,61 @@ public class OrderFoodFinal extends AppCompatActivity {
     }
 
     public void order(View view) {
+
+        mHandler = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                if (msg.what == CANCEL_DIALOG) {
+                    mDialog.cancel();
+                    Toast.makeText(OrderFoodFinal.this, "Ordered", Toast.LENGTH_SHORT).show();
+                }
+                return false;
+            }
+        });
+        mDialog = new ProgressDialog(OrderFoodFinal.this);
+        mDialog.setMessage("Ordering.. Please Wait..");
+        mDialog.show();
+        mHandler.sendEmptyMessageDelayed(CANCEL_DIALOG, 5500);
+
         Firebase.setAndroidContext(getApplicationContext());
         ref = new Firebase(Server.URL);
         Firebase newRef = ref.child("Order").push();
         newRef.setValue(order);
         Intent intent = new Intent(this, MenuPage.class);
         startActivity(intent);
-        finish();
+        storeSharedPreferences.removeAllQuant(this);
+        Thread thread = new Thread(){
+            @Override
+            public void run(){
+                try{
+                    Thread.sleep(2500);
+                    OrderFoodFinal.this.finish();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        };
+        thread.start();
+
+
+
+
     }
+
+    private Handler mHandler;
+    private ProgressDialog mDialog;
+    private final int CANCEL_DIALOG = 1;
+    private Handler mHandler2 = new Handler();
 
     public void cancelOrder(View view) {
         Intent intent = new Intent(this, MenuPage.class);
         startActivity(intent);
+        finish();
+    }
+
+    public void cancel(View view) {
+        Intent intent = new Intent(this, MenuPage.class);
+        startActivity(intent);
+        finish();
     }
 }

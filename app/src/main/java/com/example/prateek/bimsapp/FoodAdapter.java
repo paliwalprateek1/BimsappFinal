@@ -63,43 +63,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
                 .load(food.getImageUrl())
                 .transform(new CircleTransform())
                 .into(holder.foodItemIcon);
-
-
-        int w = 1024;
-        int h = 768;
-        int size = (int) Math.ceil(Math.sqrt(w*h));
-
-//        Picasso.with(holder.foodItemIcon.getContext())
-//                .load(food.getImageUrl())
-//                .transform(new BitmapTransform(w, h))
-//                .skipMemoryCache()
-//                .resize(size, size)
-//                .centerInside()
-//                .into(holder.foodItemIcon);
-
-        Picasso.with(holder.foodItemIcon.getContext())
-                .load(food.getImageUrl())
-                .transform(new CircleTransform())
-                .into(holder.foodItemIcon);
-
-
-
-
-
-//        Bitmap image=null;
-//        try {
-//            URL url = new URL(food.getImageUrl());
-//            image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-//        } catch(IOException e) {
-//            System.out.println(e);
-//        }
-//
-//        holder.foodItemIcon.setImageBitmap(cropToSquare(image));
-
-
-
-
-
     }
 
 
@@ -158,43 +121,7 @@ class CircleTransform implements Transformation {
     }
 }
 
-class BitmapTransform implements Transformation{
-    private final int maW;
-    private final int maH;
 
-    public BitmapTransform(int maW, int maH){
-        this.maH = maH;
-        this.maW = maW;
-    }
-
-    @Override
-    public Bitmap transform(Bitmap source){
-        int taW, taH;
-        double aspectRatio;
-
-        if(source.getWidth()>source.getHeight()){
-            taW = maW;
-            aspectRatio = (double)source.getHeight()/(double)source.getWidth();
-            taH = (int) (taW *aspectRatio);
-        }
-        else {
-            taH = maH;
-            aspectRatio = (double)source.getWidth()/(double)source.getHeight();
-            taW = (int) (taH *aspectRatio);
-        }
-
-        Bitmap result = Bitmap.createScaledBitmap(source, taW, taH, false);
-        if(result!=source){
-            source.recycle();
-        }
-        return result;
-    }
-
-    @Override
-    public String key(){
-        return maW +"x"+maH;
-    }
-}
 
 
 

@@ -21,6 +21,8 @@ public class StoreSharedPreferences {
     public static final String PREFS_USER_NAME = "name";
     public static final String PREFS_USER_CUSTOM_LOCATION = "location";
     public static final String NUMBER = "number";
+    public static final String PREFS_USER_IMAGE = "image";
+    public static final String PREFS_USER_REMARKS = "remarks";
 
 
 
@@ -125,6 +127,29 @@ public class StoreSharedPreferences {
     public static String getUserCustomLocation(Context ctx){
         return getSharedPreferences(ctx).getString("location", "");
     }
+
+    public static void setUserImage(Context ctx, String userImage){
+        SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();
+        editor.putString(PREFS_USER_IMAGE, userImage);
+        editor.commit();
+    }
+
+    public static String getUserImage(Context ctx){
+        return getSharedPreferences(ctx).getString("image", "");
+    }
+
+
+    public static void setUserRemarks(Context ctx, String userRemarks){
+        SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();
+        editor.putString(PREFS_USER_REMARKS, userRemarks);
+        editor.commit();
+    }
+
+    public static String getUserRemarks(Context ctx){
+        return getSharedPreferences(ctx).getString("remarks", "");
+    }
+
+
 
     public static void setUserEmail(Context ctx, String userMail) {
         SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();

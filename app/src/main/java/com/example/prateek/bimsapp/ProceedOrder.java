@@ -25,6 +25,7 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.vision.text.Text;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class ProceedOrder extends AppCompatActivity {
     TextView count, amount;
     Button ua, da, dialogOk;
     int status = 1;
+    String remarks;
     Place place;
     FoodQuantity fa = new FoodQuantity();
 
@@ -126,7 +128,7 @@ public class ProceedOrder extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), OrderFoodFinal.class);
                 intent.putExtra("address", place.getAddress().toString());
                 intent.putExtra("coordinates", place.getLatLng().toString());
-                intent.putExtra("remarks", "hello");
+                intent.putExtra("remarks", remarks);
                 startActivity(intent);
                 overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
 
@@ -137,9 +139,26 @@ public class ProceedOrder extends AppCompatActivity {
     }
 
     public void addRemarks(View view) {
-        Dialog dialog = new Dialog(this);
+        final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.remarks_dialog);
-        setTitle("Remarks");
+        dialog.setTitle("Remarks");
+
+        final TextView remarksTV = (TextView) dialog.findViewById(R.id.editText);
+
+        final Button remarksOk = (Button) dialog.findViewById(R.id.remarksOk);
+
+        remarksOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(remarksTV.getText().toString().length()!=0) {
+                    remarks = remarksTV.getText().toString();
+                }
+                else{
+                    remarks = "";
+                }
+                dialog.dismiss();
+            }
+        });
         dialog.show();
     }
 }

@@ -1,10 +1,13 @@
 package com.example.prateek.bimsapp;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -24,6 +27,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+
+import java.io.ByteArrayOutputStream;
 
 public class Login extends AppCompatActivity {
 
@@ -141,7 +146,9 @@ public class Login extends AppCompatActivity {
         String personEmail = acct.getEmail();
         String personId = acct.getId();
         Uri personPhoto = acct.getPhotoUrl();
-        String s = personPhoto.toString();
+
+
+
         Log.d("here is", "  " + personName);
         Log.d("here is", "  " + personGivenName);
         Log.d("here is", "  " + personFamilyName);
@@ -150,6 +157,7 @@ public class Login extends AppCompatActivity {
 
         StoreSharedPreferences.setUserEmail(this, personEmail);
         StoreSharedPreferences.setUserName(this, personGivenName);
+        StoreSharedPreferences.setUserImage(this, String.valueOf(personPhoto));
         if(StoreSharedPreferences.getUserEmail(this)!=null) {
                 Intent intent = new Intent(Login.this, NumberLocation.class);
                 startActivity(intent);

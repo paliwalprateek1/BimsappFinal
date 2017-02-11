@@ -1,9 +1,12 @@
 package com.example.prateek.bimsapp;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -165,8 +168,34 @@ public class Veg extends Fragment {
 
             }
         }));
+
+
+
+        if(foodList.size()==0) {
+            getVegMenu();
+            mHandler = new Handler(new Handler.Callback() {
+                @Override
+                public boolean handleMessage(Message msg) {
+                    if (msg.what == CANCEL_DIALOG) {
+                        mDialog.cancel();
+                    }
+
+                    return false;
+                }
+            });
+            mDialog = new ProgressDialog(getActivity());
+            mDialog.setMessage("Fetching Menu....");
+            mDialog.show();
+            mHandler.sendEmptyMessageDelayed(CANCEL_DIALOG, 5500);
+        }
         return view;
+
     }
+
+    private Handler mHandler;
+    private ProgressDialog mDialog;
+    private final int CANCEL_DIALOG = 1;
+    private Handler mHandler2 = new Handler();
     public void setValue(String str){
         fa.setQuantity(str);
     }

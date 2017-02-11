@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="230dp"
-    android:layout_height="290dp"
+    android:layout_height="250dp"
     android:paddingLeft="25dp"
     android:paddingBottom="20dp">
+
+    <Button
+        android:text="OK"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/remarksOk" />
+
+    <TextView
+        android:text="Eg:1. Bring extra ketchup, 2.Make it more spicy..."
+        android:layout_width="wrap_content"
+        android:textStyle="italic"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginStart="25dp"
+        android:id="@+id/textView4"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="match_parent"
@@ -12,39 +30,9 @@
         android:ems="10"
         android:hint="Remarks Here"
         android:id="@+id/editText"
-        android:layout_alignParentTop="true"
+        android:layout_above="@+id/remarksOk"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="149dp" />
-
-    <Button
-        android:text="OK"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/button4" />
-
-    <TextView
-        android:text="Eg:  1. Bring extra ketchup
-        2.Make it more spicy"
-        android:layout_width="wrap_content"
-        android:textStyle="italic"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:id="@+id/textView4"
-        android:layout_below="@+id/textView6"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:text="Add Remarks"
-        android:textColor="#000"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
-        android:id="@+id/textView6"
-        android:layout_alignParentTop="true" />
+        android:layout_marginBottom="21dp" />
 
 
 </RelativeLayout>
