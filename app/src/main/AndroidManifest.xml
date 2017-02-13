@@ -40,7 +40,11 @@
             android:name=".OrderFoodFinal"
             android:label="@string/title_activity_order_food_final"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".NumberLocation"></activity>
+        <activity android:name=".NumberLocation" />
+        <activity
+            android:name=".MenuMain"
+            android:label="@string/title_activity_menu_main"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
