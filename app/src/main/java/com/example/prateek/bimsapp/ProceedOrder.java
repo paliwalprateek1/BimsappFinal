@@ -2,18 +2,26 @@ package com.example.prateek.bimsapp;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.test.suitebuilder.TestMethod;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,16 +41,10 @@ import java.util.List;
 
 public class ProceedOrder extends AppCompatActivity {
 
-    RecyclerView recyclerView;
-    private ProceedFoodAdapter mAdapter;
-    private List<FoodQuantity> foodList = new ArrayList<>();
-    StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
-    TextView count, amount;
-    Button ua, da, dialogOk;
-    int status = 1;
-    String remarks;
-    Place place;
-    FoodQuantity fa = new FoodQuantity();
+    private ViewPager pager;
+
+    TextView cartNavigator, locationNavigator, remarksNavigator, summaryNavigator;
+    LinearLayout  nextButton, backButton;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -50,115 +52,114 @@ public class ProceedOrder extends AppCompatActivity {
         setContentView(R.layout.activity_proceed_order);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        foodList = storeSharedPreferences.loadFavorites(this);
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_proceed_order);
-        mAdapter = new ProceedFoodAdapter(foodList);
-        recyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(mLayoutManager);
-        //recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mAdapter);
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, recyclerView, new ClickListener() {
-            @Override
-            public void onClick(View view, final int position) {
 
-            }
-            @Override
-            public void onLongClick(View view, int position) {
-                foodList.remove(position);
-                storeSharedPreferences.removeAllQuant(getApplicationContext());
-                storeSharedPreferences.storeFavorites(getApplicationContext(), foodList);
-                mAdapter.notifyDataSetChanged();
-            }
-        }));
-    }
+        pager = (ViewPager) findViewById(R.id.viewPager);
+        pager.setAdapter(new ProceedOrder.MyOrderPagerAdapter(getSupportFragmentManager()));
 
+        pager.setOnTouchListener(new View.OnTouchListener() {
 
-    public void pickLocation(View view) {
-
-
-        status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(ProceedOrder.this);
-        if (status != ConnectionResult.SUCCESS) {
-            if (GooglePlayServicesUtil.isUserRecoverableError(status)) {
-                GooglePlayServicesUtil.getErrorDialog(status, ProceedOrder.this,
-                        100).show();
-            }
-        }
-        if (status == ConnectionResult.SUCCESS) {
-            int PLACE_PICKER_REQUEST = 199;
-            LatLng topLeft = new LatLng(0, 0);
-            LatLng bottomRight = new LatLng(0,0);
-           // if(StoreSharedPreferences.getUserCustomLocation(ProceedOrder.this).equals("Gandhinagar")) {
-                topLeft = new LatLng(23.179860, 72.649143);
-                bottomRight = new LatLng(23.249227, 72.652202);
-//            }
-//            else if(StoreSharedPreferences.getUserCustomLocation(ProceedOrder.this).equals("Vadodara")){
-//                topLeft = new LatLng(22.265240, 73.144044);
-//                bottomRight = new LatLng(22.381635, 73.195201);
-//            }
-            LatLngBounds bounds = new LatLngBounds(topLeft, bottomRight);
-            PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-            builder.setLatLngBounds(bounds);
-            //PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-            //Context context = this;
-            try {
-                startActivityForResult(builder.build(ProceedOrder.this), PLACE_PICKER_REQUEST);
-            } catch (GooglePlayServicesRepairableException e) {
-                e.printStackTrace();
-            } catch (GooglePlayServicesNotAvailableException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    @Override
-    protected void onActivityResult (int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 100) {
-            status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
-        }
-        if (requestCode == 199) {
-            if (data != null) {
-                place = PlacePicker.getPlace(data, this);
-                LatLngBounds place2 = PlacePicker.getLatLngBounds(data);
-                String toastMsg = String.format("Place: %s", place.getAddress()+" sfd"+place2.toString());
-                Toast.makeText(getApplication(), toastMsg, Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getApplicationContext(), OrderFoodFinal.class);
-                intent.putExtra("address", place.getAddress().toString());
-                intent.putExtra("coordinates", place.getLatLng().toString());
-                intent.putExtra("remarks", remarks);
-                startActivity(intent);
-                overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
-
-            } else {
-                Toast.makeText(this, "Select your location", Toast.LENGTH_LONG).show();
-            }
-        }
-    }
-
-    public void addRemarks(View view) {
-        final Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.remarks_dialog);
-        dialog.setTitle("Remarks");
-
-        final TextView remarksTV = (TextView) dialog.findViewById(R.id.editText);
-
-        final Button remarksOk = (Button) dialog.findViewById(R.id.remarksOk);
-
-        remarksOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(remarksTV.getText().toString().length()!=0) {
-                    remarks = remarksTV.getText().toString();
-                }
-                else{
-                    remarks = "";
-                }
-                dialog.dismiss();
+            public boolean onTouch(View arg0, MotionEvent arg1) {
+                return true;
             }
         });
-        dialog.show();
+
+        cartNavigator = (TextView)findViewById(R.id.cartNavigator);
+        locationNavigator = (TextView)findViewById(R.id.addressNavigator);
+        nextButton = (LinearLayout) findViewById(R.id.nextButton);
+        backButton =(LinearLayout) findViewById(R.id.backButton);
+        remarksNavigator = (TextView)findViewById(R.id.remarksNavigator);
+        summaryNavigator = (TextView)findViewById(R.id.summaryNavigator);
+
+        cartNavigator.setTextColor(getResources().getColor(R.color.black));
+        locationNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+        remarksNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+        summaryNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+
+        if(pager.getCurrentItem()!=3){
+            nextButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    pager.setCurrentItem(pager.getCurrentItem()+1);
+                    if(pager.getCurrentItem()==1){
+                        locationNavigator.setTextColor(getResources().getColor(R.color.black));
+                        cartNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+                        remarksNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+                        summaryNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+                    }else if(pager.getCurrentItem()==2){
+                        remarksNavigator.setTextColor(getResources().getColor(R.color.black));
+                        locationNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+                        cartNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+                        summaryNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+                    }else if(pager.getCurrentItem()==3){
+                        summaryNavigator.setTextColor(getResources().getColor(R.color.black));
+                        cartNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+                        remarksNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+                        locationNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+                    }
+
+                }
+            });}
+        //if(pager.getCurrentItem()!=0){
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pager.setCurrentItem(pager.getCurrentItem()-1);
+                if(pager.getCurrentItem()==1){
+                    locationNavigator.setTextColor(getResources().getColor(R.color.black));
+                    cartNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+                    remarksNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+                    summaryNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+                }else if(pager.getCurrentItem()==2){
+                    remarksNavigator.setTextColor(getResources().getColor(R.color.black));
+                    locationNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+                    cartNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+                    summaryNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+                }else if(pager.getCurrentItem()==3){
+                    summaryNavigator.setTextColor(getResources().getColor(R.color.black));
+                    cartNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+                    remarksNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+                    locationNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+                }else if(pager.getCurrentItem()==0){
+                    cartNavigator.setTextColor(getResources().getColor(R.color.black));
+                    summaryNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+                    remarksNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+                    locationNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+
+                }
+            }
+        });//}
+
     }
+
+
+
+    private class MyOrderPagerAdapter extends FragmentPagerAdapter {
+
+        public MyOrderPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int pos) {
+            switch(pos) {
+
+                case 0:{
+                    return OrderFragment.newInstance(0);}
+                case 1: {
+                    cartNavigator.setTextColor(getResources().getColor(R.color.black));
+                    return LocationFragment.newInstance(0);
+                }
+                case 2: return RemarksFragment.newInstance(0);
+                case 3: return SummaryFragment.newInstance(0);
+                default: return HomeFragment.newInstance(0);
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return 4;
+        }
+    }
+
 }
+

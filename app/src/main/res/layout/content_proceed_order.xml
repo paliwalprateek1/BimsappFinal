@@ -14,54 +14,122 @@
     tools:showIn="@layout/activity_proceed_order">
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view_proceed_order"
-        android:scrollbars="vertical"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="280dp" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="12sp"
+            android:layout_weight="1"
+            android:id="@+id/cartNavigator"
+            android:text="Cart"/>
+
+        <View
+            android:layout_width="40dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="12sp"
+            android:layout_weight="1"
+            android:id="@+id/addressNavigator"
+            android:text="Address"/>
+
+        <View
+            android:layout_width="40dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/remarksNavigator"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="12sp"
+
+            android:text="Remarks"/>
+        <View
+            android:layout_width="40dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:textSize="12sp"
+            android:id="@+id/summaryNavigator"
+            android:layout_height="wrap_content"
+            android:text="Summary"/>
 
 
-    <Button
-        android:id="@+id/pickLocation"
-        android:text="Pick Location"
-        android:textColor="#4895ff"
-        android:textSize="12sp"
-        android:onClick="pickLocation"
-        android:layout_width="160dp"
-        android:layout_height="60dp"
-        android:background="@drawable/buttonshape"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/reset"
-        android:text="Reset Order"
-        android:textColor="#fff"
-        android:textSize="12sp"
-        android:onClick="pickLocation"
-        android:layout_width="160dp"
-        android:layout_height="60dp"
-        android:background="@drawable/buttonreset"
-        android:layout_alignParentBottom="true"
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="fill_parent"
+        android:layout_height="400dp"
+        android:background="@color/colorPrimary"
+        android:layout_centerVertical="true"
         android:layout_alignParentStart="true" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_below="@+id/recycler_view_proceed_order"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="13dp">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:orientation="horizontal"
+        android:id="@+id/backButton"
+        android:layout_height="wrap_content">
 
-        <Button
-            android:layout_width="300dp"
+        <ImageView
+            android:layout_width="20sp"
+            android:layout_height="20sp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_keyboard_arrow_left_black_24dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="REMARKS"
-            android:background="#000"
-            android:textColor="#fff"
-            android:onClick="addRemarks"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/button2" />
-    </RelativeLayout>
+            android:text="Back"
+            android:textSize="20sp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:orientation="horizontal"
+        android:id="@+id/nextButton"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Next"
+            android:textSize="20sp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"/>
+        <ImageView
+            android:layout_width="20sp"
+            android:layout_height="20sp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_keyboard_arrow_right_black_24dp"/>
+
+    </LinearLayout>
+
 
 </RelativeLayout>

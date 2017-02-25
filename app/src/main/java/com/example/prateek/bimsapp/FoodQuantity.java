@@ -5,7 +5,19 @@ package com.example.prateek.bimsapp;
  */
 public class FoodQuantity {
 
-    private String food, price, quantity;
+    private String food;
+    private String price;
+    private String quantity;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    private String url;
 
     public FoodQuantity() {
     }
@@ -15,10 +27,11 @@ public class FoodQuantity {
 //            this.price = price;
 //        }
 
-    public FoodQuantity(String food, String price, String quantity){
+    public FoodQuantity(String food, String price, String quantity, String url){
         this.food = food;
         this.price = price;
         this.quantity = quantity;
+        this.url = url;
 
     }
 
@@ -41,4 +54,5 @@ public class FoodQuantity {
     public String getQuantity(){ return quantity;}
 
     public void setQuantity(String quantity){ this.quantity = quantity;}
+
 }
