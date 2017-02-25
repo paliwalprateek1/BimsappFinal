@@ -1,14 +1,35 @@
 package com.example.prateek.bimsapp;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -23,12 +44,17 @@ public class MenuMain extends AppCompatActivity {
 
     Toolbar toolbar;
 
+
     private RecyclerView mRecyclerView, mRecyclerView2;
     private CardAdapter mAdapter, mAdapter2;
     private RecyclerView.LayoutManager mLayoutManager, mLayoutManager2;
-    private List<Food> foodListVeg = new ArrayList<>();
-    private List<Food> foodListNon = new ArrayList<>();
+    private List<Food> finalFoodList = new ArrayList<>();
     Firebase ref;
+    ImageView homeSmallIcon, menuSmallIcon, orderSmallIcon, accountSmallIcon, settingsSmallIcon;
+    RelativeLayout homeSmallIconrl, menuSmallIconrl, orderSmallIconrl, accountSmallIconrl, settingsSmallIconrl;;
+
+    private ViewPager pager;
+    StoreSharedPreferences store = new StoreSharedPreferences();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,95 +65,215 @@ public class MenuMain extends AppCompatActivity {
 
         ref = new Firebase(Server.URL);
 
+
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getVeg();
-        getNonVeg();
+        pager = (ViewPager) findViewById(R.id.viewPager);
+        pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+
+        menuSmallIcon = (ImageView)findViewById(R.id.menuSmallIcon);
+        homeSmallIcon = (ImageView)findViewById(R.id.homeSmallIcon);
+        orderSmallIcon = (ImageView)findViewById(R.id.orderSmallIcon);
+        accountSmallIcon = (ImageView)findViewById(R.id.accountSmallIcon);
+        settingsSmallIcon = (ImageView)findViewById(R.id.settingsSmallIcon);
+
+
+        if(store.getState(this).length()!=1){
+            Log.d("hover is", "and wasmai yaha hu ##########"+store.getState(this));
+
+        }
+        else {
+            Log.d("hover is", "and was aur ab yaa");
+            pager.setCurrentItem(Integer.valueOf(store.getState(MenuMain.this)));
+            store.setState(this, null);
+        }
+
+        pager.setOnTouchListener(new View.OnTouchListener() {
+
+            public boolean onTouch(View arg0, MotionEvent arg1) {
+                return true;
+            }
+        });
+
+
+
+
+        homeSmallIconrl = (RelativeLayout)findViewById(R.id.homeSmallIconrl);
+        menuSmallIconrl = (RelativeLayout)findViewById(R.id.menuSmallIconrl);
+        accountSmallIconrl = (RelativeLayout)findViewById(R.id.accountSmallIconrl);
+        orderSmallIconrl = (RelativeLayout)findViewById(R.id.orderSmallIconrl);
+        settingsSmallIconrl = (RelativeLayout)findViewById(R.id.settingsSmallIconrl);
+
+        menuSmallIconrl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                DrawableCompat.setTint(orderSmallIcon.getDrawable(),
+                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                DrawableCompat.setTint(menuSmallIcon.getDrawable(),
+                        ContextCompat.getColor(getBaseContext(), R.color.colorPrimary));
+                DrawableCompat.setTint(homeSmallIcon.getDrawable(),
+                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                DrawableCompat.setTint(accountSmallIcon.getDrawable(),
+                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                DrawableCompat.setTint(settingsSmallIcon.getDrawable(),
+                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                Toast.makeText(getApplicationContext(), "bot", Toast.LENGTH_LONG).show();
+                //pager.setCurrentItem(1);
+
+                Intent intent = new Intent(MenuMain.this, MenuPage.class);
+                startActivity(intent);
+                // finish();
+            }
+        });
+
+
+        homeSmallIconrl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DrawableCompat.setTint(orderSmallIcon.getDrawable(),
+                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                DrawableCompat.setTint(menuSmallIcon.getDrawable(),
+                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                DrawableCompat.setTint(homeSmallIcon.getDrawable(),
+                        ContextCompat.getColor(getBaseContext(), R.color.colorPrimary));
+                DrawableCompat.setTint(accountSmallIcon.getDrawable(),
+                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                DrawableCompat.setTint(settingsSmallIcon.getDrawable(),
+                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                Toast.makeText(getApplicationContext(), "tob", Toast.LENGTH_LONG).show();
+                pager.setCurrentItem(0);
+            }
+        });
+
+        orderSmallIconrl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                DrawableCompat.setTint(orderSmallIcon.getDrawable(),
+                        ContextCompat.getColor(getBaseContext(), R.color.colorPrimary));
+                DrawableCompat.setTint(menuSmallIcon.getDrawable(),
+                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                DrawableCompat.setTint(homeSmallIcon.getDrawable(),
+                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                DrawableCompat.setTint(accountSmallIcon.getDrawable(),
+                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                DrawableCompat.setTint(settingsSmallIcon.getDrawable(),
+                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+
+                if(store.loadFavorites(getApplicationContext())!=null) {
+                    Toast.makeText(getApplicationContext(), "order", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getApplicationContext(), ProceedOrder.class);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(getApplicationContext(), "No Items Selected", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        accountSmallIconrl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DrawableCompat.setTint(orderSmallIcon.getDrawable(),
+                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                DrawableCompat.setTint(menuSmallIcon.getDrawable(),
+                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                DrawableCompat.setTint(homeSmallIcon.getDrawable(),
+                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                DrawableCompat.setTint(accountSmallIcon.getDrawable(),
+                        ContextCompat.getColor(getBaseContext(), R.color.colorPrimary));
+                DrawableCompat.setTint(settingsSmallIcon.getDrawable(),
+                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                Toast.makeText(getApplicationContext(), "account", Toast.LENGTH_LONG).show();
+                pager.setCurrentItem(3);
+            }
+        });
+        settingsSmallIconrl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                DrawableCompat.setTint(orderSmallIcon.getDrawable(),
+                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                DrawableCompat.setTint(menuSmallIcon.getDrawable(),
+                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                DrawableCompat.setTint(homeSmallIcon.getDrawable(),
+                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                DrawableCompat.setTint(accountSmallIcon.getDrawable(),
+                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                DrawableCompat.setTint(settingsSmallIcon.getDrawable(),
+                        ContextCompat.getColor(getBaseContext(), R.color.colorPrimary));
+                Toast.makeText(getApplicationContext(), "settings", Toast.LENGTH_LONG).show();
+                pager.setCurrentItem(4);
+            }
+        });
+
+        DrawableCompat.setTint(orderSmallIcon.getDrawable(),
+                ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+        DrawableCompat.setTint(menuSmallIcon.getDrawable(),
+                ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+        DrawableCompat.setTint(homeSmallIcon.getDrawable(),
+                ContextCompat.getColor(getBaseContext(), R.color.colorPrimary));
+        DrawableCompat.setTint(accountSmallIcon.getDrawable(),
+                ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+        DrawableCompat.setTint(settingsSmallIcon.getDrawable(),
+                ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+
+
+//        getVeg();
+//        getNonVeg();
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //RecyclerView
-        mRecyclerView = (RecyclerView) findViewById(R.id.hrlist_recycler_view);
-        mRecyclerView.setHasFixedSize(true);
 
-        mRecyclerView2 = (RecyclerView) findViewById(R.id.hrlist_recycler_view1);
-        mRecyclerView2.setHasFixedSize(true);
 
-        mAdapter2 = new CardAdapter(foodListVeg);
-        mRecyclerView2.setAdapter(mAdapter2);
-
-        mAdapter = new CardAdapter(foodListNon);
-        mRecyclerView.setAdapter(mAdapter);
-
-        //Layout manager for the Recycler View
-        mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        mLayoutManager2 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        mRecyclerView2.setLayoutManager(mLayoutManager2);
+//
+//        //RecyclerView
+//        mRecyclerView = (RecyclerView) findViewById(R.id.hrlist_recycler_view);
+//        mRecyclerView.setHasFixedSize(true);
+//
+//        mRecyclerView2 = (RecyclerView) findViewById(R.id.hrlist_recycler_view1);
+//        mRecyclerView2.setHasFixedSize(true);
+//
+//        mAdapter2 = new CardAdapter(foodListVeg);
+//        mRecyclerView2.setAdapter(mAdapter2);
+//
+//        mAdapter = new CardAdapter(foodListNon);
+//        mRecyclerView.setAdapter(mAdapter);
+//
+//        mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+//        mRecyclerView.setLayoutManager(mLayoutManager);
+//
+//        mLayoutManager2 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+//        mRecyclerView2.setLayoutManager(mLayoutManager2);
 
 
     }
 
-    public void getVeg() {
-        Firebase objRef = ref.child("Menu");
-        Query pendingTasks = objRef.orderByChild("cat").equalTo("veg");
-        pendingTasks.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot tasksSnapshot) {
-                for (DataSnapshot snapshot : tasksSnapshot.getChildren()) {
-                    Object value = snapshot.child("f").getValue();
-                    Object valueF = snapshot.child("p").getValue();
-                    Object valueU = snapshot.child("url").getValue();
-                    Log.d(valueU.toString(), "url che");
-                    Food food = new Food();
-                    food.setPrice(valueF.toString());
-                    food.setFood(value.toString());
-                    food.setImageUrl(valueU.toString());
-                    food.setAvailability(null);
-                    food.setRating(null);
-                    foodListVeg.add(food);
-                    mAdapter.notifyDataSetChanged();
-                    Log.d("food " + value.toString(), "price " + valueF.toString());
-                }
-            }
 
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                System.out.println("The read failed: " + firebaseError.getMessage());
-            }
-        });
-    }
+    public class MyPagerAdapter extends FragmentPagerAdapter {
 
-    public void getNonVeg() {
-        Firebase objRef = ref.child("Menu");
-        Query pendingTasks = objRef.orderByChild("cat").equalTo("nonveg");
-        pendingTasks.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot tasksSnapshot) {
-                for (DataSnapshot snapshot : tasksSnapshot.getChildren()) {
-                    Object value = snapshot.child("f").getValue();
-                    Object valueF = snapshot.child("p").getValue();
-                    Object valueU = snapshot.child("url").getValue();
-                    Log.d(valueU.toString(), "url che");
-                    Food food = new Food();
-                    food.setPrice(valueF.toString());
-                    food.setFood(value.toString());
-                    food.setImageUrl(valueU.toString());
-                    food.setAvailability(null);
-                    food.setRating(null);
-                    foodListNon.add(food);
-                    mAdapter.notifyDataSetChanged();
-                    Log.d("food " + value.toString(), "price " + valueF.toString());
-                }
-            }
+        public MyPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
 
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                System.out.println("The read failed: " + firebaseError.getMessage());
-            }
-        });
+        @Override
+        public Fragment getItem(int pos) {
+            switch(pos) {
 
+                case 0: return HomeFragment.newInstance(0);
+                case 1: return MenuFragment.newInstance(0);
+                case 2: return OrderFragment.newInstance(0);
+                case 3: return AccountFragment.newInstance(0);
+                case 4: return SettingsFragment.newInstance(0);
+                default: return HomeFragment.newInstance(0);
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return 5;
+        }
     }
 }

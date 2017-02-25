@@ -1,31 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    app:layout_scrollFlags="enterAlways">
+    android:id="@+id/container">
 
 
-    <android.support.v7.widget.RecyclerView
-        android:paddingTop="30dp"
-        android:id="@+id/hrlist_recycler_view1"
+
+
+    <android.support.v4.view.ViewPager
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/viewPager"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/llout"
+        />
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/hrlist_recycler_view"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp" >
+        android:layout_height="50dp"
+        android:elevation="30dp"
+        android:id="@+id/llout"
+        android:paddingBottom="6dp"
+        android:layout_below="@+id/viewpager"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:background="#fff">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/homeSmallIconrl">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/homeSmallIcon"
+                android:src="@drawable/ic_home_black_24dp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:text="Home"
+                android:layout_below="@+id/homeSmallIcon"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"/>
 
 
-    </android.support.v7.widget.RecyclerView>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/hrlist_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/menuSmallIconrl">
 
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/menuSmallIcon"
+                android:src="@drawable/ic_restaurant_menu_black_24dp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:text="Menu"
+                android:layout_below="@+id/menuSmallIcon"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"/>
+
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/orderSmallIconrl">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/orderSmallIcon"
+                android:src="@drawable/ic_shopping_cart_black_24dp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:text="Cart"
+                android:layout_below="@+id/orderSmallIcon"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"/>
+
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/accountSmallIconrl">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/accountSmallIcon"
+                android:src="@drawable/ic_account_circle_black_24dp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:text="User"
+                android:layout_below="@+id/accountSmallIcon"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"/>
+
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/settingsSmallIconrl">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/settingsSmallIcon"
+                android:src="@drawable/reorder_horizontal"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:text="More"
+                android:layout_below="@+id/settingsSmallIcon"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"/>
+
+
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
 
 </RelativeLayout>

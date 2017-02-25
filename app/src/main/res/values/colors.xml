@@ -9,4 +9,7 @@
     <color name="colorAccent">#ffa500</color>
     <color name="colorPrimary1">#3395ff</color>
     <color name="colorPrimaryDark1">#4895ff</color>
+    <color name="colorInactive">#c0c0c0</color>
+    <color name="white">#fff</color>
+    <color name="black">#000</color>
 </resources>
