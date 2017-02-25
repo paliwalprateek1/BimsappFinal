@@ -19,7 +19,7 @@ public class FirstPage extends AppCompatActivity {private static int SPLASH_TIME
         //this one is the real shit
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_page);
-        Toast.makeText(this, "5", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "6", Toast.LENGTH_SHORT).show();
 
 
    //     if(isNetworkAvailable()){
@@ -35,7 +35,7 @@ public class FirstPage extends AppCompatActivity {private static int SPLASH_TIME
                     // This method will be executed once the timer is over
                     // Start your app main activity
                     if(StoreSharedPreferences.getUserEmail(getApplicationContext())!=null) {
-                        Intent i = new Intent(FirstPage.this, MenuMain.class);
+                        Intent i = new Intent(FirstPage.this, Login.class);
                         overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
                         startActivity(i);
                     }
