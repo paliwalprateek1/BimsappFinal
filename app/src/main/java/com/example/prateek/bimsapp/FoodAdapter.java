@@ -61,7 +61,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
 
         Picasso.with(holder.foodItemIcon.getContext())
                 .load(food.getImageUrl())
-                .transform(new CircleTransform())
                 .into(holder.foodItemIcon);
     }
 

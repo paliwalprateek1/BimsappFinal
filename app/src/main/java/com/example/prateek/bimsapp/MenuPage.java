@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,6 +19,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +38,11 @@ public class MenuPage extends AppCompatActivity
     private View view;
     Menu menu;
     private ViewPager viewPager;
+    List<Food> ffff = new ArrayList<>();
+    StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
+
+
+    RelativeLayout home, menuHere, order, user, settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,29 +51,63 @@ public class MenuPage extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+
+        home = (RelativeLayout) findViewById(R.id.homeSmallIconrl);
+        menuHere = (RelativeLayout) findViewById(R.id.menuSmallIconrl);
+        order = (RelativeLayout) findViewById(R.id.orderSmallIconrl);
+        user = (RelativeLayout) findViewById(R.id.accountSmallIconrl);
+        settings = (RelativeLayout) findViewById(R.id.settingsSmallIconrl);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                storeSharedPreferences.setState(getApplicationContext(), "0");
+                Intent intent = new Intent(getApplicationContext(), MenuMain.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+        menuHere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
-                List a = storeSharedPreferences.loadFavorites(getApplicationContext());
-                if(a==null){
-                    Toast.makeText(MenuPage.this, "Select atleast on item", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Intent intent = new Intent(MenuPage.this, ProceedOrder.class);
-                    startActivity(intent);
-                    overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
-                    //Toast.makeText(MenuPage.this, a.size()+"Items to order", Toast.LENGTH_SHORT).show();
-                }
+            }
+        });
+        user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                storeSharedPreferences.setState(getApplicationContext(), "3");
+                Toast.makeText(MenuPage.this, "home",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), MenuMain.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+        order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                storeSharedPreferences.setState(getApplicationContext(), "2");
+                Intent intent = new Intent(getApplicationContext(), ProceedOrder.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                storeSharedPreferences.setState(getApplicationContext(), "4");
+                Intent intent = new Intent(getApplicationContext(), MenuMain.class);
+                startActivity(intent);
+                finish();
+
             }
         });
 
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
-//        imageView = (ImageView)findViewById(R.id.imageView);
 
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -81,6 +124,7 @@ public class MenuPage extends AppCompatActivity
 
         view = navigationView.getHeaderView(0);
         menu = navigationView.getMenu();
+
 
         TextView name = (TextView)view.findViewById(R.id.nameNavMenu);
         name.setText((new StoreSharedPreferences().getUserName(this)));

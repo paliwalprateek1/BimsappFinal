@@ -1,38 +1,42 @@
 package com.example.prateek.bimsapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.firebase.client.Config;
+import com.firebase.client.Firebase;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link OrderFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link OrderFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class OrderFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
     public OrderFragment() {
-        // Required empty public constructor
     }
 
+    private String mParam1;
+    private String mParam2;
     public static OrderFragment newInstance(int index) {
         OrderFragment fragment = new OrderFragment();
         Bundle args = new Bundle();
@@ -40,6 +44,7 @@ public class OrderFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,14 +54,111 @@ public class OrderFragment extends Fragment {
         }
     }
 
+    StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
+    ArrayList<FoodQuantity> foodQuantityArrayList = new ArrayList<>();
+    RecyclerView recyclerView;
+    private ProceedFoodAdapter proceedFoodAdapter;
+    Button continueToOrder;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_order, container, false);
+        View view = inflater.inflate(R.layout.fragment_order, container, false);
+        foodQuantityArrayList = storeSharedPreferences.loadFavorites(getActivity());
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_order);
+        proceedFoodAdapter = new ProceedFoodAdapter(foodQuantityArrayList);
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(mLayoutManager);
+        //recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(proceedFoodAdapter);
+
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener() {
+            @Override
+            public void onClick(View view, final int position) {
+                ImageView a = (ImageView) view.findViewById(R.id.upCount);
+                ImageView e = (ImageView) view.findViewById(R.id.downCount);
+                final TextView b = (TextView)view.findViewById(R.id.price_quant);
+                final String s;
+                s = b.getText().toString();
+                final int c = position;
+                a.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(getActivity(), ""+c, Toast.LENGTH_SHORT).show();
+                        char as = s.charAt(5);
+                        Log.d("jdkf", "kdjf"+as+"adf"+s);
+                        int a = Integer.valueOf(as);
+                        a=a-48;
+                        Log.d("jdkf", "kdjf "+a+" adf");
+                        if(a!=9){
+                            a++;}else{Toast.makeText(getActivity(), "Not more than 9", Toast.LENGTH_SHORT).show();}
+                        b.setText(" X   "+Integer.toString(a) + "   = ");
+
+                        FoodQuantity fff = new FoodQuantity();
+                        fff = foodQuantityArrayList.get(c);
+                        fff.setQuantity(Integer.toString(a));
+                        storeSharedPreferences.removeAllQuant(getActivity());
+                        for(int i=0;i<foodQuantityArrayList.size();i++){
+                            FoodQuantity f = new FoodQuantity();
+                            System.out.print("hereerhehreh");
+                            Log.d("jdkf", "kdjf   ###fddddfffff##     ad");
+                            f = foodQuantityArrayList.get(i);
+                            storeSharedPreferences.addFavorite(getContext(), f);
+                        }
+                    }
+                });
+
+                e.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(getActivity(), ""+c, Toast.LENGTH_SHORT).show();
+                        char as = s.charAt(5);
+                        Log.d("jdkf", "kdjf   #####  "+as+"   adf   "+s);
+                        int a = Integer.valueOf(as);
+                        if(a>20){
+                            a=a-48;}
+                        Log.d("jdkf", "kdjf    "+a+"     adf");
+                        if(a!=0){
+                            a--;
+                        }else{//Toast.makeText(getActivity(), "Not more than 9", Toast.LENGTH_SHORT).show();
+                        }
+                        if(a==0){
+                            foodQuantityArrayList.remove(c);
+                            proceedFoodAdapter.notifyDataSetChanged();
+                        }else {
+                            b.setText(" X   "+Integer.toString(a) + "   = ");
+                            FoodQuantity fff = new FoodQuantity();
+                            fff = foodQuantityArrayList.get(c);
+                            fff.setQuantity(Integer.toString(a));
+                        }
+
+                        storeSharedPreferences.removeAllQuant(getActivity());
+                        for(int i=0;i<foodQuantityArrayList.size();i++){
+                            FoodQuantity f = new FoodQuantity();
+                            System.out.print("hereerhehreh");
+                            Log.d("jdkf", "kdjf   ###fddddfffff##     ad");
+                            f = foodQuantityArrayList.get(i);
+                            storeSharedPreferences.addFavorite(getContext(), f);
+                        }
+                    }
+                });
+
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
+
+
+
+        return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
+
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -66,7 +168,7 @@ public class OrderFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mListener = null;
+        mListener=null;
     }
 
     @Override
@@ -75,16 +177,7 @@ public class OrderFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

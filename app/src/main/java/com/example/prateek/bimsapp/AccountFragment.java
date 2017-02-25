@@ -9,14 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link AccountFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link AccountFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class AccountFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,6 +26,7 @@ public class AccountFragment extends Fragment {
         // Required empty public constructor
     }
 
+    // TODO: Rename and change types and number of parameters
     public static AccountFragment newInstance(int index) {
         AccountFragment fragment = new AccountFragment();
         Bundle args = new Bundle();
@@ -67,7 +61,7 @@ public class AccountFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mListener = null;
+        mListener=null;
     }
 
     @Override
