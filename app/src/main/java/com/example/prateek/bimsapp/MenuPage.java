@@ -8,6 +8,8 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
@@ -28,8 +30,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MenuPage extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MenuPage extends AppCompatActivity {
 
     private TabLayout tabLayout;
 
@@ -39,6 +40,7 @@ public class MenuPage extends AppCompatActivity
     Menu menu;
     private ViewPager viewPager;
     List<Food> ffff = new ArrayList<>();
+    ImageView homeSmallIcon, menuSmallIcon, orderSmallIcon, accountSmallIcon, settingsSmallIcon;
     StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
 
 
@@ -52,11 +54,21 @@ public class MenuPage extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
+
+
         home = (RelativeLayout) findViewById(R.id.homeSmallIconrl);
         menuHere = (RelativeLayout) findViewById(R.id.menuSmallIconrl);
         order = (RelativeLayout) findViewById(R.id.orderSmallIconrl);
         user = (RelativeLayout) findViewById(R.id.accountSmallIconrl);
         settings = (RelativeLayout) findViewById(R.id.settingsSmallIconrl);
+
+        menuSmallIcon = (ImageView)findViewById(R.id.menuSmallIcon);
+        homeSmallIcon = (ImageView)findViewById(R.id.homeSmallIcon);
+        orderSmallIcon = (ImageView)findViewById(R.id.orderSmallIcon);
+        accountSmallIcon = (ImageView)findViewById(R.id.accountSmallIcon);
+        settingsSmallIcon = (ImageView)findViewById(R.id.settingsSmallIcon);
+
+
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,21 +125,18 @@ public class MenuPage extends AppCompatActivity
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+                        DrawableCompat.setTint(orderSmallIcon.getDrawable(),
+                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                DrawableCompat.setTint(menuSmallIcon.getDrawable(),
+                        ContextCompat.getColor(getBaseContext(), R.color.colorPrimary));
+                DrawableCompat.setTint(homeSmallIcon.getDrawable(),
+                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                DrawableCompat.setTint(accountSmallIcon.getDrawable(),
+                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                DrawableCompat.setTint(settingsSmallIcon.getDrawable(),
+                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
 
-        view = navigationView.getHeaderView(0);
-        menu = navigationView.getMenu();
-
-
-        TextView name = (TextView)view.findViewById(R.id.nameNavMenu);
-        name.setText((new StoreSharedPreferences().getUserName(this)));
     }
 
 
@@ -179,43 +188,4 @@ public class MenuPage extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_page, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.nav_profile) {
-        } else if (id == R.id.nav_location) {
-
-        } else if (id == R.id.nav_offers) {
-
-        } else if (id == R.id.sign_out) {
-
-        } else if (id == R.id.nav_feedback) {
-
-        } else if (id == R.id.nav_settings) {
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
 }

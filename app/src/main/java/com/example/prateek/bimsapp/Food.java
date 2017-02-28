@@ -4,17 +4,32 @@ package com.example.prateek.bimsapp;
  * Created by prateek on 7/10/16.
  */
 public class Food {
-    private String food, price, imageUrl, rating, availability;
+    private String food;
+    private String price;
+    private String imageUrl;
+    private String rating;
+    private String availability;
+
+    public String getCat() {
+        return cat;
+    }
+
+    public void setCat(String cat) {
+        this.cat = cat;
+    }
+
+    private String cat;
 
         public Food() {
         }
 
-        public Food(String food, String price, String imageUrl, String rating, String availability) {
+        public Food(String food, String price, String imageUrl, String rating, String availability, String cat) {
             this.food = food;
             this.price = price;
             this.imageUrl = imageUrl;
             this.rating = rating;
             this.availability= availability;
+            this.cat = cat;
         }
 
 

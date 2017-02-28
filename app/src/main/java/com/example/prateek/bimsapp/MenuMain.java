@@ -65,8 +65,6 @@ public class MenuMain extends AppCompatActivity {
 
         ref = new Firebase(Server.URL);
 
-
-
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

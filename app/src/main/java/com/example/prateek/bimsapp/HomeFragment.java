@@ -31,12 +31,14 @@ public class HomeFragment extends Fragment {
     private String mParam2;
 
 
-    private RecyclerView mRecyclerView, mRecyclerView2;
-    private CardAdapter mAdapter2;
+    private RecyclerView mRecyclerView, mRecyclerView2, mRecyclerView3;
+    private CardAdapter mAdapter2, mAdapter3;
     private FeaturedCardAdapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager, mLayoutManager2;
+    private RecyclerView.LayoutManager mLayoutManager, mLayoutManager2, mLayoutManager3;
     private List<Food> foodListVeg = new ArrayList<>();
     private List<Food> foodListNon = new ArrayList<>();
+    private List<Food> foodListAll = new ArrayList<>();
+    private List<Food> foodListFeature = new ArrayList<>();
     Firebase ref;
 
     private OnFragmentInteractionListener mListener;
@@ -71,7 +73,7 @@ public class HomeFragment extends Fragment {
 
 
         if(foodListVeg.size()==0) {
-            getNonVeg();getVeg();
+            getNonVeg();getVeg();getAllMenu();
             mHandler = new Handler(new Handler.Callback() {
                 @Override
                 public boolean handleMessage(Message msg) {
@@ -95,10 +97,30 @@ public class HomeFragment extends Fragment {
         mRecyclerView2 = (RecyclerView) view.findViewById(R.id.hrlist_recycler_view1);
         mRecyclerView2.setHasFixedSize(true);
 
+        mRecyclerView3 = (RecyclerView) view.findViewById(R.id.hrlist_recycler_view2);
+        mRecyclerView3.setHasFixedSize(true);
+
+
+        if(foodListVeg.size()==0) {
+
+            for (int i = 0; i < foodListAll.size(); i++) {
+                if (foodListAll.get(i).getCat().equals("feature")) {
+                    foodListFeature.add(foodListAll.get(i));
+                } else if (foodListAll.get(i).getCat().equals("veg")) {
+                    foodListVeg.add(foodListAll.get(i));
+                } else if (foodListAll.get(i).getCat().equals("nonveg")) {
+                    foodListNon.add(foodListAll.get(i));
+                }
+            }
+        }
+
         mAdapter2 = new CardAdapter(foodListVeg);
         mRecyclerView2.setAdapter(mAdapter2);
 
-        mAdapter = new FeaturedCardAdapter(foodListNon);
+        mAdapter3 = new CardAdapter(foodListNon);
+        mRecyclerView3.setAdapter(mAdapter3);
+
+        mAdapter = new FeaturedCardAdapter(foodListFeature);
         mRecyclerView.setAdapter(mAdapter);
 
         mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
@@ -107,12 +129,12 @@ public class HomeFragment extends Fragment {
         mLayoutManager2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView2.setLayoutManager(mLayoutManager2);
 
-
+        mLayoutManager3 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        mRecyclerView3.setLayoutManager(mLayoutManager3);
 
         return view;
-
-
     }
+
     private Handler mHandler;
     private ProgressDialog mDialog;
     private final int CANCEL_DIALOG = 1;
@@ -139,6 +161,37 @@ public class HomeFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
+    public void getAllMenu() {
+        Firebase objRef = ref.child("Menu");
+        Query pendingTasks = objRef.orderByChild("cat").equalTo("feature");
+        pendingTasks.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot tasksSnapshot) {
+                for (DataSnapshot snapshot : tasksSnapshot.getChildren()) {
+                    Object value = snapshot.child("f").getValue();
+                    Object valueF = snapshot.child("p").getValue();
+                    Object valueU = snapshot.child("url").getValue();
+                    Log.d(valueU.toString(), "url che");
+                    Food food = new Food();
+                    food.setPrice(valueF.toString());
+                    food.setFood(value.toString());
+                    food.setImageUrl(valueU.toString());
+                    food.setAvailability(null);
+                    food.setRating(null);
+                    food.setCat("feature");
+                    foodListAll.add(food);
+                    mAdapter.notifyDataSetChanged();
+                    Log.d("food " + value.toString(), "price " + valueF.toString());
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+            }
+        });
+    }
+
     public void getVeg() {
         Firebase objRef = ref.child("Menu");
         Query pendingTasks = objRef.orderByChild("cat").equalTo("veg");
@@ -156,7 +209,8 @@ public class HomeFragment extends Fragment {
                     food.setImageUrl(valueU.toString());
                     food.setAvailability(null);
                     food.setRating(null);
-                    foodListVeg.add(food);
+                    food.setCat("veg");
+                    foodListAll.add(food);
                     mAdapter.notifyDataSetChanged();
                     Log.d("food " + value.toString(), "price " + valueF.toString());
                 }
@@ -186,7 +240,8 @@ public class HomeFragment extends Fragment {
                     food.setImageUrl(valueU.toString());
                     food.setAvailability(null);
                     food.setRating(null);
-                    foodListNon.add(food);
+                    food.setCat("nonveg");
+                    foodListAll.add(food);
                     mAdapter.notifyDataSetChanged();
                     Log.d("food " + value.toString(), "price " + valueF.toString());
                 }
