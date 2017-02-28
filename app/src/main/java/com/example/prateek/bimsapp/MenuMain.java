@@ -110,16 +110,16 @@ public class MenuMain extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                DrawableCompat.setTint(orderSmallIcon.getDrawable(),
-                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
-                DrawableCompat.setTint(menuSmallIcon.getDrawable(),
-                        ContextCompat.getColor(getBaseContext(), R.color.colorPrimary));
-                DrawableCompat.setTint(homeSmallIcon.getDrawable(),
-                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
-                DrawableCompat.setTint(accountSmallIcon.getDrawable(),
-                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
-                DrawableCompat.setTint(settingsSmallIcon.getDrawable(),
-                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+//                DrawableCompat.setTint(orderSmallIcon.getDrawable(),
+//                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+//                DrawableCompat.setTint(menuSmallIcon.getDrawable(),
+//                        ContextCompat.getColor(getBaseContext(), R.color.colorPrimary));
+//                DrawableCompat.setTint(homeSmallIcon.getDrawable(),
+//                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+//                DrawableCompat.setTint(accountSmallIcon.getDrawable(),
+//                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+//                DrawableCompat.setTint(settingsSmallIcon.getDrawable(),
+//                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
                 Toast.makeText(getApplicationContext(), "bot", Toast.LENGTH_LONG).show();
                 //pager.setCurrentItem(1);
 
@@ -152,16 +152,16 @@ public class MenuMain extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                DrawableCompat.setTint(orderSmallIcon.getDrawable(),
-                        ContextCompat.getColor(getBaseContext(), R.color.colorPrimary));
-                DrawableCompat.setTint(menuSmallIcon.getDrawable(),
-                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
-                DrawableCompat.setTint(homeSmallIcon.getDrawable(),
-                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
-                DrawableCompat.setTint(accountSmallIcon.getDrawable(),
-                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
-                DrawableCompat.setTint(settingsSmallIcon.getDrawable(),
-                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+//                DrawableCompat.setTint(orderSmallIcon.getDrawable(),
+//                        ContextCompat.getColor(getBaseContext(), R.color.colorPrimary));
+//                DrawableCompat.setTint(menuSmallIcon.getDrawable(),
+//                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+//                DrawableCompat.setTint(homeSmallIcon.getDrawable(),
+//                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+//                DrawableCompat.setTint(accountSmallIcon.getDrawable(),
+//                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+//                DrawableCompat.setTint(settingsSmallIcon.getDrawable(),
+//                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
 
                 if(store.loadFavorites(getApplicationContext())!=null) {
                     Toast.makeText(getApplicationContext(), "order", Toast.LENGTH_LONG).show();
@@ -226,27 +226,6 @@ public class MenuMain extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-
-//
-//        //RecyclerView
-//        mRecyclerView = (RecyclerView) findViewById(R.id.hrlist_recycler_view);
-//        mRecyclerView.setHasFixedSize(true);
-//
-//        mRecyclerView2 = (RecyclerView) findViewById(R.id.hrlist_recycler_view1);
-//        mRecyclerView2.setHasFixedSize(true);
-//
-//        mAdapter2 = new CardAdapter(foodListVeg);
-//        mRecyclerView2.setAdapter(mAdapter2);
-//
-//        mAdapter = new CardAdapter(foodListNon);
-//        mRecyclerView.setAdapter(mAdapter);
-//
-//        mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-//        mRecyclerView.setLayoutManager(mLayoutManager);
-//
-//        mLayoutManager2 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-//        mRecyclerView2.setLayoutManager(mLayoutManager2);
 
 
     }
