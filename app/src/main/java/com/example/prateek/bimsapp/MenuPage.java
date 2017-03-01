@@ -100,9 +100,13 @@ public class MenuPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 storeSharedPreferences.setState(getApplicationContext(), "2");
-                Intent intent = new Intent(getApplicationContext(), ProceedOrder.class);
-                startActivity(intent);
-                finish();
+                if(storeSharedPreferences.loadFavorites(getApplicationContext())!=null) {
+                    Toast.makeText(getApplicationContext(), "order", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getApplicationContext(), ProceedOrder.class);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(getApplicationContext(), "No Items Selected", Toast.LENGTH_LONG).show();
+                }
 
             }
         });

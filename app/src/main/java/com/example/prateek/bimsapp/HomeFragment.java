@@ -2,6 +2,7 @@ package com.example.prateek.bimsapp;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -46,6 +47,7 @@ public class HomeFragment extends Fragment {
     private List<Food> foodListNon = new ArrayList<>();
     private List<Food> foodListAll = new ArrayList<>();
     private List<Food> foodListFeature = new ArrayList<>();
+    FoodQuantity fa = new FoodQuantity();
     Firebase ref;
 
     private OnFragmentInteractionListener mListener;
@@ -113,25 +115,95 @@ public class HomeFragment extends Fragment {
         mRecyclerView3.setHasFixedSize(true);
 
 
+        mLayoutManager2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        mRecyclerView2.setLayoutManager(mLayoutManager2);
 
 
         mAdapter2 = new CardAdapter(foodListVeg);
         mRecyclerView2.setAdapter(mAdapter2);
+        mRecyclerView2.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), mRecyclerView2, new ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Food f = new Food();
+                f = foodListVeg.get(position);
+                fa.setPrice(f.getPrice());
+                fa.setFood(f.getFood());
+
+                Intent intent = new Intent(getActivity(), SetQuantity.class);
+                // overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
+                intent.putExtra("foodItemName", f.getFood());
+                intent.putExtra("foodItemPrice", f.getPrice());
+                intent.putExtra("foodItemUrl", f.getImageUrl());
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+                StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
+                storeSharedPreferences.removeAllQuant(getActivity());
+
+            }
+        }));
 
         mAdapter3 = new CardAdapter(foodListNon);
         mRecyclerView3.setAdapter(mAdapter3);
+        mRecyclerView3.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), mRecyclerView3, new ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Food f = new Food();
+                f = foodListNon.get(position);
+                fa.setPrice(f.getPrice());
+                fa.setFood(f.getFood());
+
+                Intent intent = new Intent(getActivity(), SetQuantity.class);
+                // overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
+                intent.putExtra("foodItemName", f.getFood());
+                intent.putExtra("foodItemPrice", f.getPrice());
+                intent.putExtra("foodItemUrl", f.getImageUrl());
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+                StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
+                storeSharedPreferences.removeAllQuant(getActivity());
+
+            }
+        }));
+        mLayoutManager3 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        mRecyclerView3.setLayoutManager(mLayoutManager3);
 
         mAdapter = new FeaturedCardAdapter(foodListFeature);
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), mRecyclerView, new ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Food f = new Food();
+                f = foodListFeature.get(position);
+                fa.setPrice(f.getPrice());
+                fa.setFood(f.getFood());
+
+                Intent intent = new Intent(getActivity(), SetQuantity.class);
+                intent.putExtra("foodItemName", f.getFood());
+                intent.putExtra("foodItemPrice", f.getPrice());
+                intent.putExtra("foodItemUrl", f.getImageUrl());
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+                StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
+                storeSharedPreferences.removeAllQuant(getActivity());
+
+            }
+        }));
 
         mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mLayoutManager2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        mRecyclerView2.setLayoutManager(mLayoutManager2);
 
-        mLayoutManager3 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        mRecyclerView3.setLayoutManager(mLayoutManager3);
+
+
 
         return view;
     }
@@ -179,7 +251,7 @@ public class HomeFragment extends Fragment {
                     food.setImageUrl(valueU.toString());
                     food.setAvailability(null);
                     food.setRating(null);
-                    food.setCat("feature");
+                    food.setCat("Featured");
                     foodListFeature.add(food);
                     mAdapter.notifyDataSetChanged();
                     storeSharedPreferences.addFavoriteData(getActivity(), food);
@@ -211,7 +283,7 @@ public class HomeFragment extends Fragment {
                     food.setImageUrl(valueU.toString());
                     food.setAvailability(null);
                     food.setRating(null);
-                    food.setCat("veg");
+                    food.setCat("Veg");
                     foodListVeg.add(food);
                     mAdapter2.notifyDataSetChanged();
                     storeSharedPreferences.addFavoriteData(getActivity(), food);
@@ -243,7 +315,7 @@ public class HomeFragment extends Fragment {
                     food.setImageUrl(valueU.toString());
                     food.setAvailability(null);
                     food.setRating(null);
-                    food.setCat("nonveg");
+                    food.setCat("Non-Veg");
                     foodListNon.add(food);
                     mAdapter3.notifyDataSetChanged();
                     storeSharedPreferences.addFavoriteData(getActivity(), food);
@@ -256,20 +328,5 @@ public class HomeFragment extends Fragment {
                 System.out.println("The read failed: " + firebaseError.getMessage());
             }
         });
-    }
-
-    public void goFurther(){
-        if(foodListVeg!=null) {
-
-            for (int i = 0; i < foodListAll.size(); i++) {
-                if (foodListAll.get(i).getCat().equals("feature")) {
-                    foodListFeature.add(foodListAll.get(i));
-                } else if (foodListAll.get(i).getCat().equals("veg")) {
-                    foodListVeg.add(foodListAll.get(i));
-                } else if (foodListAll.get(i).getCat().equals("nonveg")) {
-                    foodListNon.add(foodListAll.get(i));
-                }
-            }
-        }
     }
 }

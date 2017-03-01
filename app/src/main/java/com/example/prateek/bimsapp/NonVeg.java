@@ -2,6 +2,7 @@ package com.example.prateek.bimsapp;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -103,62 +104,21 @@ public class NonVeg extends Fragment {
                 fa.setPrice(f.getPrice());
                 fa.setFood(f.getFood());
 
-                final Dialog dialog = new Dialog(getActivity());
-                dialog.setContentView(R.layout.dialog_counter);
-                dialog.setTitle(f.getFood());
-                ImageView image = (ImageView) dialog.findViewById(R.id.image);
-                ImageView dialogImage = (ImageView) dialog.findViewById(R.id.dialogImage);
+                Intent intent = new Intent(getActivity(), SetQuantity.class);
+                // overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
+                getActivity().overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
 
-                Log.d("her image url is", f.getImageUrl()+"");
-
-                count = (TextView) dialog.findViewById(R.id.count);
-                count.setText("0");
-                ua = (Button) dialog.findViewById(R.id.buttonUp);
-                da = (Button) dialog.findViewById(R.id.buttonDown);
-
-                ua.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        int s = Integer.parseInt(count.getText().toString());
-                        s++;
-                        count.setText(Integer.toString(s));
-                    }
-                });
-
-                da.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        int s = Integer.parseInt(count.getText().toString());
-                        if(s>0) {
-                            s--;
-                            count.setText(Integer.toString(s));
-                        }
-                    }
-                });
-
-                Picasso.with(dialogImage.getContext())
-                        .load(f.getImageUrl())
-                        .transform(new CircleTransform())
-                        .into(dialogImage);
-
-                dialogOk = (Button) dialog.findViewById(R.id.counterOk);
-
-                dialogOk.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-
-                        if(!(count.getText().toString()).equals("0")) {
-                            setValue(count.getText().toString());
-                            storeData(fa);
-                        }
-                        dialog.dismiss();
-                    }
-                });
-                dialog.show();
+                intent.putExtra("foodItemName", f.getFood());
+                intent.putExtra("foodItemPrice", f.getPrice());
+                intent.putExtra("foodItemUrl", f.getImageUrl());
+                startActivity(intent);
             }
+
             @Override
             public void onLongClick(View view, int position) {
+                StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
+                storeSharedPreferences.removeAllQuant(getActivity());
+
             }
         }));
         return view;

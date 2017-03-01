@@ -57,9 +57,14 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Food food = foodList.get(position);
         holder.food.setText(food.getFood());
-        holder.category.setText("     Veg");
-        holder.categoryIcon.setText("\u25CF");
-        holder.categoryIcon.setTextColor(Color.parseColor("#53f442"));
+        holder.category.setText("     "+food.getCat());
+
+            holder.categoryIcon.setText("\u25CF");
+        if(food.getCat().equals("Veg")) {
+            holder.categoryIcon.setTextColor(Color.parseColor("#53f442"));
+        }else{
+            holder.categoryIcon.setTextColor(Color.parseColor("#ff0000"));
+        }
         holder.price.setText(food.getPrice()+" Rs");
 
 

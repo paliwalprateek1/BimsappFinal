@@ -117,56 +117,6 @@ public class Veg extends Fragment {
                 intent.putExtra("foodItemPrice", f.getPrice());
                 intent.putExtra("foodItemUrl", f.getImageUrl());
                 startActivity(intent);
-                //getActivity().overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
-
-
-
-
-
-//                count = (TextView) dialog.findViewById(R.id.count);
-//                count.setText("0");
-//                ua = (Button) dialog.findViewById(R.id.buttonUp);
-//                da = (Button) dialog.findViewById(R.id.buttonDown);
-//
-//                ua.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        int s = Integer.parseInt(count.getText().toString());
-//                        s++;
-//                        count.setText(Integer.toString(s));
-//                    }
-//                });
-//
-//                da.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        int s = Integer.parseInt(count.getText().toString());
-//                        if(s>0) {
-//                            s--;
-//                            count.setText(Integer.toString(s));
-//                        }
-//                    }
-//                });
-//
-//                Picasso.with(dialogImage.getContext())
-//                        .load(f.getImageUrl())
-//                        .transform(new CircleTransform())
-//                        .into(dialogImage);
-//
-//                dialogOk = (Button) dialog.findViewById(R.id.counterOk);
-//
-//                dialogOk.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//
-//
-//                        if(!(count.getText().toString()).equals("0")) {
-//                            setValue(count.getText().toString());
-//                            storeData(fa);
-//                        }
-//                        dialog.dismiss();
-//                    }
-//                });
             }
 
             @Override
