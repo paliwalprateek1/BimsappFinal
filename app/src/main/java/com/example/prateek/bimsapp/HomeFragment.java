@@ -2,6 +2,8 @@ package com.example.prateek.bimsapp;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,7 +21,12 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
+import com.firebase.client.utilities.Base64;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,6 +70,7 @@ public class HomeFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+    StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,9 +79,13 @@ public class HomeFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+       // Log.d("ole ole ole", "Maakiiiii)))"+ storeSharedPreferences.loadFavoritesData(getActivity()).size());
+
+
 
         if(foodListVeg.size()==0) {
-            getNonVeg();getVeg();getAllMenu();
+            //getNonVeg();getVeg();
+            getAllMenu();
             mHandler = new Handler(new Handler.Callback() {
                 @Override
                 public boolean handleMessage(Message msg) {
@@ -101,18 +113,7 @@ public class HomeFragment extends Fragment {
         mRecyclerView3.setHasFixedSize(true);
 
 
-        if(foodListVeg.size()==0) {
 
-            for (int i = 0; i < foodListAll.size(); i++) {
-                if (foodListAll.get(i).getCat().equals("feature")) {
-                    foodListFeature.add(foodListAll.get(i));
-                } else if (foodListAll.get(i).getCat().equals("veg")) {
-                    foodListVeg.add(foodListAll.get(i));
-                } else if (foodListAll.get(i).getCat().equals("nonveg")) {
-                    foodListNon.add(foodListAll.get(i));
-                }
-            }
-        }
 
         mAdapter2 = new CardAdapter(foodListVeg);
         mRecyclerView2.setAdapter(mAdapter2);
@@ -181,6 +182,7 @@ public class HomeFragment extends Fragment {
                     food.setCat("feature");
                     foodListAll.add(food);
                     mAdapter.notifyDataSetChanged();
+                    storeSharedPreferences.addFavoriteData(getActivity(), food);
                     Log.d("food " + value.toString(), "price " + valueF.toString());
                 }
             }
@@ -189,7 +191,7 @@ public class HomeFragment extends Fragment {
             public void onCancelled(FirebaseError firebaseError) {
                 System.out.println("The read failed: " + firebaseError.getMessage());
             }
-        });
+        });getVeg();
     }
 
     public void getVeg() {
@@ -211,7 +213,8 @@ public class HomeFragment extends Fragment {
                     food.setRating(null);
                     food.setCat("veg");
                     foodListAll.add(food);
-                    mAdapter.notifyDataSetChanged();
+                    mAdapter2.notifyDataSetChanged();
+                    storeSharedPreferences.addFavoriteData(getActivity(), food);
                     Log.d("food " + value.toString(), "price " + valueF.toString());
                 }
             }
@@ -220,7 +223,7 @@ public class HomeFragment extends Fragment {
             public void onCancelled(FirebaseError firebaseError) {
                 System.out.println("The read failed: " + firebaseError.getMessage());
             }
-        });
+        });getNonVeg();
     }
 
     public void getNonVeg() {
@@ -242,7 +245,8 @@ public class HomeFragment extends Fragment {
                     food.setRating(null);
                     food.setCat("nonveg");
                     foodListAll.add(food);
-                    mAdapter.notifyDataSetChanged();
+                    mAdapter3.notifyDataSetChanged();
+                    storeSharedPreferences.addFavoriteData(getActivity(), food);
                     Log.d("food " + value.toString(), "price " + valueF.toString());
                 }
             }
@@ -251,7 +255,21 @@ public class HomeFragment extends Fragment {
             public void onCancelled(FirebaseError firebaseError) {
                 System.out.println("The read failed: " + firebaseError.getMessage());
             }
-        });
+        });goFurther();
+    }
 
+    public void goFurther(){
+        if(foodListVeg!=null) {
+
+            for (int i = 0; i < foodListAll.size(); i++) {
+                if (foodListAll.get(i).getCat().equals("feature")) {
+                    foodListFeature.add(foodListAll.get(i));
+                } else if (foodListAll.get(i).getCat().equals("veg")) {
+                    foodListVeg.add(foodListAll.get(i));
+                } else if (foodListAll.get(i).getCat().equals("nonveg")) {
+                    foodListNon.add(foodListAll.get(i));
+                }
+            }
+        }
     }
 }

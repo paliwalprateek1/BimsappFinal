@@ -2,16 +2,35 @@ package com.example.prateek.bimsapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-public class FirstPage extends AppCompatActivity {private static int SPLASH_TIME_OUT = 500;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.Query;
+import com.firebase.client.ValueEventListener;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+public class FirstPage extends AppCompatActivity {
+    private static int SPLASH_TIME_OUT = 8000;
+
+    Firebase ref;
+    StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +38,16 @@ public class FirstPage extends AppCompatActivity {private static int SPLASH_TIME
         //this one is the real shit
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_page);
-        Toast.makeText(this, "6", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "8", Toast.LENGTH_SHORT).show();
+
+
+
+        Firebase.setAndroidContext(this);
+        ref = new Firebase(Server.URL);
+
+
+        storeSharedPreferences.removeAllQuantData(this);
+
 
 
    //     if(isNetworkAvailable()){
@@ -48,10 +76,115 @@ public class FirstPage extends AppCompatActivity {private static int SPLASH_TIME
                     finish();
                 }
             }, SPLASH_TIME_OUT);
+
+        //getAllMenu();
+
+
 //        }
 //        else{
 //            Toast.makeText(this, "NO INTERNET CONNECTION", Toast.LENGTH_SHORT).show();
 //        }
+
+    }
+
+    public void getAllMenu() {
+        Firebase objRef = ref.child("Menu");
+        Query pendingTasks = objRef.orderByChild("cat").equalTo("feature");
+        pendingTasks.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot tasksSnapshot) {
+                for (DataSnapshot snapshot : tasksSnapshot.getChildren()) {
+                    Object value = snapshot.child("f").getValue();
+                    Object valueF = snapshot.child("p").getValue();
+                    Object valueU = snapshot.child("url").getValue();
+                    Log.d(valueU.toString(), "url che");
+                    Food food = new Food();
+                    food.setPrice(valueF.toString());
+                    food.setFood(value.toString());
+                    food.setImageUrl(valueU.toString());
+                    food.setAvailability(null);
+                    food.setRating(null);
+                    food.setCat("feature");
+                    storeSharedPreferences.addFavoriteData(FirstPage.this, food);
+                    //foodListAll.add(food);
+                    //mAdapter.notifyDataSetChanged();
+                    Log.d("food " + value.toString(), "price " + valueF.toString());
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+            }
+        });
+        getVeg();
+
+    }
+
+    public void getVeg() {
+        Firebase objRef = ref.child("Menu");
+        Query pendingTasks = objRef.orderByChild("cat").equalTo("veg");
+        pendingTasks.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot tasksSnapshot) {
+                for (DataSnapshot snapshot : tasksSnapshot.getChildren()) {
+                    Object value = snapshot.child("f").getValue();
+                    Object valueF = snapshot.child("p").getValue();
+                    Object valueU = snapshot.child("url").getValue();
+                    Log.d(valueU.toString(), "url che");
+                    Food food = new Food();
+                    food.setPrice(valueF.toString());
+                    food.setFood(value.toString());
+                    food.setImageUrl(valueU.toString());
+                    food.setAvailability(null);
+                    food.setRating(null);
+                    food.setCat("veg");
+                    storeSharedPreferences.addFavoriteData(FirstPage.this, food);
+//foodListAll.add(food);
+                    //mAdapter.notifyDataSetChanged();
+                    Log.d("food " + value.toString(), "price " + valueF.toString());
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+            }
+        });
+
+        getNonVeg();
+    }
+
+    public void getNonVeg() {
+        Firebase objRef = ref.child("Menu");
+        Query pendingTasks = objRef.orderByChild("cat").equalTo("nonveg");
+        pendingTasks.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot tasksSnapshot) {
+                for (DataSnapshot snapshot : tasksSnapshot.getChildren()) {
+                    Object value = snapshot.child("f").getValue();
+                    Object valueF = snapshot.child("p").getValue();
+                    Object valueU = snapshot.child("url").getValue();
+                    Log.d(valueU.toString(), "url che");
+                    Food food = new Food();
+                    food.setPrice(valueF.toString());
+                    food.setFood(value.toString());
+                    food.setImageUrl(valueU.toString());
+                    food.setAvailability(null);
+                    food.setRating(null);
+                    food.setCat("nonveg");
+//                    foodListAll.add(food);
+//                    mAdapter.notifyDataSetChanged();
+                    storeSharedPreferences.addFavoriteData(FirstPage.this, food);
+                    Log.d("food " + value.toString(), "price " + valueF.toString());
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+            }
+        });
 
     }
 

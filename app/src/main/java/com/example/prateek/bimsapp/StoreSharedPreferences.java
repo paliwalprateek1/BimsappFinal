@@ -80,6 +80,50 @@ public class StoreSharedPreferences {
         storeFavorites(context, favorites);
     }
 
+    //////////////////////////////////////////////////////////
+
+    public void removeAllQuantData(Context context){
+        SharedPreferences preferences = context.getSharedPreferences("data", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.commit();
+    }
+
+
+    public void storeFavoritesData(Context context, List favorites) {
+        SharedPreferences settings;
+        SharedPreferences.Editor editor;
+        settings = context.getSharedPreferences("data",Context.MODE_PRIVATE);
+        editor = settings.edit();
+        Gson gson = new Gson();
+        String jsonFavorites = gson.toJson(favorites);
+        editor.putString("favoriteData", jsonFavorites);
+        editor.commit();
+    }
+
+
+    public ArrayList loadFavoritesData(Context context) {
+        SharedPreferences settings;
+        List favorites;
+        settings = context.getSharedPreferences("data",Context.MODE_PRIVATE);
+        if (settings.contains("favoriteData")) {
+            String jsonFavorites = settings.getString("favoriteData", null);
+            Gson gson = new Gson();
+            Food[] favoriteItems = gson.fromJson(jsonFavorites,Food[].class);
+            favorites = Arrays.asList(favoriteItems);
+            favorites = new ArrayList(favorites);
+        } else
+            return null;
+        return (ArrayList) favorites;
+    }
+    public void addFavoriteData(Context context, Food beanSampleList) {
+        List favorites = loadFavorites(context);
+        if (favorites == null)
+            favorites = new ArrayList();
+        favorites.add(beanSampleList);
+        storeFavoritesData(context, favorites);
+    }
+
     ////////////////////////////////////////////////////
     public void removeFavorite(Context context, FoodQuantity beanSampleList) {
         ArrayList favorites = loadFavorites(context);

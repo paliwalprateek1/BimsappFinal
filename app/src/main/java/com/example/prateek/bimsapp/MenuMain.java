@@ -118,11 +118,12 @@ public class MenuMain extends AppCompatActivity {
 //                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
 //                DrawableCompat.setTint(settingsSmallIcon.getDrawable(),
 //                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
-                Toast.makeText(getApplicationContext(), "bot", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "bot++"+  store.loadFavoritesData(getApplicationContext()).size()
+                , Toast.LENGTH_LONG).show();
                 //pager.setCurrentItem(1);
 
-                Intent intent = new Intent(MenuMain.this, MenuPage.class);
-                startActivity(intent);
+                //Intent intent = new Intent(MenuMain.this, MenuPage.class);
+                //startActivity(intent);
                 // finish();
             }
         });
