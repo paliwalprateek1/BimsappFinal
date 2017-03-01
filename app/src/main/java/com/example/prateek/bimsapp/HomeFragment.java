@@ -84,7 +84,7 @@ public class HomeFragment extends Fragment {
 
 
         if(foodListVeg.size()==0) {
-            //getNonVeg();getVeg();
+            getNonVeg();getVeg();
             getAllMenu();
             mHandler = new Handler(new Handler.Callback() {
                 @Override
@@ -180,7 +180,7 @@ public class HomeFragment extends Fragment {
                     food.setAvailability(null);
                     food.setRating(null);
                     food.setCat("feature");
-                    foodListAll.add(food);
+                    foodListFeature.add(food);
                     mAdapter.notifyDataSetChanged();
                     storeSharedPreferences.addFavoriteData(getActivity(), food);
                     Log.d("food " + value.toString(), "price " + valueF.toString());
@@ -191,7 +191,7 @@ public class HomeFragment extends Fragment {
             public void onCancelled(FirebaseError firebaseError) {
                 System.out.println("The read failed: " + firebaseError.getMessage());
             }
-        });getVeg();
+        });
     }
 
     public void getVeg() {
@@ -212,7 +212,7 @@ public class HomeFragment extends Fragment {
                     food.setAvailability(null);
                     food.setRating(null);
                     food.setCat("veg");
-                    foodListAll.add(food);
+                    foodListVeg.add(food);
                     mAdapter2.notifyDataSetChanged();
                     storeSharedPreferences.addFavoriteData(getActivity(), food);
                     Log.d("food " + value.toString(), "price " + valueF.toString());
@@ -223,7 +223,7 @@ public class HomeFragment extends Fragment {
             public void onCancelled(FirebaseError firebaseError) {
                 System.out.println("The read failed: " + firebaseError.getMessage());
             }
-        });getNonVeg();
+        });
     }
 
     public void getNonVeg() {
@@ -244,7 +244,7 @@ public class HomeFragment extends Fragment {
                     food.setAvailability(null);
                     food.setRating(null);
                     food.setCat("nonveg");
-                    foodListAll.add(food);
+                    foodListNon.add(food);
                     mAdapter3.notifyDataSetChanged();
                     storeSharedPreferences.addFavoriteData(getActivity(), food);
                     Log.d("food " + value.toString(), "price " + valueF.toString());
@@ -255,7 +255,7 @@ public class HomeFragment extends Fragment {
             public void onCancelled(FirebaseError firebaseError) {
                 System.out.println("The read failed: " + firebaseError.getMessage());
             }
-        });goFurther();
+        });
     }
 
     public void goFurther(){
