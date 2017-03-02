@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class RemarksFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -61,6 +62,7 @@ public class RemarksFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 storeSharedPreferences.setUserRemarks(getActivity(), remarks.getText().toString());
+                Toast.makeText(getActivity(), "Remarks Added", Toast.LENGTH_SHORT).show();
             }
         });
 

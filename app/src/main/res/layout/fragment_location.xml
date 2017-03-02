@@ -21,6 +21,13 @@
             android:layout_alignTop="@+id/textViewAddress2"
             android:layout_alignParentStart="true" />
 
+        <RadioButton android:id="@+id/radio_ninjas2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:onClick="onRadioButtonClicked2"
+            android:layout_alignTop="@+id/textViewAddress"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:layout_width="match_parent"

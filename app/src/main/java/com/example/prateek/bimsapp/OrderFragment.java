@@ -20,6 +20,8 @@ import android.widget.Toast;
 import com.firebase.client.Config;
 import com.firebase.client.Firebase;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -80,8 +82,12 @@ public class OrderFragment extends Fragment {
                 ImageView a = (ImageView) view.findViewById(R.id.upCount);
                 ImageView e = (ImageView) view.findViewById(R.id.downCount);
                 final TextView b = (TextView)view.findViewById(R.id.price_quant);
-                final String s;
+                final TextView quantity = (TextView)view.findViewById(R.id.quantity);
+                final String s, d;
                 s = b.getText().toString();
+                d = quantity.getText().toString();
+                final float basePrice = Integer.parseInt(d.substring(0, d.length()-2))/Integer.valueOf(s.charAt(5)-48);
+                Log.d("as;dklfj;aksjdf", "))))"+basePrice);
                 final int c = position;
                 a.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -95,6 +101,9 @@ public class OrderFragment extends Fragment {
                         if(a!=9){
                             a++;}else{Toast.makeText(getActivity(), "Not more than 9", Toast.LENGTH_SHORT).show();}
                         b.setText(" X   "+Integer.toString(a) + "   = ");
+                        int basePriceInt = (int)basePrice;
+                        quantity.setText(Integer.toString(basePriceInt*Integer.parseInt(Integer.toString(a)))+" ₹");
+                        Log.d("alkfd", "quantity is="+basePriceInt);
 
                         FoodQuantity fff = new FoodQuantity();
                         fff = foodQuantityArrayList.get(c);
@@ -124,6 +133,9 @@ public class OrderFragment extends Fragment {
                             a--;
                         }else{//Toast.makeText(getActivity(), "Not more than 9", Toast.LENGTH_SHORT).show();
                         }
+
+                        int basePriceInt = (int)basePrice;
+                        quantity.setText(Integer.toString(basePriceInt*Integer.parseInt(Integer.toString(a)))+" ₹");
                         if(a==0){
                             foodQuantityArrayList.remove(c);
                             proceedFoodAdapter.notifyDataSetChanged();
@@ -133,7 +145,6 @@ public class OrderFragment extends Fragment {
                             fff = foodQuantityArrayList.get(c);
                             fff.setQuantity(Integer.toString(a));
                         }
-
                         storeSharedPreferences.removeAllQuant(getActivity());
                         for(int i=0;i<foodQuantityArrayList.size();i++){
                             FoodQuantity f = new FoodQuantity();
@@ -142,19 +153,17 @@ public class OrderFragment extends Fragment {
                             f = foodQuantityArrayList.get(i);
                             storeSharedPreferences.addFavorite(getContext(), f);
                         }
+                        if(storeSharedPreferences.loadFavorites(getActivity())==null){
+                            getActivity().finish();
+                        }
                     }
                 });
-
             }
-
             @Override
             public void onLongClick(View view, int position) {
 
             }
         }));
-
-
-
         return view;
     }
 

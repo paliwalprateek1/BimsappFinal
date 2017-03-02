@@ -54,8 +54,6 @@ public class MenuPage extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-
-
         home = (RelativeLayout) findViewById(R.id.homeSmallIconrl);
         menuHere = (RelativeLayout) findViewById(R.id.menuSmallIconrl);
         order = (RelativeLayout) findViewById(R.id.orderSmallIconrl);
@@ -125,6 +123,7 @@ public class MenuPage extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
+        viewPager.setOffscreenPageLimit(5);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);

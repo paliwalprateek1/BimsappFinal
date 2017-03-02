@@ -26,7 +26,7 @@ public class NumberLocation extends AppCompatActivity {
 
         storeSharedPreferences.setUserNumber(this, etMobileNumber.getText().toString());
 
-        Intent intent = new Intent(this, MenuPage.class);
+        Intent intent = new Intent(this, MenuMain.class);
         startActivity(intent);
     }
 }

@@ -38,7 +38,7 @@ public class FirstPage extends AppCompatActivity {
         //this one is the real shit
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_page);
-        Toast.makeText(this, "8", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "10", Toast.LENGTH_SHORT).show();
 
 
 
@@ -46,7 +46,7 @@ public class FirstPage extends AppCompatActivity {
         ref = new Firebase(Server.URL);
 
 
-        storeSharedPreferences.removeAllQuantData(this);
+        storeSharedPreferences.removeAllQuant(this);
 
 
 

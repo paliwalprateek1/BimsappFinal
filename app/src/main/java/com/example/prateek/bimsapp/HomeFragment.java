@@ -101,7 +101,7 @@ public class HomeFragment extends Fragment {
             mDialog = new ProgressDialog(getActivity());
             mDialog.setMessage("Starting Application....");
             mDialog.show();
-            mHandler.sendEmptyMessageDelayed(CANCEL_DIALOG, 5500);
+            mHandler.sendEmptyMessageDelayed(CANCEL_DIALOG, 3500);
         }
 
 
@@ -139,9 +139,6 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onLongClick(View view, int position) {
-                StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
-                storeSharedPreferences.removeAllQuant(getActivity());
-
             }
         }));
 
@@ -165,9 +162,6 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onLongClick(View view, int position) {
-                StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
-                storeSharedPreferences.removeAllQuant(getActivity());
-
             }
         }));
         mLayoutManager3 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
@@ -192,18 +186,11 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onLongClick(View view, int position) {
-                StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
-                storeSharedPreferences.removeAllQuant(getActivity());
-
             }
         }));
 
         mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
-
-
-
-
 
         return view;
     }
@@ -254,7 +241,6 @@ public class HomeFragment extends Fragment {
                     food.setCat("Featured");
                     foodListFeature.add(food);
                     mAdapter.notifyDataSetChanged();
-                    storeSharedPreferences.addFavoriteData(getActivity(), food);
                     Log.d("food " + value.toString(), "price " + valueF.toString());
                 }
             }
@@ -286,7 +272,6 @@ public class HomeFragment extends Fragment {
                     food.setCat("Veg");
                     foodListVeg.add(food);
                     mAdapter2.notifyDataSetChanged();
-                    storeSharedPreferences.addFavoriteData(getActivity(), food);
                     Log.d("food " + value.toString(), "price " + valueF.toString());
                 }
             }
@@ -318,7 +303,6 @@ public class HomeFragment extends Fragment {
                     food.setCat("Non-Veg");
                     foodListNon.add(food);
                     mAdapter3.notifyDataSetChanged();
-                    storeSharedPreferences.addFavoriteData(getActivity(), food);
                     Log.d("food " + value.toString(), "price " + valueF.toString());
                 }
             }

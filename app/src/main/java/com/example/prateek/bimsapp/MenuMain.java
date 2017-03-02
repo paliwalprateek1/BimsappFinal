@@ -95,6 +95,8 @@ public class MenuMain extends AppCompatActivity {
             }
         });
 
+        pager.setOffscreenPageLimit(5);
+
 
 
 

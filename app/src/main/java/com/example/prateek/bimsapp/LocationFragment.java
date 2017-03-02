@@ -70,7 +70,7 @@ public class LocationFragment extends Fragment {
     int status = 1;
     String remarks;
     Place place;
-    TextView textViewAddress;
+    TextView textViewAddress, textViewAddress2;
     StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
 
     RadioButton rb, rb2;
@@ -83,6 +83,11 @@ public class LocationFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_location, container, false);
         textViewAddress =(TextView)view.findViewById(R.id.textViewAddress);
+        textViewAddress2 =(TextView)view.findViewById(R.id.textViewAddress2);
+
+        if(storeSharedPreferences.getUserCustomLocation(getActivity())!=null){
+            textViewAddress2.setText(storeSharedPreferences.getUserCustomLocation(getActivity()));
+        }
         buttonPickLocation = (Button)view.findViewById(R.id.buttonPickLocation);
         buttonPickLocation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,13 +128,20 @@ public class LocationFragment extends Fragment {
         });
 
         rb = (RadioButton)view.findViewById(R.id.radio_ninjas);
+        rb2 = (RadioButton)view.findViewById(R.id.radio_ninjas2);
         rb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(), "hi,", Toast.LENGTH_LONG).show();
-                if(rb.isChecked()){
-                    //rb.setChecked(false);
-                }
+                rb2.setChecked(false);
+                storeSharedPreferences.setUserCustomLocation(getActivity(), textViewAddress2.getText().toString());
+            }
+        });
+        rb2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rb.setChecked(false);
+                storeSharedPreferences.setUserCustomLocation(getActivity(), textViewAddress.getText().toString());
             }
         });
 

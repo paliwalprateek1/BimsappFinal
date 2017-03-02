@@ -47,16 +47,10 @@ public class SetQuantity extends AppCompatActivity {
 
         Log.d("hadf", "adjf  "+foodItemUrl);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarHere);
 
         Picasso.with(this)
                 .load(foodItemUrl)
                 .into(itemImage);
-
-
-        setSupportActionBar(toolbar);
-
-        toolbar.setTitle(foodItemName);
 
         // itemName.setText(foodItemName);
         itemPrice.setText(foodItemPrice +" \u20B9");

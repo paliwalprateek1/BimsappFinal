@@ -27,7 +27,8 @@
         <activity
             android:name=".ProceedOrder"
             android:label="@string/title_activity_proceed_order"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"/>
 
         <meta-data
             android:name="com.google.android.gms.version"

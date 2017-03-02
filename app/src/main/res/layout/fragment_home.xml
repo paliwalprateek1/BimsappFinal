@@ -83,7 +83,6 @@
             android:paddingTop="30dp"
             android:id="@+id/llNonVeg"
             android:layout_marginBottom="30dp"
-            android:paddingBottom="30dp"
             android:layout_margin="2dp"
 
             android:layout_below="@id/hrlist_recycler_view1">

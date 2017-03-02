@@ -62,6 +62,7 @@ public class ProceedOrder extends AppCompatActivity {
                 return true;
             }
         });
+        pager.setOffscreenPageLimit(5);
 
         cartNavigator = (TextView)findViewById(R.id.cartNavigator);
         locationNavigator = (TextView)findViewById(R.id.addressNavigator);
@@ -95,6 +96,7 @@ public class ProceedOrder extends AppCompatActivity {
                         cartNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
                         remarksNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
                         locationNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+
                     }
 
                 }
@@ -131,6 +133,9 @@ public class ProceedOrder extends AppCompatActivity {
 
     }
 
+    public void cancelProceedOrder(View view) {
+        this.finish();
+    }
 
 
     private class MyOrderPagerAdapter extends FragmentPagerAdapter {

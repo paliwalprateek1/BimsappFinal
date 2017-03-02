@@ -130,7 +130,7 @@ public class Veg extends Fragment {
 
 
         if(foodList.size()==0) {
-            getVegMenu();
+            //getVegMenu();
             mHandler = new Handler(new Handler.Callback() {
                 @Override
                 public boolean handleMessage(Message msg) {

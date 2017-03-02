@@ -128,10 +128,6 @@ public class OrderFoodFinal extends AppCompatActivity {
             }
         };
         thread.start();
-
-
-
-
     }
 
     private Handler mHandler;
