@@ -33,13 +33,7 @@ import java.util.List;
 public class MenuPage extends AppCompatActivity {
 
     private TabLayout tabLayout;
-
-
-    private NavigationView navigationView;
-    private View view;
-    Menu menu;
     private ViewPager viewPager;
-    List<Food> ffff = new ArrayList<>();
     ImageView homeSmallIcon, menuSmallIcon, orderSmallIcon, accountSmallIcon, settingsSmallIcon;
     StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
 

@@ -72,10 +72,8 @@ public class OrderFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
-        //recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(proceedFoodAdapter);
-
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, final int position) {
@@ -87,17 +85,14 @@ public class OrderFragment extends Fragment {
                 s = b.getText().toString();
                 d = quantity.getText().toString();
                 final float basePrice = Integer.parseInt(d.substring(0, d.length()-2))/Integer.valueOf(s.charAt(5)-48);
-                Log.d("as;dklfj;aksjdf", "))))"+basePrice);
                 final int c = position;
                 a.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Toast.makeText(getActivity(), ""+c, Toast.LENGTH_SHORT).show();
                         char as = s.charAt(5);
-                        Log.d("jdkf", "kdjf"+as+"adf"+s);
                         int a = Integer.valueOf(as);
                         a=a-48;
-                        Log.d("jdkf", "kdjf "+a+" adf");
                         if(a!=9){
                             a++;}else{Toast.makeText(getActivity(), "Not more than 9", Toast.LENGTH_SHORT).show();}
                         b.setText(" X   "+Integer.toString(a) + "   = ");
@@ -105,14 +100,12 @@ public class OrderFragment extends Fragment {
                         quantity.setText(Integer.toString(basePriceInt*Integer.parseInt(Integer.toString(a)))+" ₹");
                         Log.d("alkfd", "quantity is="+basePriceInt);
 
-                        FoodQuantity fff = new FoodQuantity();
+                        FoodQuantity fff;
                         fff = foodQuantityArrayList.get(c);
                         fff.setQuantity(Integer.toString(a));
                         storeSharedPreferences.removeAllQuant(getActivity());
                         for(int i=0;i<foodQuantityArrayList.size();i++){
-                            FoodQuantity f = new FoodQuantity();
-                            System.out.print("hereerhehreh");
-                            Log.d("jdkf", "kdjf   ###fddddfffff##     ad");
+                            FoodQuantity f;
                             f = foodQuantityArrayList.get(i);
                             storeSharedPreferences.addFavorite(getContext(), f);
                         }
@@ -124,14 +117,12 @@ public class OrderFragment extends Fragment {
                     public void onClick(View view) {
                         Toast.makeText(getActivity(), ""+c, Toast.LENGTH_SHORT).show();
                         char as = s.charAt(5);
-                        Log.d("jdkf", "kdjf   #####  "+as+"   adf   "+s);
                         int a = Integer.valueOf(as);
                         if(a>20){
                             a=a-48;}
-                        Log.d("jdkf", "kdjf    "+a+"     adf");
                         if(a!=0){
                             a--;
-                        }else{//Toast.makeText(getActivity(), "Not more than 9", Toast.LENGTH_SHORT).show();
+                        }else{
                         }
 
                         int basePriceInt = (int)basePrice;
@@ -141,15 +132,13 @@ public class OrderFragment extends Fragment {
                             proceedFoodAdapter.notifyDataSetChanged();
                         }else {
                             b.setText(" X   "+Integer.toString(a) + "   = ");
-                            FoodQuantity fff = new FoodQuantity();
+                            FoodQuantity fff;
                             fff = foodQuantityArrayList.get(c);
                             fff.setQuantity(Integer.toString(a));
                         }
                         storeSharedPreferences.removeAllQuant(getActivity());
                         for(int i=0;i<foodQuantityArrayList.size();i++){
-                            FoodQuantity f = new FoodQuantity();
-                            System.out.print("hereerhehreh");
-                            Log.d("jdkf", "kdjf   ###fddddfffff##     ad");
+                            FoodQuantity f;
                             f = foodQuantityArrayList.get(i);
                             storeSharedPreferences.addFavorite(getContext(), f);
                         }

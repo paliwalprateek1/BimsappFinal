@@ -3,8 +3,6 @@ package com.example.prateek.bimsapp;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,12 +20,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
-import com.firebase.client.utilities.Base64;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,16 +31,14 @@ public class HomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-
     private RecyclerView mRecyclerView, mRecyclerView2, mRecyclerView3;
     private CardAdapter mAdapter2, mAdapter3;
     private FeaturedCardAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager, mLayoutManager2, mLayoutManager3;
     private List<Food> foodListVeg = new ArrayList<>();
     private List<Food> foodListNon = new ArrayList<>();
-    private List<Food> foodListAll = new ArrayList<>();
     private List<Food> foodListFeature = new ArrayList<>();
-    FoodQuantity fa = new FoodQuantity();
+    FoodQuantity foodQuantity = new FoodQuantity();
     Firebase ref;
 
     private OnFragmentInteractionListener mListener;
@@ -80,11 +71,6 @@ public class HomeFragment extends Fragment {
         ref = new Firebase(Server.URL);
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-       // Log.d("ole ole ole", "Maakiiiii)))"+ storeSharedPreferences.loadFavoritesData(getActivity()).size());
-
-
-
         if(foodListVeg.size()==0) {
             getNonVeg();getVeg();
             getAllMenu();
@@ -124,13 +110,11 @@ public class HomeFragment extends Fragment {
         mRecyclerView2.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), mRecyclerView2, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Food f = new Food();
+                Food f;
                 f = foodListVeg.get(position);
-                fa.setPrice(f.getPrice());
-                fa.setFood(f.getFood());
-
+                foodQuantity.setPrice(f.getPrice());
+                foodQuantity.setFood(f.getFood());
                 Intent intent = new Intent(getActivity(), SetQuantity.class);
-                // overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
                 intent.putExtra("foodItemName", f.getFood());
                 intent.putExtra("foodItemPrice", f.getPrice());
                 intent.putExtra("foodItemUrl", f.getImageUrl());
@@ -147,13 +131,11 @@ public class HomeFragment extends Fragment {
         mRecyclerView3.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), mRecyclerView3, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Food f = new Food();
+                Food f;
                 f = foodListNon.get(position);
-                fa.setPrice(f.getPrice());
-                fa.setFood(f.getFood());
-
+                foodQuantity.setPrice(f.getPrice());
+                foodQuantity.setFood(f.getFood());
                 Intent intent = new Intent(getActivity(), SetQuantity.class);
-                // overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
                 intent.putExtra("foodItemName", f.getFood());
                 intent.putExtra("foodItemPrice", f.getPrice());
                 intent.putExtra("foodItemUrl", f.getImageUrl());
@@ -172,10 +154,10 @@ public class HomeFragment extends Fragment {
         mRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), mRecyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Food f = new Food();
+                Food f;
                 f = foodListFeature.get(position);
-                fa.setPrice(f.getPrice());
-                fa.setFood(f.getFood());
+                foodQuantity.setPrice(f.getPrice());
+                foodQuantity.setFood(f.getFood());
 
                 Intent intent = new Intent(getActivity(), SetQuantity.class);
                 intent.putExtra("foodItemName", f.getFood());
@@ -183,7 +165,6 @@ public class HomeFragment extends Fragment {
                 intent.putExtra("foodItemUrl", f.getImageUrl());
                 startActivity(intent);
             }
-
             @Override
             public void onLongClick(View view, int position) {
             }
@@ -191,7 +172,6 @@ public class HomeFragment extends Fragment {
 
         mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
-
         return view;
     }
 

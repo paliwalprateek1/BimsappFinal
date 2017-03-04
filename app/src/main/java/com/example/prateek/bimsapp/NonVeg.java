@@ -37,12 +37,8 @@ import java.util.List;
 
 
 public class NonVeg extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     Food food = new Food();
@@ -50,7 +46,6 @@ public class NonVeg extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     public NonVeg() {
-        // Required empty public constructor
     }
     public static NonVeg newInstance(String param1, String param2) {
         NonVeg fragment = new NonVeg();
@@ -73,11 +68,8 @@ public class NonVeg extends Fragment {
     private List<Food> foodList = new ArrayList<>();
     private RecyclerView recyclerView;
     StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
-    Button dialogOk, ua, da;
-    TextView count;
     FoodQuantity fa = new FoodQuantity();
     private FoodAdapter mAdapter;
-    //just a comment to chech githib settings
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -99,15 +91,12 @@ public class NonVeg extends Fragment {
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Food f = new Food();
+                Food f;
                 f = foodList.get(position);
                 fa.setPrice(f.getPrice());
                 fa.setFood(f.getFood());
-
                 Intent intent = new Intent(getActivity(), SetQuantity.class);
-                // overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
                 getActivity().overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
-
                 intent.putExtra("foodItemName", f.getFood());
                 intent.putExtra("foodItemPrice", f.getPrice());
                 intent.putExtra("foodItemUrl", f.getImageUrl());
@@ -127,16 +116,9 @@ public class NonVeg extends Fragment {
         fa.setQuantity(str);
     }
 
-    public void storeData(FoodQuantity fq){
-        StoreSharedPreferences s = new StoreSharedPreferences();
-        s.addFavorite(getActivity(), fq);
-
-    }
-
     Firebase ref;
 
     private void getNonVegMenu(){
-        //final Food food = new Food(null, null);
         Firebase objRef = ref.child("Menu");
         Query pendingTasks = objRef.orderByChild("cat").equalTo("nonveg");
         pendingTasks.addListenerForSingleValueEvent(new ValueEventListener() {

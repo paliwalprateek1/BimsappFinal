@@ -1,6 +1,5 @@
 package com.example.prateek.bimsapp;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -17,18 +16,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.NumberPicker;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,11 +63,7 @@ public class Veg extends Fragment {
     private List<Food> foodList = new ArrayList<>();
     Firebase ref;
     Food food = new Food();
-    Button dialogOk, ua, da;
-    TextView count;
-    FoodQuantity fa = new FoodQuantity();
-    NumberPicker np;
-    RelativeLayout rl;
+    FoodQuantity foodQuantity = new FoodQuantity();
     StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
 
     @Override
@@ -91,8 +81,6 @@ public class Veg extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_veg, container, false);
 
-        // foodList.add(food);
-
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mAdapter = new FoodAdapter(foodList);
         recyclerView.setHasFixedSize(true);
@@ -104,13 +92,12 @@ public class Veg extends Fragment {
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Food f = new Food();
+                Food f;
                 f = foodList.get(position);
-                fa.setPrice(f.getPrice());
-                fa.setFood(f.getFood());
+                foodQuantity.setPrice(f.getPrice());
+                foodQuantity.setFood(f.getFood());
 
                 Intent intent = new Intent(getActivity(), SetQuantity.class);
-                // overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
                 getActivity().overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
 
                 intent.putExtra("foodItemName", f.getFood());
@@ -127,10 +114,7 @@ public class Veg extends Fragment {
             }
         }));
 
-
-
         if(foodList.size()==0) {
-            //getVegMenu();
             mHandler = new Handler(new Handler.Callback() {
                 @Override
                 public boolean handleMessage(Message msg) {
@@ -164,13 +148,7 @@ public class Veg extends Fragment {
     private final int CANCEL_DIALOG = 1;
     private Handler mHandler2 = new Handler();
     public void setValue(String str){
-        fa.setQuantity(str);
-    }
-
-    public void storeData(FoodQuantity fq){
-        StoreSharedPreferences s = new StoreSharedPreferences();
-        s.addFavorite(getActivity(), fq);
-
+        foodQuantity.setQuantity(str);
     }
 
 

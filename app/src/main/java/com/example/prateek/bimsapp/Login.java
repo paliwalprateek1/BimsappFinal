@@ -44,24 +44,17 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-
-
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestScopes(new Scope(Scopes.DRIVE_APPFOLDER))
                 .requestIdToken("847235219484-rc4h5v8krng4v33trnhq744sjqfntg3a.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
-
         mAuth = FirebaseAuth.getInstance();
-
-
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this, null)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
-
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -73,12 +66,9 @@ public class Login extends AppCompatActivity {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
-                // ...
             }
         };
-
     }
-
 
     @Override
     public void onStart() {
@@ -135,7 +125,6 @@ public class Login extends AppCompatActivity {
                 Log.d("Success", "1");
             } else {
                 Log.d("failed", "1");
-                // Google Sign In failed, update UI appropriately
             }
         }
         GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
@@ -146,8 +135,6 @@ public class Login extends AppCompatActivity {
         String personEmail = acct.getEmail();
         String personId = acct.getId();
         Uri personPhoto = acct.getPhotoUrl();
-
-
 
         Log.d("here is", "  " + personName);
         Log.d("here is", "  " + personGivenName);

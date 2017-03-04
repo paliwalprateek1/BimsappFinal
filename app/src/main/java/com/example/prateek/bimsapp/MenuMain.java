@@ -43,12 +43,6 @@ import java.util.List;
 public class MenuMain extends AppCompatActivity {
 
     Toolbar toolbar;
-
-
-    private RecyclerView mRecyclerView, mRecyclerView2;
-    private CardAdapter mAdapter, mAdapter2;
-    private RecyclerView.LayoutManager mLayoutManager, mLayoutManager2;
-    private List<Food> finalFoodList = new ArrayList<>();
     Firebase ref;
     ImageView homeSmallIcon, menuSmallIcon, orderSmallIcon, accountSmallIcon, settingsSmallIcon;
     RelativeLayout homeSmallIconrl, menuSmallIconrl, orderSmallIconrl, accountSmallIconrl, settingsSmallIconrl;;
@@ -80,7 +74,6 @@ public class MenuMain extends AppCompatActivity {
 
         if(store.getState(this).length()!=1){
             Log.d("hover is", "and wasmai yaha hu ##########"+store.getState(this));
-
         }
         else {
             Log.d("hover is", "and was aur ab yaa");
@@ -88,18 +81,14 @@ public class MenuMain extends AppCompatActivity {
             store.setState(this, null);
         }
 
+
         pager.setOnTouchListener(new View.OnTouchListener() {
 
             public boolean onTouch(View arg0, MotionEvent arg1) {
                 return true;
             }
         });
-
         pager.setOffscreenPageLimit(5);
-
-
-
-
         homeSmallIconrl = (RelativeLayout)findViewById(R.id.homeSmallIconrl);
         menuSmallIconrl = (RelativeLayout)findViewById(R.id.menuSmallIconrl);
         accountSmallIconrl = (RelativeLayout)findViewById(R.id.accountSmallIconrl);
@@ -109,19 +98,6 @@ public class MenuMain extends AppCompatActivity {
         menuSmallIconrl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-//                DrawableCompat.setTint(orderSmallIcon.getDrawable(),
-//                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
-//                DrawableCompat.setTint(menuSmallIcon.getDrawable(),
-//                        ContextCompat.getColor(getBaseContext(), R.color.colorPrimary));
-//                DrawableCompat.setTint(homeSmallIcon.getDrawable(),
-//                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
-//                DrawableCompat.setTint(accountSmallIcon.getDrawable(),
-//                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
-//                DrawableCompat.setTint(settingsSmallIcon.getDrawable(),
-//                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
-                //pager.setCurrentItem(1);
-
                 Intent intent = new Intent(MenuMain.this, MenuPage.class);
                 startActivity(intent);
                  finish();
@@ -151,16 +127,6 @@ public class MenuMain extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-//                DrawableCompat.setTint(orderSmallIcon.getDrawable(),
-//                        ContextCompat.getColor(getBaseContext(), R.color.colorPrimary));
-//                DrawableCompat.setTint(menuSmallIcon.getDrawable(),
-//                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
-//                DrawableCompat.setTint(homeSmallIcon.getDrawable(),
-//                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
-//                DrawableCompat.setTint(accountSmallIcon.getDrawable(),
-//                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
-//                DrawableCompat.setTint(settingsSmallIcon.getDrawable(),
-//                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
 
                 if(store.loadFavorites(getApplicationContext())!=null) {
                     Toast.makeText(getApplicationContext(), "order", Toast.LENGTH_LONG).show();

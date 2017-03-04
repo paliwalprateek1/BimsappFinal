@@ -64,7 +64,6 @@ public class FirstPage extends AppCompatActivity {
                     // Start your app main activity
                     if(StoreSharedPreferences.getUserEmail(getApplicationContext())!=null) {
                         Intent i = new Intent(FirstPage.this, MenuMain.class);
-                        overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
                         startActivity(i);
                     }
                     else{

@@ -101,7 +101,6 @@ public class ProceedOrder extends AppCompatActivity {
 
                 }
             });}
-        //if(pager.getCurrentItem()!=0){
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -66,33 +66,25 @@ public class Bev extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         Firebase.setAndroidContext(getActivity());
-
         ref = new Firebase(Server.URL);
-
         View view = inflater.inflate(R.layout.fragment_bev, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mAdapter = new FoodAdapter(foodList);
-
-
-        if(foodList.size()==0){
-            getBevMenu();
-        }
+        getBevMenu();
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
-        //recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Food f = new Food();
+                Food f;
                 f = foodList.get(position);
                 fa.setPrice(f.getPrice());
                 fa.setFood(f.getFood());
 
                 Intent intent = new Intent(getActivity(), SetQuantity.class);
-                // overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
                 getActivity().overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
 
                 intent.putExtra("foodItemName", f.getFood());
@@ -107,21 +99,16 @@ public class Bev extends Fragment {
                 storeSharedPreferences.removeAllQuant(getActivity());
 
             }
-        }));        return view;
+        }));
+        return view;
     }
     public void setValue(String str){
         fa.setQuantity(str);
     }
 
-    public void storeData(FoodQuantity fq){
-        StoreSharedPreferences s = new StoreSharedPreferences();
-        s.addFavorite(getActivity(), fq);
-
-    }
     Firebase ref;
 
     private void getBevMenu(){
-        //final Food food = new Food(null, null);
         Firebase objRef = ref.child("Menu");
         Query pendingTasks = objRef.orderByChild("cat").equalTo("bev");
         pendingTasks.addListenerForSingleValueEvent(new ValueEventListener() {
