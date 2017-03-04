@@ -24,6 +24,7 @@ public class SummaryFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     public SummaryFragment() {
     }
+
     public static SummaryFragment newInstance(int index) {
         SummaryFragment fragment = new SummaryFragment();
         Bundle args = new Bundle();
