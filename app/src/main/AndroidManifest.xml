@@ -28,7 +28,7 @@
             android:name=".ProceedOrder"
             android:label="@string/title_activity_proceed_order"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -46,7 +46,11 @@
             android:name=".MenuMain"
             android:label="@string/title_activity_menu_main"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SetQuantity"></activity>
+        <activity android:name=".SetQuantity" />
+        <activity
+            android:name=".SelectRestraunt"
+            android:label="@string/title_activity_select_restraunt"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

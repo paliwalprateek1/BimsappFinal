@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -93,12 +94,16 @@ public class SetQuantity extends AppCompatActivity {
     }
 
     public void gotOrder(View view) {
+
+        if(itemQuantity.getText().toString().equals("0")){
+            finish();
+        }else{
         Log.d("kjdf", "lakjsd"+ itemQuantity.getText());
         foodQuantity.setFood(foodItemName);
         foodQuantity.setQuantity(itemQuantity.getText().toString());
         foodQuantity.setPrice(foodItemPrice);
         foodQuantity.setUrl(foodItemUrl);
         storeSharedPreferences.addFavorite(this, foodQuantity);
-        finish();
+        finish();}
     }
 }

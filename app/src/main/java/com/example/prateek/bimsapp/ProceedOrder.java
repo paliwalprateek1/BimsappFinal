@@ -45,6 +45,7 @@ public class ProceedOrder extends AppCompatActivity {
 
     TextView cartNavigator, locationNavigator, remarksNavigator, summaryNavigator;
     LinearLayout  nextButton, backButton;
+    StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -55,6 +56,8 @@ public class ProceedOrder extends AppCompatActivity {
 
         pager = (ViewPager) findViewById(R.id.viewPager);
         pager.setAdapter(new ProceedOrder.MyOrderPagerAdapter(getSupportFragmentManager()));
+
+        Toast.makeText(this, storeSharedPreferences.getUserEmail(this), Toast.LENGTH_SHORT).show();
 
         pager.setOnTouchListener(new View.OnTouchListener() {
 

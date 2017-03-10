@@ -40,15 +40,10 @@ public class FirstPage extends AppCompatActivity {
         setContentView(R.layout.activity_first_page);
         Toast.makeText(this, "10", Toast.LENGTH_SHORT).show();
 
-
-
         Firebase.setAndroidContext(this);
         ref = new Firebase(Server.URL);
 
-
         storeSharedPreferences.removeAllQuant(this);
-
-
 
    //     if(isNetworkAvailable()){
             new Handler().postDelayed(new Runnable() {
@@ -62,8 +57,8 @@ public class FirstPage extends AppCompatActivity {
                 public void run() {
                     // This method will be executed once the timer is over
                     // Start your app main activity
-                    if(StoreSharedPreferences.getUserEmail(getApplicationContext())!=null) {
-                        Intent i = new Intent(FirstPage.this, MenuMain.class);
+                    if(StoreSharedPreferences.getUserEmail(getApplicationContext()).length()!=0) {
+                        Intent i = new Intent(FirstPage.this, SelectRestraunt.class);
                         startActivity(i);
                     }
                     else{
@@ -85,108 +80,6 @@ public class FirstPage extends AppCompatActivity {
 //        }
 
     }
-
-    public void getAllMenu() {
-        Firebase objRef = ref.child("Menu");
-        Query pendingTasks = objRef.orderByChild("cat").equalTo("feature");
-        pendingTasks.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot tasksSnapshot) {
-                for (DataSnapshot snapshot : tasksSnapshot.getChildren()) {
-                    Object value = snapshot.child("f").getValue();
-                    Object valueF = snapshot.child("p").getValue();
-                    Object valueU = snapshot.child("url").getValue();
-                    Log.d(valueU.toString(), "url che");
-                    Food food = new Food();
-                    food.setPrice(valueF.toString());
-                    food.setFood(value.toString());
-                    food.setImageUrl(valueU.toString());
-                    food.setAvailability(null);
-                    food.setRating(null);
-                    food.setCat("feature");
-                    storeSharedPreferences.addFavoriteData(FirstPage.this, food);
-                    //foodListAll.add(food);
-                    //mAdapter.notifyDataSetChanged();
-                    Log.d("food " + value.toString(), "price " + valueF.toString());
-                }
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                System.out.println("The read failed: " + firebaseError.getMessage());
-            }
-        });
-        getVeg();
-
-    }
-
-    public void getVeg() {
-        Firebase objRef = ref.child("Menu");
-        Query pendingTasks = objRef.orderByChild("cat").equalTo("veg");
-        pendingTasks.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot tasksSnapshot) {
-                for (DataSnapshot snapshot : tasksSnapshot.getChildren()) {
-                    Object value = snapshot.child("f").getValue();
-                    Object valueF = snapshot.child("p").getValue();
-                    Object valueU = snapshot.child("url").getValue();
-                    Log.d(valueU.toString(), "url che");
-                    Food food = new Food();
-                    food.setPrice(valueF.toString());
-                    food.setFood(value.toString());
-                    food.setImageUrl(valueU.toString());
-                    food.setAvailability(null);
-                    food.setRating(null);
-                    food.setCat("veg");
-                    storeSharedPreferences.addFavoriteData(FirstPage.this, food);
-//foodListAll.add(food);
-                    //mAdapter.notifyDataSetChanged();
-                    Log.d("food " + value.toString(), "price " + valueF.toString());
-                }
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                System.out.println("The read failed: " + firebaseError.getMessage());
-            }
-        });
-
-        getNonVeg();
-    }
-
-    public void getNonVeg() {
-        Firebase objRef = ref.child("Menu");
-        Query pendingTasks = objRef.orderByChild("cat").equalTo("nonveg");
-        pendingTasks.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot tasksSnapshot) {
-                for (DataSnapshot snapshot : tasksSnapshot.getChildren()) {
-                    Object value = snapshot.child("f").getValue();
-                    Object valueF = snapshot.child("p").getValue();
-                    Object valueU = snapshot.child("url").getValue();
-                    Log.d(valueU.toString(), "url che");
-                    Food food = new Food();
-                    food.setPrice(valueF.toString());
-                    food.setFood(value.toString());
-                    food.setImageUrl(valueU.toString());
-                    food.setAvailability(null);
-                    food.setRating(null);
-                    food.setCat("nonveg");
-//                    foodListAll.add(food);
-//                    mAdapter.notifyDataSetChanged();
-                    storeSharedPreferences.addFavoriteData(FirstPage.this, food);
-                    Log.d("food " + value.toString(), "price " + valueF.toString());
-                }
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                System.out.println("The read failed: " + firebaseError.getMessage());
-            }
-        });
-
-    }
-
 
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager

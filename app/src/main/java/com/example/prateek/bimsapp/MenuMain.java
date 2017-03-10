@@ -28,6 +28,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -45,7 +46,7 @@ public class MenuMain extends AppCompatActivity {
     Toolbar toolbar;
     Firebase ref;
     ImageView homeSmallIcon, menuSmallIcon, orderSmallIcon, accountSmallIcon, settingsSmallIcon;
-    RelativeLayout homeSmallIconrl, menuSmallIconrl, orderSmallIconrl, accountSmallIconrl, settingsSmallIconrl;;
+    LinearLayout homeSmallIconrl, menuSmallIconrl, orderSmallIconrl, accountSmallIconrl, settingsSmallIconrl;;
 
     private ViewPager pager;
     StoreSharedPreferences store = new StoreSharedPreferences();
@@ -71,6 +72,8 @@ public class MenuMain extends AppCompatActivity {
         accountSmallIcon = (ImageView)findViewById(R.id.accountSmallIcon);
         settingsSmallIcon = (ImageView)findViewById(R.id.settingsSmallIcon);
 
+        Toast.makeText(this, store.getUserEmail(this), Toast.LENGTH_SHORT).show();
+
 
         if(store.getState(this).length()!=1){
             Log.d("hover is", "and wasmai yaha hu ##########"+store.getState(this));
@@ -89,11 +92,11 @@ public class MenuMain extends AppCompatActivity {
             }
         });
         pager.setOffscreenPageLimit(5);
-        homeSmallIconrl = (RelativeLayout)findViewById(R.id.homeSmallIconrl);
-        menuSmallIconrl = (RelativeLayout)findViewById(R.id.menuSmallIconrl);
-        accountSmallIconrl = (RelativeLayout)findViewById(R.id.accountSmallIconrl);
-        orderSmallIconrl = (RelativeLayout)findViewById(R.id.orderSmallIconrl);
-        settingsSmallIconrl = (RelativeLayout)findViewById(R.id.settingsSmallIconrl);
+        homeSmallIconrl = (LinearLayout) findViewById(R.id.homeSmallIconrl);
+        menuSmallIconrl = (LinearLayout) findViewById(R.id.menuSmallIconrl);
+        accountSmallIconrl = (LinearLayout) findViewById(R.id.accountSmallIconrl);
+        orderSmallIconrl = (LinearLayout) findViewById(R.id.orderSmallIconrl);
+        settingsSmallIconrl = (LinearLayout) findViewById(R.id.settingsSmallIconrl);
 
         menuSmallIconrl.setOnClickListener(new View.OnClickListener() {
             @Override

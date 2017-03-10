@@ -12,4 +12,5 @@
     <string name="title_activity_proceed_order">ProceedOrder</string>
     <string name="title_activity_order_food_final">OrderFoodFinal</string>
     <string name="title_activity_menu_main">MenuMain</string>
+    <string name="title_activity_select_restraunt">SelectRestraunt</string>
 </resources>

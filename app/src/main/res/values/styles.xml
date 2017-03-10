@@ -36,4 +36,12 @@
     </style>
 
 
+    <style name="green">
+        <item name="colorPrimary">#abacad</item>
+    </style>
+
+    <style name="blue">
+        <item name="colorPrimary">@color/colorPrimary</item>
+    </style>
+
 </resources>
