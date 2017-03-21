@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,7 +60,7 @@ public class Veg extends Fragment {
     }
 
     RecyclerView recyclerView;
-    private FoodAdapter mAdapter;
+    private CardAdapter mAdapter;
     private List<Food> foodList = new ArrayList<>();
     Firebase ref;
     Food food = new Food();
@@ -81,38 +82,43 @@ public class Veg extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_veg, container, false);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        mAdapter = new FoodAdapter(foodList);
-        recyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(mLayoutManager);
-        //recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        mAdapter = new CardAdapter(foodList);
         recyclerView.setAdapter(mAdapter);
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                Food f;
-                f = foodList.get(position);
-                foodQuantity.setPrice(f.getPrice());
-                foodQuantity.setFood(f.getFood());
 
-                Intent intent = new Intent(getActivity(), SetQuantity.class);
-                getActivity().overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
-
-                intent.putExtra("foodItemName", f.getFood());
-                intent.putExtra("foodItemPrice", f.getPrice());
-                intent.putExtra("foodItemUrl", f.getImageUrl());
-                startActivity(intent);
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-                StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
-                storeSharedPreferences.removeAllQuant(getActivity());
-
-            }
-        }));
+//        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+//        mAdapter = new FoodAdapter(foodList);
+//        recyclerView.setHasFixedSize(true);
+//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+//        recyclerView.setLayoutManager(mLayoutManager);
+//        //recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//        recyclerView.setAdapter(mAdapter);
+//        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener() {
+//            @Override
+//            public void onClick(View view, int position) {
+//                Food f;
+//                f = foodList.get(position);
+//                foodQuantity.setPrice(f.getPrice());
+//                foodQuantity.setFood(f.getFood());
+//
+//                Intent intent = new Intent(getActivity(), SetQuantity.class);
+//                getActivity().overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+//
+//                intent.putExtra("foodItemName", f.getFood());
+//                intent.putExtra("foodItemPrice", f.getPrice());
+//                intent.putExtra("foodItemUrl", f.getImageUrl());
+//                startActivity(intent);
+//            }
+//
+//            @Override
+//            public void onLongClick(View view, int position) {
+//                StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
+//                storeSharedPreferences.removeAllQuant(getActivity());
+//
+//            }
+//        }));
 
         if(foodList.size()==0) {
             mHandler = new Handler(new Handler.Callback() {

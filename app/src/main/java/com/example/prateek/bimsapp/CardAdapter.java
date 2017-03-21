@@ -65,11 +65,11 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
         holder.category.setText("     "+food.getCat());
 
             holder.categoryIcon.setText("\u25CF");
-        if(food.getCat().equals("Veg")) {
+//        if(food.getCat().equals("Veg")) {
             holder.categoryIcon.setTextColor(Color.parseColor("#53f442"));
-        }else{
-            holder.categoryIcon.setTextColor(Color.parseColor("#ff0000"));
-        }
+//        }else{
+//            holder.categoryIcon.setTextColor(Color.parseColor("#ff0000"));
+//        }
         holder.price.setText(food.getPrice()+" Rs");
 
 

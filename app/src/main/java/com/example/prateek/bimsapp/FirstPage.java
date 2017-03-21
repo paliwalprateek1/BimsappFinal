@@ -27,7 +27,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class FirstPage extends AppCompatActivity {
-    private static int SPLASH_TIME_OUT = 8000;
+    private static int SPLASH_TIME_OUT = 2000;
 
     Firebase ref;
     StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
