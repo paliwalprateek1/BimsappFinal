@@ -23,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,7 +39,7 @@ public class MenuPage extends AppCompatActivity {
     StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
 
 
-    RelativeLayout home, menuHere, order, user, settings;
+    LinearLayout home, menuHere, order, user, settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +48,11 @@ public class MenuPage extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-        home = (RelativeLayout) findViewById(R.id.homeSmallIconrl);
-        menuHere = (RelativeLayout) findViewById(R.id.menuSmallIconrl);
-        order = (RelativeLayout) findViewById(R.id.orderSmallIconrl);
-        user = (RelativeLayout) findViewById(R.id.accountSmallIconrl);
-        settings = (RelativeLayout) findViewById(R.id.settingsSmallIconrl);
+        home = (LinearLayout) findViewById(R.id.homeSmallIconrl);
+        menuHere = (LinearLayout) findViewById(R.id.menuSmallIconrl);
+        user = (LinearLayout) findViewById(R.id.accountSmallIconrl);
+        order = (LinearLayout) findViewById(R.id.orderSmallIconrl);
+        settings = (LinearLayout) findViewById(R.id.settingsSmallIconrl);
 
         menuSmallIcon = (ImageView)findViewById(R.id.menuSmallIcon);
         homeSmallIcon = (ImageView)findViewById(R.id.homeSmallIcon);

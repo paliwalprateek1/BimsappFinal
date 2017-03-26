@@ -96,20 +96,21 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:elevation="30dp"
-        android:paddingBottom="6dp"
-        android:layout_below="@+id/viewpager"
-        android:gravity="bottom"
+        android:layout_height="wrap_content"
+        android:id="@+id/llout"
+        android:padding="8dp"
         android:layout_gravity="bottom"
+        android:layout_below="@+id/viewpager"
         android:layout_alignParentBottom="true"
         android:background="#fff">
 
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
             android:id="@+id/homeSmallIconrl">
 
             <ImageView
@@ -124,17 +125,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="Home"
                 android:layout_below="@+id/homeSmallIcon"
+                android:text="Home"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"/>
 
 
 
-        </RelativeLayout>
-        <RelativeLayout
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:gravity="center"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/menuSmallIconrl">
 
@@ -157,8 +160,10 @@
 
 
 
-        </RelativeLayout>
-        <RelativeLayout
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -172,7 +177,6 @@
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true" />
 
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -184,8 +188,10 @@
 
 
 
-        </RelativeLayout>
-        <RelativeLayout
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -210,13 +216,14 @@
 
 
 
-        </RelativeLayout>
-        <RelativeLayout
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:id="@+id/settingsSmallIconrl">
-
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
@@ -224,7 +231,6 @@
                 android:src="@drawable/reorder_horizontal"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -233,14 +239,6 @@
                 android:layout_below="@+id/settingsSmallIcon"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"/>
-
-
-
-        </RelativeLayout>
-
-
-
-
+        </LinearLayout>
     </LinearLayout>
-
 </android.support.design.widget.CoordinatorLayout>
