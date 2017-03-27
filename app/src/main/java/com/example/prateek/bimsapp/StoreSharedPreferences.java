@@ -169,6 +169,17 @@ public class StoreSharedPreferences {
         return getSharedPreferences(ctx).getString("name", "");
     }
 
+    public static void setKitchenDatabase(Context ctx, String userName) {
+        SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();
+        editor.putString("database", userName);
+        editor.commit();
+    }
+
+    public static String getKitchenDatabase(Context ctx){
+        return getSharedPreferences(ctx).getString("database", "");
+    }
+
+
     public static void setUserCustomLocation(Context ctx, String userCustomLocation){
         SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();
         editor.putString(PREFS_USER_CUSTOM_LOCATION, userCustomLocation);

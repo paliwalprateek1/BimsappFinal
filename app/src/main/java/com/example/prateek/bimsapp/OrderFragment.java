@@ -75,10 +75,13 @@ public class OrderFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(proceedFoodAdapter);
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener() {
+
+
             @Override
             public void onClick(View view, final int position) {
                 ImageView a = (ImageView) view.findViewById(R.id.upCount);
                 ImageView e = (ImageView) view.findViewById(R.id.downCount);
+//                a.setVisibility(View.INVISIBLE);e.setVisibility(View.INVISIBLE);
                 final TextView b = (TextView)view.findViewById(R.id.price_quant);
                 final TextView quantity = (TextView)view.findViewById(R.id.quantity);
                 final String s, d;

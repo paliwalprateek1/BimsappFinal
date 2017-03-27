@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 public class SelectRestraunt extends AppCompatActivity {
+    StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,13 +29,11 @@ public class SelectRestraunt extends AppCompatActivity {
     }
 
     public void b1(View view) {
-        this.setTheme(R.style.green);
         Intent i = new Intent(SelectRestraunt.this, MenuMain.class);
         startActivity(i);
     }
 
     public void b2(View view) {
-        this.setTheme(R.style.blue);
         Intent i = new Intent(SelectRestraunt.this, MenuMain.class);
         startActivity(i);
     }

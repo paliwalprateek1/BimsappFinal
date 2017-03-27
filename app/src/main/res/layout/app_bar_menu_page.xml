@@ -58,8 +58,31 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:elevation="0dp"
-            app:layout_scrollFlags="scroll|enterAlways"
+            app:layout_scrollFlags="scroll|enterAlways">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:paddingRight="10dp"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Menu"
+                    android:textColor="@color/white"
+                    android:textSize="30dp"/>
+
+        <ImageView
+            android:tint="@color/white"
+            android:id="@+id/cartIcon"
+            android:layout_width="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_shopping_cart_black_24dp"/>
             />
+            </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
+
+
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"

@@ -65,7 +65,7 @@ public class ProceedOrder extends AppCompatActivity {
                 return true;
             }
         });
-        pager.setOffscreenPageLimit(5);
+        pager.setOffscreenPageLimit(3);
 
         cartNavigator = (TextView)findViewById(R.id.cartNavigator);
         locationNavigator = (TextView)findViewById(R.id.addressNavigator);
@@ -98,6 +98,31 @@ public class ProceedOrder extends AppCompatActivity {
                         cartNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
                         summaryNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
                     }else if(pager.getCurrentItem()==3){
+//
+//                        String itemString = "";
+//                        List<FoodQuantity> l = new ArrayList<>();
+//                        l = storeSharedPreferences.loadFavorites(getApplicationContext());
+//
+//
+//                        int total = 0;
+//                        for (int i=0;i<l.size();i++){
+//
+//                            int k = Integer.parseInt(l.get(i).getQuantity());
+//                            int j = Integer.parseInt(l.get(i).getPrice());
+//                            int m = k*j;
+//
+//                            itemString = itemString + l.get(i).getFood() +"     X     "+
+//                                    l.get(i).getQuantity() +"     =     "+ Integer.toString(m) +","+"\n";
+//                            total = total+m;
+//
+//                        }
+//                        itemString = itemString.substring(0, itemString.length()-2);
+//
+//                        Bundle bundle=new Bundle();
+//                        bundle.putString("value", itemString);
+//                        SummaryFragment fragobj=new SummaryFragment();
+//                        fragobj.setArguments(bundle);
+
                         nextButton.setVisibility(View.INVISIBLE);
                         summaryNavigator.setTextColor(getResources().getColor(R.color.black));
                         cartNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
@@ -138,6 +163,8 @@ public class ProceedOrder extends AppCompatActivity {
                 }
             }
         });//}
+
+
 
     }
 

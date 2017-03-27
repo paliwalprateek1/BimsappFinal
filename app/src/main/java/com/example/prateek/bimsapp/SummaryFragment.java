@@ -84,11 +84,12 @@ public class SummaryFragment extends Fragment {
 
         }
         itemString = itemString.substring(0, itemString.length()-2);
+        String strtext=getArguments().getString("value");
 
 
         foodItemList = (TextView)view.findViewById(R.id.foodItemList);
         foodItemList.setText(null);
-        foodItemList.setText(itemString);
+        foodItemList.setText(strtext);
         order.setItem(storeSharedPreferences.loadFavorites(getActivity()));
 
 

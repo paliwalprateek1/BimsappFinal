@@ -45,6 +45,7 @@ public class SetQuantity extends AppCompatActivity {
         foodItemName = extras.getString("foodItemName");
         foodItemPrice = extras.getString("foodItemPrice");
         foodItemUrl = extras.getString("foodItemUrl");
+        itemName.setText(foodItemName);
 
         Log.d("hadf", "adjf  "+foodItemUrl);
 
