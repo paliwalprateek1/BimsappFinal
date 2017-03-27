@@ -141,7 +141,7 @@ public class ProceedOrder extends AppCompatActivity {
 
     }
 
-    public void cancelProceedOrder(View view) {finish();
+    public void cancelDialog(View view) {finish();
     }
 
 
