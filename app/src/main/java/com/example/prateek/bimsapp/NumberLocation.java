@@ -10,59 +10,117 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class NumberLocation extends AppCompatActivity {
 
-    TextView tvSelectLocation;
     EditText etMobileNumber;
     StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
+    Firebase ref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_number_location);
+        Firebase.setAndroidContext(this);
+        ref = new Firebase(Server.URL);
+
 
         etMobileNumber = (EditText)findViewById(R.id.etMobileNumber);
+        checkPreviousUser();
 
-//        tvSelectLocation.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                android.app.AlertDialog.Builder builderSingle = new android.app.AlertDialog.Builder(NumberLocation.this);
-//                builderSingle.setTitle("Select Your Location");
-//                final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-//                        NumberLocation.this, android.R.layout.select_dialog_item);
-//                arrayAdapter.add("Gandhinagar");
-//                arrayAdapter.add("Vadodara");
-//
-//                builderSingle.setAdapter(
-//
-//                        arrayAdapter, new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                String strName = arrayAdapter.getItem(which);
-//                                android.app.AlertDialog.Builder builderInner = new android.app.AlertDialog.Builder(
-//                                        NumberLocation.this);
-//                                if (strName == "Gandhinagar") {
-//                                    tvSelectLocation.setText(strName);
-//                                    StoreSharedPreferences.setUserCustomLocation(NumberLocation.this, "Gandhinagar");
-//                                } else if (strName == "Vadodara") {
-//                                    tvSelectLocation.setText(strName);
-//                                    StoreSharedPreferences.setUserCustomLocation(NumberLocation.this, "Vadodara");
-//
-//                                }
-//                            }
-//                        });
-//                builderSingle.create().show();
-//            }
-//        });
     }
 
     public void continueNumberLocation(View view) {
         if(etMobileNumber.getText().toString().length()!=10){
-            Toast.makeText(this, "Enter valid mobile number", Toast.LENGTH_SHORT).show();
+            Toast.makeText(NumberLocation.this, "Enter valid mobile number", Toast.LENGTH_SHORT).show();
         }else {
-            storeSharedPreferences.setUserNumber(this, etMobileNumber.getText().toString());
-            Intent intent = new Intent(this, SelectRestraunt.class);
-            startActivity(intent);
+            storeSharedPreferences.setUserNumber(getApplicationContext(), etMobileNumber.getText().toString());
+            if(checkPreviousUser()){
+                waitTime();
+            }else{
+                createUser();
+            }
+
         }
+
     }
+
+    public void waitTime(){
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(getApplicationContext(), SelectRestraunt.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                },
+                2000
+        );
+    }
+
+    public boolean checkPreviousUser(){
+
+        return false;
+    }
+
+    public void createUser(){
+        User user = new User();
+        user.setEmail(storeSharedPreferences.getUserEmail(this));
+        user.setName(storeSharedPreferences.getUserName(this));
+        user.setNumber(etMobileNumber.getText().toString());
+        user.setPoints("100");
+
+        Firebase newRef = ref.child("User").push();
+        newRef.setValue(user);
+
+        waitTime();
+
+    }
+}
+
+class User{
+    private String name;
+    private String number;
+    private String email;
+
+    public String getPoints() {
+        return points;
+    }
+
+    public void setPoints(String points) {
+        this.points = points;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private String points;
 }
