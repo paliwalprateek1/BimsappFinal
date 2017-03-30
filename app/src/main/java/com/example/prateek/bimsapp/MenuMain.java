@@ -60,8 +60,15 @@ public class MenuMain extends AppCompatActivity {
 
         ref = new Firebase(Server.URL);
 
+//        toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(store.getKitchenName(this));
+
+
 
         pager = (ViewPager) findViewById(R.id.viewPager);
         pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
@@ -103,7 +110,6 @@ public class MenuMain extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MenuMain.this, MenuPage.class);
                 startActivity(intent);
-                 finish();
             }
         });
 
@@ -188,11 +194,6 @@ public class MenuMain extends AppCompatActivity {
         DrawableCompat.setTint(settingsSmallIcon.getDrawable(),
                 ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
 
-
-//        getVeg();
-//        getNonVeg();
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
 

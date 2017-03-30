@@ -34,6 +34,7 @@ public class SelectRestraunt extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 storeSharedPreferences.setKitchenDatabase(getApplicationContext(), "email");
+                storeSharedPreferences.setKitchenName(getApplicationContext(), "Bims' Kitchen");
                 Toast.makeText(getApplicationContext(), "bims", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(SelectRestraunt.this, MenuMain.class);
                 startActivity(i);
@@ -43,6 +44,7 @@ public class SelectRestraunt extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 storeSharedPreferences.setKitchenDatabase(getApplicationContext(), "kuch bhi");
+                storeSharedPreferences.setKitchenName(getApplicationContext(), "Midnight Scorer");
                 Toast.makeText(getApplicationContext(), "Midnight", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(SelectRestraunt.this, MenuMain.class);
                 startActivity(i);

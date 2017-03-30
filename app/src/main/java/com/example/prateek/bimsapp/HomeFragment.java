@@ -85,7 +85,7 @@ public class HomeFragment extends Fragment {
                 }
             });
             mDialog = new ProgressDialog(getActivity());
-            mDialog.setMessage("Starting Application....");
+            mDialog.setMessage("Loading Restraunt....");
             mDialog.show();
             mHandler.sendEmptyMessageDelayed(CANCEL_DIALOG, 3500);
         }

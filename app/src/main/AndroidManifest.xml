@@ -21,6 +21,7 @@
         </activity>
         <activity android:name=".Login" />
         <activity
+            android:parentActivityName=".MenuMain"
             android:name=".MenuPage"
             android:label="@string/title_activity_menu_page"
             android:theme="@style/AppTheme.NoActionBar" />
