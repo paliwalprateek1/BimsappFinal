@@ -59,20 +59,20 @@ android:background="@color/white"
             android:textSize="12sp"
 
             android:text="Remarks"/>
-        <View
-            android:layout_width="40dp"
-            android:layout_height="1dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:background="@color/colorPrimary"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:textSize="12sp"
-            android:id="@+id/summaryNavigator"
-            android:layout_height="wrap_content"
-            android:text="Summary"/>
+        <!--<View-->
+            <!--android:layout_width="40dp"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@color/colorPrimary"/>-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_weight="1"-->
+            <!--android:textSize="12sp"-->
+            <!--android:id="@+id/summaryNavigator"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Summary"/>-->
 
 
     </LinearLayout>

@@ -1,10 +1,12 @@
 package com.example.prateek.bimsapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -58,6 +60,9 @@ public class RemarksFragment extends Fragment {
             public void onClick(View view) {
                 storeSharedPreferences.setUserRemarks(getActivity(), remarks.getText().toString());
                 Toast.makeText(getActivity(), "Remarks Added", Toast.LENGTH_SHORT).show();
+                Intent in = new Intent(getActivity(), OrderFoodFinal.class);
+                startActivity(in);
+                getActivity().finish();
             }
         });
 
