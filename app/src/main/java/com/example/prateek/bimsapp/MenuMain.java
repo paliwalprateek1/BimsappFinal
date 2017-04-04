@@ -127,7 +127,7 @@ public class MenuMain extends AppCompatActivity {
                         ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
                 DrawableCompat.setTint(settingsSmallIcon.getDrawable(),
                         ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
-                Toast.makeText(getApplicationContext(), "tob", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "tob", Toast.LENGTH_LONG).show();
                 pager.setCurrentItem(0);
             }
         });
@@ -160,7 +160,7 @@ public class MenuMain extends AppCompatActivity {
                         ContextCompat.getColor(getBaseContext(), R.color.colorPrimary));
                 DrawableCompat.setTint(settingsSmallIcon.getDrawable(),
                         ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
-                Toast.makeText(getApplicationContext(), "account", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "account", Toast.LENGTH_LONG).show();
                 pager.setCurrentItem(3);
             }
         });
@@ -178,7 +178,7 @@ public class MenuMain extends AppCompatActivity {
                         ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
                 DrawableCompat.setTint(settingsSmallIcon.getDrawable(),
                         ContextCompat.getColor(getBaseContext(), R.color.colorPrimary));
-                Toast.makeText(getApplicationContext(), "settings", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "settings", Toast.LENGTH_LONG).show();
                 pager.setCurrentItem(4);
             }
         });

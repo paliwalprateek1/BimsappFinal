@@ -11,6 +11,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.util.SortedListAdapterCallback;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -61,7 +62,7 @@ public class Bev extends Fragment {
 
     private List<Food> foodList = new ArrayList<>();
     private RecyclerView recyclerView;
-    private FoodAdapter mAdapter;
+    private CardAdapter mAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -69,12 +70,15 @@ public class Bev extends Fragment {
         ref = new Firebase(Server.URL);
         View view = inflater.inflate(R.layout.fragment_bev, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        mAdapter = new FoodAdapter(foodList);
+        mAdapter = new CardAdapter(foodList);
+
         getBevMenu();
         recyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+//        recyclerView.setLayoutManager(mLayoutManager);
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         recyclerView.setAdapter(mAdapter);
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener() {
             @Override

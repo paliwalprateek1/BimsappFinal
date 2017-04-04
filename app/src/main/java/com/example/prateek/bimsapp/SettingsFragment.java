@@ -49,14 +49,14 @@ public class SettingsFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
-        LinearLayout singOut = (LinearLayout)view.findViewById(R.id.llsignout);
-        singOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity(), "signiong out", Toast.LENGTH_SHORT).show();
-                signingOut();
-            }
-        });
+//        LinearLayout singOut = (LinearLayout)view.findViewById(R.id.llsignout);
+//        singOut.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(getActivity(), "signiong out", Toast.LENGTH_SHORT).show();
+//                signingOut();
+//            }
+//        });
         return view;
     }
 

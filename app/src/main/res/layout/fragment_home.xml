@@ -111,7 +111,14 @@
             >
         </android.support.v7.widget.RecyclerView>
 
+        <LinearLayout
+            android:layout_below="@id/hrlist_recycler_view2"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"></LinearLayout>
+
 
     </RelativeLayout>
+
+
 
 </ScrollView>

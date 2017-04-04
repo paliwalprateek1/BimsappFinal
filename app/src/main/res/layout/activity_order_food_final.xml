@@ -18,6 +18,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:minHeight="?attr/actionBarSize"
+            android:id="@+id/toolbarSummary"
             android:layout_alignParentTop="true"
             tools:context=".MyActivity"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar">

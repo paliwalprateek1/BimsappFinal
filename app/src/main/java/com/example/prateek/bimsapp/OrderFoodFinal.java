@@ -38,13 +38,18 @@ public class OrderFoodFinal extends AppCompatActivity {
     String itemString = "";
 
     ListView listView;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_food_final);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbarSummary);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Order Summary");
 
 
 
@@ -53,10 +58,10 @@ public class OrderFoodFinal extends AppCompatActivity {
 //        Firebase.setAndroidContext(this);
 //        ref = new Firebase(Server.URL);
 //
-        l = storeSharedPreferences.loadFavorites(this);
-        for(int i=0;i<l.size();i++){
-            System.out.println(l.get(i).getFood()+l.get(i).getQuantity()+l.get(i).getPrice());
-        }
+          l = storeSharedPreferences.loadFavorites(this);
+//        for(int i=0;i<l.size();i++){
+//            System.out.println(l.get(i).getFood()+l.get(i).getQuantity()+l.get(i).getPrice());
+//        }
 
         listView = (ListView)findViewById(R.id.orderList);
         OrderListAdapter orderListAdapter = new OrderListAdapter(this, l);
@@ -68,11 +73,11 @@ public class OrderFoodFinal extends AppCompatActivity {
 //        address = extras.getString("address");
 //        coordinates = extras.getString("coordinates");
 //        remarks = extras.getString("remarks");
-//
-//        order.setAddress(address);
-//        order.setAmount("thats");
-//        order.setCoordinates(coordinates);
-//
+
+        order.setAddress(storeSharedPreferences.getUserCustomLocation(this));
+        order.setAmount("thats");
+        order.setCoordinates(storeSharedPreferences.getUserCoordinates(this));
+
 //        for (int i=0;i<l.size();i++){
 //
 //            int k = Integer.parseInt(l.get(i).getQuantity());
@@ -87,30 +92,30 @@ public class OrderFoodFinal extends AppCompatActivity {
 //        foodItemList = (TextView)findViewById(R.id.foodItemList);
 //        foodItemList.setText(itemString);
 //        order.setItem(storeSharedPreferences.loadFavorites(this));
-//
-//
-//        order.setName(storeSharedPreferences.getUserName(this));
-//        order.setMail(storeSharedPreferences.getUserEmail(this));
-//        order.setNumber(storeSharedPreferences.getUserNumber(this));
-//        Toast.makeText(this, storeSharedPreferences.getUserNumber(this), Toast.LENGTH_SHORT).show();
-//
-//        nameTv = (TextView)findViewById(R.id.nameTv);
-//        nameTv.setText(storeSharedPreferences.getUserName(this));
-//
-//        addressTv = (TextView)findViewById(R.id.addressTv);
-//        addressTv.setText(address);
-//
-//        totalTv = (TextView) findViewById(R.id.totalTv);
-//        totalTv.setText("thats");
-//
-//        remarksTv = (TextView) findViewById(R.id.remarksTv);
-//        remarksTv.setText(remarks);
+
+
+        order.setName(storeSharedPreferences.getUserName(this));
+        order.setMail(storeSharedPreferences.getUserEmail(this));
+        order.setNumber(storeSharedPreferences.getUserNumber(this));
+        //Toast.makeText(this, storeSharedPreferences.getUserNumber(this), Toast.LENGTH_SHORT).show();
+
+        nameTv = (TextView)findViewById(R.id.nameTv);
+        nameTv.setText(storeSharedPreferences.getUserName(this));
+
+        addressTv = (TextView)findViewById(R.id.addressTv);
+        addressTv.setText(storeSharedPreferences.getUserCustomLocation(this));
+
+        totalTv = (TextView) findViewById(R.id.totalTv);
+        totalTv.setText("Total Amount");
+
+        remarksTv = (TextView) findViewById(R.id.remarksTv);
+        remarksTv.setText(storeSharedPreferences.getUserRemarks(this));
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Toast.makeText(this, "Kutte order kyon cancel kiya", Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, "Kutte order kyon cancel kiya", Toast.LENGTH_SHORT).show();
     }
 
     public void order(View view) {

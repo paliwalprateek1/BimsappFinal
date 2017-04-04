@@ -14,6 +14,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -69,7 +70,7 @@ public class NonVeg extends Fragment {
     private RecyclerView recyclerView;
     StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
     FoodQuantity fa = new FoodQuantity();
-    private FoodAdapter mAdapter;
+    private CardAdapter mAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -79,14 +80,16 @@ public class NonVeg extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_non_veg, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        mAdapter = new FoodAdapter(foodList);
+        mAdapter = new CardAdapter(foodList);
         if(foodList.size()==0){
             getNonVegMenu();
         }
         recyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+//        recyclerView.setLayoutManager(mLayoutManager);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener() {
             @Override

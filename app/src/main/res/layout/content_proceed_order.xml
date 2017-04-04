@@ -82,6 +82,7 @@ android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#EEEEEE"
+        android:padding="5dp"
         android:id="@+id/rlstine"
         android:layout_below="@+id/viewpager"
         android:layout_alignParentBottom="true">

@@ -1,9 +1,12 @@
 package com.example.prateek.bimsapp;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,6 +60,11 @@ public class LocationFragment extends Fragment {
     TextView textViewAddress, textViewAddress2;
     StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
 
+
+    private Handler mHandler;
+    private ProgressDialog mDialog;
+    private final int CANCEL_DIALOG = 1;
+    private Handler mHandler2 = new Handler();
     RadioButton radioButton, radioButton1;
 
     @Override
@@ -75,6 +83,21 @@ public class LocationFragment extends Fragment {
         buttonPickLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                mHandler = new Handler(new Handler.Callback() {
+                    @Override
+                    public boolean handleMessage(Message msg) {
+                        if (msg.what == CANCEL_DIALOG) {
+                            mDialog.cancel();
+                            //Toast.makeText(getActivity(), "Ordered", Toast.LENGTH_SHORT).show();
+                        }
+                        return false;
+                    }
+                });
+                mDialog = new ProgressDialog(getActivity());
+                mDialog.setMessage("Please Wait..");
+                mDialog.show();
+                mHandler.sendEmptyMessageDelayed(CANCEL_DIALOG, 5500);
                 status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getActivity());
                 if (status != ConnectionResult.SUCCESS) {
                     if (GooglePlayServicesUtil.isUserRecoverableError(status)) {
@@ -113,7 +136,7 @@ public class LocationFragment extends Fragment {
         radioButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "hi,", Toast.LENGTH_LONG).show();
+               // Toast.makeText(getActivity(), "hi,", Toast.LENGTH_LONG).show();
                 radioButton1.setChecked(false);
                 storeSharedPreferences.setUserCustomLocation(getActivity(), textViewAddress2.getText().toString());
             }
@@ -143,7 +166,7 @@ public class LocationFragment extends Fragment {
                 place = PlacePicker.getPlace(data, getActivity());
                 LatLngBounds place2 = PlacePicker.getLatLngBounds(data);
                 String toastMsg = String.format("Place: %s", place.getAddress()+" sfd"+place2.toString());
-                Toast.makeText(getActivity(), toastMsg, Toast.LENGTH_LONG).show();
+               // Toast.makeText(getActivity(), toastMsg, Toast.LENGTH_LONG).show();
                 textViewAddress.setText(place.getAddress());
 
                 storeSharedPreferences.setUserCustomLocation(getActivity(), place.getAddress().toString());
