@@ -76,7 +76,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hot/Spicy/Masala"
+                android:text=""
                 android:textSize="10dp"
                 android:id="@+id/textViewType"
                 android:layout_below="@+id/categoryIcon"/>
@@ -88,7 +88,7 @@
                 android:layout_marginEnd="11dp"
                 android:id="@+id/imageView3"
                 android:background="@drawable/cart_shape"
-                android:layout_alignBottom="@+id/textViewType"
+                android:layout_alignTop="@+id/textViewFood"
                 android:layout_alignParentEnd="true" />
 
         </RelativeLayout>
