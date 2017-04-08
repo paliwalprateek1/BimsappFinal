@@ -56,6 +56,12 @@ public class OrderFoodFinal extends AppCompatActivity {
         ref = new Firebase(Server.URL);
 //
           l = storeSharedPreferences.loadFavorites(this);
+        int sum=0;
+        for(int i=0;i<l.size();i++){
+            int j = Integer.valueOf(l.get(i).getPrice());
+            sum = j + sum;
+        }
+
 
         listView = (ListView)findViewById(R.id.orderList);
         OrderListAdapter orderListAdapter = new OrderListAdapter(this, l);
@@ -63,7 +69,7 @@ public class OrderFoodFinal extends AppCompatActivity {
 
         order.setItem(l);
         order.setAddress(storeSharedPreferences.getUserCustomLocation(this));
-        order.setAmount("thats");
+        order.setAmount(Integer.toString(sum));
         order.setCoordinates(storeSharedPreferences.getUserCoordinates(this));
         order.setName(storeSharedPreferences.getUserName(this));
         order.setMail(storeSharedPreferences.getUserEmail(this));
@@ -81,7 +87,7 @@ public class OrderFoodFinal extends AppCompatActivity {
         addressTv.setText(storeSharedPreferences.getUserCustomLocation(this));
 
         totalTv = (TextView) findViewById(R.id.totalTv);
-        totalTv.setText("Total Amount");
+        totalTv.setText(Integer.toString(sum));
 
         numberTv = (TextView)findViewById(R.id.numberTv);
         numberTv.setText(storeSharedPreferences.getUserNumber(this));
@@ -101,7 +107,7 @@ public class OrderFoodFinal extends AppCompatActivity {
         mHandler = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message msg) {
-                if (msg.what == CANCEL_DIALOG) {
+                if (msg.what == CANCEL_DIALOG && mDialog!=null) {
                     mDialog.cancel();
                     Toast.makeText(OrderFoodFinal.this, "Ordered", Toast.LENGTH_SHORT).show();
                 }
@@ -117,7 +123,7 @@ public class OrderFoodFinal extends AppCompatActivity {
         ref = new Firebase(Server.URL);
         Firebase newRef = ref.child("Order").push();
         newRef.setValue(order);
-        Intent intent = new Intent(this, MenuPage.class);
+        Intent intent = new Intent(this, MenuMain.class);
         startActivity(intent);
         storeSharedPreferences.removeAllQuant(this);
         Thread thread = new Thread(){
