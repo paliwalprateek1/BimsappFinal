@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     android:layout_marginLeft="5dp"
+    android:paddingTop="80dp"
     android:orientation="vertical"
     android:layout_marginRight="20dp">
 
@@ -27,6 +28,7 @@
 
 
     <EditText
+        android:background="@color/white"
         android:layout_margin="5dp"
         android:id="@+id/feedbackEditText"
         android:layout_width="match_parent"
