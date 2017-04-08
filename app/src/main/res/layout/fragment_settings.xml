@@ -10,6 +10,48 @@
 
 
 
+    <TextView
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Feedback Form:"
+        android:textColor="@color/black"
+        android:textSize="28dp"/>
+
+
+    <TextView
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Give Feedback about kitchen and the app:"/>
+
+
+    <EditText
+        android:layout_margin="5dp"
+        android:id="@+id/feedbackEditText"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:inputType="textMultiLine"/>
+
+    <TextView
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:text="*your feedback would be completely anonymous"/>
+
+    <Button
+        android:layout_margin="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/feedbackButton"
+        android:text="Send Feedback"
+        android:padding="15dp"
+        android:textColor="@color/white"
+        android:background="@color/colorPrimary"/>
+
+
+
     <!--<LinearLayout-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="80dp"></LinearLayout>-->

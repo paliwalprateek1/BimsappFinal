@@ -7,7 +7,6 @@ import java.util.List;
  */
 
 public class Order {
-    private String name;
 
     public String getStatus() {
         return status;
@@ -16,8 +15,6 @@ public class Order {
     public void setStatus(String status) {
         this.status = status;
     }
-
-    private String status;
 
     public String getName() {
         return name;
@@ -75,10 +72,24 @@ public class Order {
         this.item = item;
     }
 
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+
+    private String remarks;
     private String address;
+    private String name;
     private String amount;
     private String number;
     private String mail;
     private String coordinates;
     private List<Food> item;
+    private String status;
+
+
 }

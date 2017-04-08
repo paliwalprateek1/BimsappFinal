@@ -52,9 +52,6 @@ public class OrderFoodFinal extends AppCompatActivity {
         getSupportActionBar().setTitle("Order Summary");
 
 
-
-
-
         Firebase.setAndroidContext(this);
         ref = new Firebase(Server.URL);
 //
@@ -64,17 +61,17 @@ public class OrderFoodFinal extends AppCompatActivity {
         OrderListAdapter orderListAdapter = new OrderListAdapter(this, l);
         listView.setAdapter(orderListAdapter);
 
-
+        order.setItem(l);
         order.setAddress(storeSharedPreferences.getUserCustomLocation(this));
         order.setAmount("thats");
         order.setCoordinates(storeSharedPreferences.getUserCoordinates(this));
-
-
-
-
         order.setName(storeSharedPreferences.getUserName(this));
         order.setMail(storeSharedPreferences.getUserEmail(this));
         order.setNumber(storeSharedPreferences.getUserNumber(this));
+        order.setStatus("pending");
+        order.setRemarks(storeSharedPreferences.getUserRemarks(this));
+
+
         //Toast.makeText(this, storeSharedPreferences.getUserNumber(this), Toast.LENGTH_SHORT).show();
 
         nameTv = (TextView)findViewById(R.id.nameTv);

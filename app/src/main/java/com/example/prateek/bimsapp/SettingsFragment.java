@@ -7,13 +7,18 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.firebase.client.Firebase;
 
 
 public class SettingsFragment extends Fragment {
@@ -44,20 +49,45 @@ public class SettingsFragment extends Fragment {
         }
     }
 
+    EditText feedbackEditText;
+    Button feedbackButton;
+    Firebase ref;
+    StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
-//        LinearLayout singOut = (LinearLayout)view.findViewById(R.id.llsignout);
-//        singOut.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(getActivity(), "signiong out", Toast.LENGTH_SHORT).show();
-//                signingOut();
-//            }
-//        });
+        feedbackEditText = (EditText)view.findViewById(R.id.feedbackEditText);
+
+        Firebase.setAndroidContext(getActivity());
+        ref = new Firebase(Server.URL);
+
+        feedbackButton = (Button)view.findViewById(R.id.feedbackButton);
+        feedbackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendFeedback();
+            }
+        });
+
         return view;
+    }
+
+    public void sendFeedback(){
+        //send feedback firebase logic
+        Feedback feedback = new Feedback();
+        feedback.setEmail(storeSharedPreferences.getUserEmail(getActivity()));
+        feedback.setName(storeSharedPreferences.getUserName(getActivity()));
+        feedback.setNumber(storeSharedPreferences.getUserNumber(getActivity()));
+        feedback.setFeedback(feedbackEditText.getText().toString());
+        Firebase newRef = ref.child("Feedback").push();
+        newRef.setValue(feedback);
+        feedbackEditText.setText(null);
+        Toast.makeText(getActivity(), "Feedback submitted", Toast.LENGTH_SHORT).show();
     }
 
     public void signingOut(){
@@ -87,4 +117,44 @@ public class SettingsFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }
+}
+class Feedback{
+    String name;
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    String number;
+    String email;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
+    }
+
+    String feedback;
 }
