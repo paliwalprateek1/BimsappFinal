@@ -30,7 +30,7 @@ import java.util.concurrent.Exchanger;
 public class OrderFoodFinal extends AppCompatActivity {
 
     private String address, coordinates, remarks;
-    TextView nameTv, addressTv, totalTv, remarksTv, foodItemList;
+    TextView nameTv, addressTv, totalTv, remarksTv, foodItemList, numberTv;
     Order order = new Order();
     Firebase ref;
     StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
@@ -55,43 +55,21 @@ public class OrderFoodFinal extends AppCompatActivity {
 
 
 
-//        Firebase.setAndroidContext(this);
-//        ref = new Firebase(Server.URL);
+        Firebase.setAndroidContext(this);
+        ref = new Firebase(Server.URL);
 //
           l = storeSharedPreferences.loadFavorites(this);
-//        for(int i=0;i<l.size();i++){
-//            System.out.println(l.get(i).getFood()+l.get(i).getQuantity()+l.get(i).getPrice());
-//        }
 
         listView = (ListView)findViewById(R.id.orderList);
         OrderListAdapter orderListAdapter = new OrderListAdapter(this, l);
         listView.setAdapter(orderListAdapter);
 
 
-//        Intent intent = getIntent();
-//        Bundle extras = intent.getExtras();
-//        address = extras.getString("address");
-//        coordinates = extras.getString("coordinates");
-//        remarks = extras.getString("remarks");
-
         order.setAddress(storeSharedPreferences.getUserCustomLocation(this));
         order.setAmount("thats");
         order.setCoordinates(storeSharedPreferences.getUserCoordinates(this));
 
-//        for (int i=0;i<l.size();i++){
-//
-//            int k = Integer.parseInt(l.get(i).getQuantity());
-//            int j = Integer.parseInt(l.get(i).getPrice());
-//            int m = k*j;
-//
-//            itemString = itemString + l.get(i).getFood() +"     X     "+
-//                    l.get(i).getQuantity() +"     =     "+ Integer.toString(m) +","+"\n";
-//        }
-//        itemString = itemString.substring(0, itemString.length()-2);
-//
-//        foodItemList = (TextView)findViewById(R.id.foodItemList);
-//        foodItemList.setText(itemString);
-//        order.setItem(storeSharedPreferences.loadFavorites(this));
+
 
 
         order.setName(storeSharedPreferences.getUserName(this));
@@ -107,6 +85,9 @@ public class OrderFoodFinal extends AppCompatActivity {
 
         totalTv = (TextView) findViewById(R.id.totalTv);
         totalTv.setText("Total Amount");
+
+        numberTv = (TextView)findViewById(R.id.numberTv);
+        numberTv.setText(storeSharedPreferences.getUserNumber(this));
 
         remarksTv = (TextView) findViewById(R.id.remarksTv);
         remarksTv.setText(storeSharedPreferences.getUserRemarks(this));
@@ -168,9 +149,6 @@ public class OrderFoodFinal extends AppCompatActivity {
     }
 
     public void cancel(View view) {
-//        Intent intent = new Intent(this, MenuMain.class);
-//        startActivity(intent);
-//        finish();
 
         Intent homeIntent=new Intent(this,MenuMain.class);
 
