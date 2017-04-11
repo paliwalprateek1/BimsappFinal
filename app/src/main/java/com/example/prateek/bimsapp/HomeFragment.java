@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -172,7 +173,30 @@ public class HomeFragment extends Fragment {
 
         mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
+
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        // your code here
+                        toastMessage();
+                    }
+                },
+                5000
+        );
         return view;
+    }
+
+    public void toastMessage(){
+
+        getActivity().runOnUiThread(new Runnable() {
+            public void run() {
+                if(foodListFeature.size()==0){
+                    Toast.makeText(getActivity(), "Poor Network Connection", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 
     private Handler mHandler;

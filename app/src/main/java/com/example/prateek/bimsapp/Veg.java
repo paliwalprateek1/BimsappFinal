@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -137,10 +138,35 @@ public class Veg extends Fragment {
             mDialog.show();
             mHandler.sendEmptyMessageDelayed(CANCEL_DIALOG, 5500);
         }
+
+
+
+       new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        // your code here
+                        toastMessage();
+                    }
+                },
+                5000
+        );
+
         return view;
 
     }
 
+    public void toastMessage(){
+
+        getActivity().runOnUiThread(new Runnable() {
+            public void run() {
+                if(foodList.size()==0){
+                    Toast.makeText(getActivity(), "Poor Network Connection", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+    }
     @Override
     public void onPause() {
         super.onPause();

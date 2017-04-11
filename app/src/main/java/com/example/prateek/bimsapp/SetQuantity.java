@@ -91,8 +91,16 @@ public class SetQuantity extends AppCompatActivity {
     }
 
     public void cancelDialog(View view) {
-        finish();
+        onBackPressed();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        // Toast.makeText(this, "Kutte order kyon cancel kiya", Toast.LENGTH_SHORT).show();
+    }
+
 
     public void gotOrder(View view) {
 
