@@ -21,10 +21,10 @@
         </activity>
         <activity android:name=".Login" />
         <activity
-            android:parentActivityName=".MenuMain"
-            android:launchMode="singleTop"
             android:name=".MenuPage"
             android:label="@string/title_activity_menu_page"
+            android:launchMode="singleTop"
+            android:parentActivityName=".MenuMain"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ProceedOrder"
@@ -46,14 +46,15 @@
         <activity android:name=".NumberLocation" />
         <activity
             android:name=".MenuMain"
-            android:launchMode="singleTop"
             android:label="@string/title_activity_menu_main"
+            android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SetQuantity" />
         <activity
             android:name=".SelectRestraunt"
             android:label="@string/title_activity_select_restraunt"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".FeedbackForm"></activity>
     </application>
 
 </manifest>

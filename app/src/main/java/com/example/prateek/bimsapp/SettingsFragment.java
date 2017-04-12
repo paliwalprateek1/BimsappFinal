@@ -54,6 +54,7 @@ public class SettingsFragment extends Fragment {
     Firebase ref;
     StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
 
+    LinearLayout feedbackLayout;
 
 
     @Override
@@ -61,34 +62,42 @@ public class SettingsFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
-        feedbackEditText = (EditText)view.findViewById(R.id.feedbackEditText);
-
-        Firebase.setAndroidContext(getActivity());
-        ref = new Firebase(Server.URL);
-
-        feedbackButton = (Button)view.findViewById(R.id.feedbackButton);
-        feedbackButton.setOnClickListener(new View.OnClickListener() {
+        feedbackLayout = (LinearLayout)view.findViewById(R.id.feedbackLayout);
+        feedbackLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendFeedback();
+                Intent intent = new Intent(getActivity(), FeedbackForm.class);
+                startActivity(intent);
             }
         });
+//        feedbackEditText = (EditText)view.findViewById(R.id.feedbackEditText);
+//
+//        Firebase.setAndroidContext(getActivity());
+//        ref = new Firebase(Server.URL);
+//
+//        feedbackButton = (Button)view.findViewById(R.id.feedbackButton);
+//        feedbackButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                sendFeedback();
+//            }
+//        });
 
         return view;
     }
-
-    public void sendFeedback(){
-        //send feedback firebase logic
-        Feedback feedback = new Feedback();
-        feedback.setEmail(storeSharedPreferences.getUserEmail(getActivity()));
-        feedback.setName(storeSharedPreferences.getUserName(getActivity()));
-        feedback.setNumber(storeSharedPreferences.getUserNumber(getActivity()));
-        feedback.setFeedback(feedbackEditText.getText().toString());
-        Firebase newRef = ref.child("Feedback").push();
-        newRef.setValue(feedback);
-        feedbackEditText.setText(null);
-        Toast.makeText(getActivity(), "Feedback submitted", Toast.LENGTH_SHORT).show();
-    }
+//
+//    public void sendFeedback(){
+//        //send feedback firebase logic
+//        Feedback feedback = new Feedback();
+//        feedback.setEmail(storeSharedPreferences.getUserEmail(getActivity()));
+//        feedback.setName(storeSharedPreferences.getUserName(getActivity()));
+//        feedback.setNumber(storeSharedPreferences.getUserNumber(getActivity()));
+//        feedback.setFeedback(feedbackEditText.getText().toString());
+//        Firebase newRef = ref.child("Feedback").push();
+//        newRef.setValue(feedback);
+//        feedbackEditText.setText(null);
+//        Toast.makeText(getActivity(), "Feedback submitted", Toast.LENGTH_SHORT).show();
+//    }
 
     public void signingOut(){
         StoreSharedPreferences s = new StoreSharedPreferences();
@@ -117,44 +126,4 @@ public class SettingsFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }
-}
-class Feedback{
-    String name;
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    String number;
-    String email;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getFeedback() {
-        return feedback;
-    }
-
-    public void setFeedback(String feedback) {
-        this.feedback = feedback;
-    }
-
-    String feedback;
 }
