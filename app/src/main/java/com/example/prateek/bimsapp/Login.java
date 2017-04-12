@@ -13,6 +13,11 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.Query;
+import com.firebase.client.ValueEventListener;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -27,6 +32,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
 
 import java.io.ByteArrayOutputStream;
 
@@ -37,6 +43,7 @@ public class Login extends AppCompatActivity {
     private static final String TAG = "GoogleActivity";
     private static final int RC_SIGN_IN = 9001;
     private GoogleApiClient mGoogleApiClient;
+    Firebase ref;
 
 
 
@@ -44,6 +51,10 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        Firebase.setAndroidContext(this);
+        ref = new Firebase(Server.URL);
+
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestScopes(new Scope(Scopes.DRIVE_APPFOLDER))
@@ -145,6 +156,7 @@ public class Login extends AppCompatActivity {
         StoreSharedPreferences.setUserEmail(this, personEmail);
         StoreSharedPreferences.setUserName(this, personGivenName);
         StoreSharedPreferences.setUserImage(this, String.valueOf(personPhoto));
+        checkPreviousUser(personEmail);
         if(StoreSharedPreferences.getUserEmail(this)!=null) {
                 Intent intent = new Intent(Login.this, NumberLocation.class);
                 startActivity(intent);
@@ -154,5 +166,28 @@ public class Login extends AppCompatActivity {
 
     public void signIn(View view) {
         signIn();
+    }
+
+    public void checkPreviousUser(String email){
+        Firebase objRef = ref.child("User");
+        Query pendingTasks = objRef.orderByChild("email").equalTo(email);
+        pendingTasks.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot tasksSnapshot) {
+                if (tasksSnapshot.exists()){
+                    Toast.makeText(getApplicationContext(), "User Already Exixts", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    //Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT).show();
+                }
+//                for (DataSnapshot snapshot: tasksSnapshot.getChildren()) {
+//
+//                }
+            }
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+            }
+        });
     }
 }

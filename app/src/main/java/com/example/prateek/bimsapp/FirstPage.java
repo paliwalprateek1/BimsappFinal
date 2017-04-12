@@ -58,7 +58,7 @@ public class FirstPage extends AppCompatActivity {
                     // This method will be executed once the timer is over
                     // Start your app main activity
                    // if(StoreSharedPreferences.getUserEmail(getApplicationContext()).length()!=0) {
-                        Intent i = new Intent(FirstPage.this, SelectRestraunt.class);
+                        Intent i = new Intent(FirstPage.this, Login.class);
                         startActivity(i);
 //                    }
 //                    else{

@@ -1,5 +1,6 @@
 package com.example.prateek.bimsapp;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -173,29 +174,31 @@ public class HomeFragment extends Fragment {
 
         mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
-
-        new java.util.Timer().schedule(
-                new java.util.TimerTask() {
-                    @Override
-                    public void run() {
-                        // your code here
-                        toastMessage();
-                    }
-                },
-                5000
-        );
+//
+//        new java.util.Timer().schedule(
+//                new java.util.TimerTask() {
+//                    @Override
+//                    public void run() {
+//                        toastMessage();
+//                    }
+//                },
+//                5000
+//        );
         return view;
     }
 
     public void toastMessage(){
 
-        getActivity().runOnUiThread(new Runnable() {
-            public void run() {
-                if(foodListFeature.size()==0){
-                    Toast.makeText(getActivity(), "Poor Network Connection", Toast.LENGTH_SHORT).show();
+        Activity a = getActivity();
+        if(a!=null) {
+            getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    if (foodListFeature.size()==0) {
+                        Toast.makeText(getActivity(), "Poor Network Connection", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        });
+            });
+        }
 
     }
 

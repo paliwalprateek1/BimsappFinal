@@ -94,12 +94,12 @@ public class SetQuantity extends AppCompatActivity {
         onBackPressed();
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-        // Toast.makeText(this, "Kutte order kyon cancel kiya", Toast.LENGTH_SHORT).show();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//        finish();
+//        // Toast.makeText(this, "Kutte order kyon cancel kiya", Toast.LENGTH_SHORT).show();
+//    }
 
 
     public void gotOrder(View view) {
@@ -107,7 +107,6 @@ public class SetQuantity extends AppCompatActivity {
         if(itemQuantity.getText().toString().equals("0")){
             finish();
         }else{
-        Log.d("kjdf", "lakjsd"+ itemQuantity.getText());
         foodQuantity.setFood(foodItemName);
         foodQuantity.setQuantity(itemQuantity.getText().toString());
         foodQuantity.setPrice(foodItemPrice);

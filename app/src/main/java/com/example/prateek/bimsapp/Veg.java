@@ -1,5 +1,6 @@
 package com.example.prateek.bimsapp;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -158,13 +160,16 @@ public class Veg extends Fragment {
 
     public void toastMessage(){
 
-        getActivity().runOnUiThread(new Runnable() {
-            public void run() {
-                if(foodList.size()==0){
-                    Toast.makeText(getActivity(), "Poor Network Connection", Toast.LENGTH_SHORT).show();
+        Activity a = getActivity();
+        if(a!=null) {
+            getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    if (foodList.size() == 0) {
+                        Toast.makeText(getActivity(), "Poor Network Connection", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        });
+            });
+        }
 
     }
     @Override
