@@ -175,15 +175,15 @@ public class HomeFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
 //
-//        new java.util.Timer().schedule(
-//                new java.util.TimerTask() {
-//                    @Override
-//                    public void run() {
-//                        toastMessage();
-//                    }
-//                },
-//                5000
-//        );
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        toastMessage();
+                    }
+                },
+                5000
+        );
         return view;
     }
 

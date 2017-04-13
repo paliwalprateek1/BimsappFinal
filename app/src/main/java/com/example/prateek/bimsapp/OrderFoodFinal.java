@@ -58,7 +58,7 @@ public class OrderFoodFinal extends AppCompatActivity {
           l = storeSharedPreferences.loadFavorites(this);
         int sum=0;
         for(int i=0;i<l.size();i++){
-            int j = Integer.valueOf(l.get(i).getPrice());
+            int j = Integer.valueOf(l.get(i).getPrice())*Integer.valueOf(l.get(i).getQuantity());
             sum = j + sum;
         }
 
