@@ -54,17 +54,17 @@ public class RemarksFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_remarks, container, false);
         cartNavigator = (TextView)view.findViewById(R.id.cartNavigator);
         remarks = (EditText) view.findViewById(R.id.editTextRemarks);
-        buttonAddRemarks = (Button)view.findViewById(R.id.buttonAddRemarks);
-        buttonAddRemarks.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                storeSharedPreferences.setUserRemarks(getActivity(), remarks.getText().toString());
-                Toast.makeText(getActivity(), "Remarks Added", Toast.LENGTH_SHORT).show();
-                Intent in = new Intent(getActivity(), OrderFoodFinal.class);
-                startActivity(in);
-                getActivity().finish();
-            }
-        });
+//        buttonAddRemarks = (Button)view.findViewById(R.id.buttonAddRemarks);
+//        buttonAddRemarks.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                storeSharedPreferences.setUserRemarks(getActivity(), remarks.getText().toString());
+//                Toast.makeText(getActivity(), "Remarks Added", Toast.LENGTH_SHORT).show();
+//                Intent in = new Intent(getActivity(), OrderFoodFinal.class);
+//                startActivity(in);
+//                getActivity().finish();
+//            }
+//        });
 
         return view;
     }

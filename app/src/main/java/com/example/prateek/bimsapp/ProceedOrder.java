@@ -43,8 +43,8 @@ public class ProceedOrder extends AppCompatActivity {
 
     private ViewPager pager;
 
-    TextView cartNavigator, locationNavigator, remarksNavigator, summaryNavigator;
-    LinearLayout  nextButton, backButton;
+    TextView cartNavigator, locationNavigator, remarksNavigator, summaryNavigator, nextButtonTextOnProceedOrder;
+    LinearLayout  nextButton, backButton, doneButton;
     StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
 
     @Override
@@ -67,10 +67,15 @@ public class ProceedOrder extends AppCompatActivity {
         });
         pager.setOffscreenPageLimit(2);
 
+        nextButtonTextOnProceedOrder =(TextView)findViewById(R.id.nextButtonTextOnProceedOrder);
+
         cartNavigator = (TextView)findViewById(R.id.cartNavigator);
         locationNavigator = (TextView)findViewById(R.id.addressNavigator);
+
         nextButton = (LinearLayout) findViewById(R.id.nextButton);
         backButton =(LinearLayout) findViewById(R.id.backButton);
+        doneButton = (LinearLayout)findViewById(R.id.doneButton);
+
         remarksNavigator = (TextView)findViewById(R.id.remarksNavigator);
 //        summaryNavigator = (TextView)findViewById(R.id.summaryNavigator);
 
@@ -80,6 +85,7 @@ public class ProceedOrder extends AppCompatActivity {
 //        summaryNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
 
         backButton.setVisibility(View.INVISIBLE);
+        doneButton.setVisibility(View.INVISIBLE);
 
         if(pager.getCurrentItem()!=2){
             nextButton.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +107,8 @@ public class ProceedOrder extends AppCompatActivity {
 //                    }
                     else if(pager.getCurrentItem()==2){
                         nextButton.setVisibility(View.INVISIBLE);
+                        doneButton.setVisibility(View.VISIBLE);
+                        //nextButtonTextOnProceedOrder.setText("DONE");
 //                        summaryNavigator.setTextColor(getResources().getColor(R.color.black));
                         cartNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
                         remarksNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
@@ -116,6 +124,9 @@ public class ProceedOrder extends AppCompatActivity {
                 pager.setCurrentItem(pager.getCurrentItem()-1);
                 if(pager.getCurrentItem()==1){
                     nextButton.setVisibility(View.VISIBLE);
+                    doneButton.setVisibility(View.INVISIBLE);
+                    //nextButtonTextOnProceedOrder.setText("NEXT");
+                    //nextButtonTextOnProceedOrder.setVisibility(V);
                     locationNavigator.setTextColor(getResources().getColor(R.color.black));
                     cartNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
                     remarksNavigator.setTextColor(getResources().getColor(R.color.colorInactive));

@@ -42,16 +42,16 @@
         android:layout_below="@+id/textView10"
         android:layout_centerHorizontal="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:text="Done"
-        android:textColor="@color/white"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:background="#E74c5a"
-        android:id="@+id/buttonAddRemarks"
-        android:layout_marginTop="41dp"
-        android:layout_below="@+id/editTextRemarks"
-        android:layout_alignEnd="@+id/editTextRemarks" />
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:text="Done"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--android:background="#E74c5a"-->
+        <!--android:id="@+id/buttonAddRemarks"-->
+        <!--android:layout_marginTop="41dp"-->
+        <!--android:layout_below="@+id/editTextRemarks"-->
+        <!--android:layout_alignEnd="@+id/editTextRemarks" />-->
 
 </RelativeLayout>
