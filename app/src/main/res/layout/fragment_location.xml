@@ -48,7 +48,7 @@
             android:layout_width="match_parent"
             android:text="Choose Another Location"
             android:background="@drawable/buttonshape"
-            android:textColor="@color/colorPrimary1"
+            android:textColor="@color/colorPrimary"
             android:layout_height="wrap_content"
             android:id="@+id/buttonPickLocation"
             android:padding="10dp"

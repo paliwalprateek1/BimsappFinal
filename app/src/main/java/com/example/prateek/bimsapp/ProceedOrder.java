@@ -154,6 +154,16 @@ public class ProceedOrder extends AppCompatActivity {
         });//}
 
 
+        doneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(getApplicationContext(), OrderFoodFinal.class);
+                startActivity(in);
+                finish();
+            }
+        });
+
+
 
     }
 

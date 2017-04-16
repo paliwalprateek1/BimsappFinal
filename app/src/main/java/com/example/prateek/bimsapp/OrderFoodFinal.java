@@ -1,5 +1,6 @@
 package com.example.prateek.bimsapp;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -107,9 +108,8 @@ public class OrderFoodFinal extends AppCompatActivity {
         mHandler = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message msg) {
-                if (msg.what == CANCEL_DIALOG && mDialog!=null) {
+                if (msg.what == CANCEL_DIALOG && (mDialog!=null)) {
                     mDialog.cancel();
-                    Toast.makeText(OrderFoodFinal.this, "Ordered", Toast.LENGTH_SHORT).show();
                 }
                 return false;
             }
@@ -123,21 +123,38 @@ public class OrderFoodFinal extends AppCompatActivity {
         ref = new Firebase(Server.URL);
         Firebase newRef = ref.child("Order").push();
         newRef.setValue(order);
-        Intent intent = new Intent(this, MenuMain.class);
-        startActivity(intent);
+
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        message();
+                    }
+                },
+                5800
+        );
+
         storeSharedPreferences.removeAllQuant(this);
-        Thread thread = new Thread(){
-            @Override
-            public void run(){
-                try{
-                    Thread.sleep(2500);
-                    OrderFoodFinal.this.finish();
-                }catch (Exception e){
-                    e.printStackTrace();
+    }
+
+    public void message(){
+
+        Context c = getApplicationContext();
+        if(c!=null) {
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    Toast.makeText(OrderFoodFinal.this, "Ordered", Toast.LENGTH_SHORT).show();
+//                    Intent homeIntent=new Intent(getApplicationContext(),MenuMain.class);
+//
+//                    homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//
+//                    startActivity(homeIntent);
+                    finish();
                 }
-            }
-        };
-        thread.start();
+            });
+        }
+
     }
 
     private Handler mHandler;
@@ -146,19 +163,24 @@ public class OrderFoodFinal extends AppCompatActivity {
     private Handler mHandler2 = new Handler();
 
     public void cancelOrder(View view) {
-        Intent intent = new Intent(this, MenuMain.class);
-        startActivity(intent);
+//        Intent homeIntent=new Intent(this,MenuMain.class);
+//
+//        homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//
+//        startActivity(homeIntent);
         finish();
     }
 
     public void cancel(View view) {
-
-        Intent homeIntent=new Intent(this,MenuMain.class);
-
-        homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
-        startActivity(homeIntent);
+//
+//        Intent homeIntent=new Intent(this,MenuMain.class);
+//
+//        homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//
+//        startActivity(homeIntent);
+        finish();
     }
 }
 
