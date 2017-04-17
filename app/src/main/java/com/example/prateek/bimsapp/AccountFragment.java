@@ -100,8 +100,8 @@ public class AccountFragment extends Fragment {
     }
     public void method(){
         Firebase objRef = ref.child("User");
-        //Query pendingTasks = objRef.orderByChild("email").equalTo((new StoreSharedPreferences()).getUserEmail(getActivity()));
-        Query pendingTasks = objRef.orderByChild("email").equalTo("prateekp987@gmail.com");
+        Query pendingTasks = objRef.orderByChild("email").equalTo((new StoreSharedPreferences()).getUserEmail(getActivity()));
+       // Query pendingTasks = objRef.orderByChild("email").equalTo("prateekp987@gmail.com");
         pendingTasks.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot tasksSnapshot) {

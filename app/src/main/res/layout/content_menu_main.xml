@@ -110,34 +110,34 @@
 
 
         </LinearLayout>
-        <LinearLayout
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:id="@+id/accountSmallIconrl">
+        <!--<LinearLayout-->
+            <!--android:orientation="vertical"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:id="@+id/accountSmallIconrl">-->
 
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:id="@+id/accountSmallIcon"
-                android:src="@drawable/offfers"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true" />
+            <!--<ImageView-->
+                <!--android:layout_width="25dp"-->
+                <!--android:layout_height="25dp"-->
+                <!--android:id="@+id/accountSmallIcon"-->
+                <!--android:src="@drawable/offfers"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_centerHorizontal="true" />-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="10sp"
-                android:text="Offers"
-                android:layout_below="@+id/accountSmallIcon"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"/>
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textSize="10sp"-->
+                <!--android:text="Offers"-->
+                <!--android:layout_below="@+id/accountSmallIcon"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_centerHorizontal="true"/>-->
 
 
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
         <LinearLayout
             android:orientation="vertical"
             android:gravity="center"
@@ -149,14 +149,14 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:id="@+id/settingsSmallIcon"
-                android:src="@drawable/ic_account_circle_black_24dp"
+                android:src="@drawable/ic_settings_black_24dp"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
-                android:text="FeedBack"
+                android:text="More"
                 android:layout_below="@+id/settingsSmallIcon"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"/>

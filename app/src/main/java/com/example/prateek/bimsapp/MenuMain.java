@@ -76,7 +76,7 @@ public class MenuMain extends AppCompatActivity {
         menuSmallIcon = (ImageView)findViewById(R.id.menuSmallIcon);
         homeSmallIcon = (ImageView)findViewById(R.id.homeSmallIcon);
         orderSmallIcon = (ImageView)findViewById(R.id.orderSmallIcon);
-        accountSmallIcon = (ImageView)findViewById(R.id.accountSmallIcon);
+        //accountSmallIcon = (ImageView)findViewById(R.id.accountSmallIcon);
         settingsSmallIcon = (ImageView)findViewById(R.id.settingsSmallIcon);
 
         Toast.makeText(this, store.getUserEmail(this), Toast.LENGTH_SHORT).show();
@@ -101,7 +101,7 @@ public class MenuMain extends AppCompatActivity {
         pager.setOffscreenPageLimit(5);
         homeSmallIconrl = (LinearLayout) findViewById(R.id.homeSmallIconrl);
         menuSmallIconrl = (LinearLayout) findViewById(R.id.menuSmallIconrl);
-        accountSmallIconrl = (LinearLayout) findViewById(R.id.accountSmallIconrl);
+        //accountSmallIconrl = (LinearLayout) findViewById(R.id.accountSmallIconrl);
         orderSmallIconrl = (LinearLayout) findViewById(R.id.orderSmallIconrl);
         settingsSmallIconrl = (LinearLayout) findViewById(R.id.settingsSmallIconrl);
 
@@ -123,8 +123,8 @@ public class MenuMain extends AppCompatActivity {
                         ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
                 DrawableCompat.setTint(homeSmallIcon.getDrawable(),
                         ContextCompat.getColor(getBaseContext(), R.color.colorPrimary));
-                DrawableCompat.setTint(accountSmallIcon.getDrawable(),
-                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+//                DrawableCompat.setTint(accountSmallIcon.getDrawable(),
+//                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
                 DrawableCompat.setTint(settingsSmallIcon.getDrawable(),
                         ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
                 //Toast.makeText(getApplicationContext(), "tob", Toast.LENGTH_LONG).show();
@@ -147,23 +147,23 @@ public class MenuMain extends AppCompatActivity {
             }
         });
 
-        accountSmallIconrl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DrawableCompat.setTint(orderSmallIcon.getDrawable(),
-                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
-                DrawableCompat.setTint(menuSmallIcon.getDrawable(),
-                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
-                DrawableCompat.setTint(homeSmallIcon.getDrawable(),
-                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
-                DrawableCompat.setTint(accountSmallIcon.getDrawable(),
-                        ContextCompat.getColor(getBaseContext(), R.color.colorPrimary));
-                DrawableCompat.setTint(settingsSmallIcon.getDrawable(),
-                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
-                //Toast.makeText(getApplicationContext(), "account", Toast.LENGTH_LONG).show();
-                pager.setCurrentItem(3);
-            }
-        });
+//        accountSmallIconrl.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                DrawableCompat.setTint(orderSmallIcon.getDrawable(),
+//                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+//                DrawableCompat.setTint(menuSmallIcon.getDrawable(),
+//                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+//                DrawableCompat.setTint(homeSmallIcon.getDrawable(),
+//                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+//                DrawableCompat.setTint(accountSmallIcon.getDrawable(),
+//                        ContextCompat.getColor(getBaseContext(), R.color.colorPrimary));
+//                DrawableCompat.setTint(settingsSmallIcon.getDrawable(),
+//                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+//                //Toast.makeText(getApplicationContext(), "account", Toast.LENGTH_LONG).show();
+//                pager.setCurrentItem(3);
+//            }
+//        });
         settingsSmallIconrl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -174,8 +174,8 @@ public class MenuMain extends AppCompatActivity {
                         ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
                 DrawableCompat.setTint(homeSmallIcon.getDrawable(),
                         ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
-                DrawableCompat.setTint(accountSmallIcon.getDrawable(),
-                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+//                DrawableCompat.setTint(accountSmallIcon.getDrawable(),
+//                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
                 DrawableCompat.setTint(settingsSmallIcon.getDrawable(),
                         ContextCompat.getColor(getBaseContext(), R.color.colorPrimary));
                 //Toast.makeText(getApplicationContext(), "settings", Toast.LENGTH_LONG).show();
@@ -189,8 +189,8 @@ public class MenuMain extends AppCompatActivity {
                 ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
         DrawableCompat.setTint(homeSmallIcon.getDrawable(),
                 ContextCompat.getColor(getBaseContext(), R.color.colorPrimary));
-        DrawableCompat.setTint(accountSmallIcon.getDrawable(),
-                ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+//        DrawableCompat.setTint(accountSmallIcon.getDrawable(),
+//                ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
         DrawableCompat.setTint(settingsSmallIcon.getDrawable(),
                 ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
 

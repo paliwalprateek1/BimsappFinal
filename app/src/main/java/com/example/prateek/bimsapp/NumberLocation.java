@@ -56,7 +56,7 @@ public class NumberLocation extends AppCompatActivity {
                 new java.util.TimerTask() {
                     @Override
                     public void run() {
-                        Intent intent = new Intent(getApplicationContext(), SelectRestraunt.class);
+                        Intent intent = new Intent(getApplicationContext(), MenuMain.class);
                         startActivity(intent);
                         finish();
                     }
