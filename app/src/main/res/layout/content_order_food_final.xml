@@ -12,7 +12,6 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:background="#939393"
         android:layout_height="200dp"
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
@@ -162,7 +161,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name"
+                android:text=""
                 android:id="@+id/remarksTv"
                 android:layout_marginStart="10dp"
                 android:layout_alignParentTop="true"

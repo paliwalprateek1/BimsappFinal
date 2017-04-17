@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,12 +14,18 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.Query;
+import com.firebase.client.ValueEventListener;
 import com.google.android.gms.vision.text.Line;
 
 public class SelectRestraunt extends AppCompatActivity {
     StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
 
     LinearLayout bims, midnight;
+    Firebase ref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +33,9 @@ public class SelectRestraunt extends AppCompatActivity {
         setContentView(R.layout.activity_select_restraunt);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Firebase.setAndroidContext(this);
+        ref = new Firebase(Server.URL);
 
         bims = (LinearLayout)findViewById(R.id.bimsKitchen);
         midnight = (LinearLayout)findViewById(R.id.midnightScorer);
@@ -53,8 +63,7 @@ public class SelectRestraunt extends AppCompatActivity {
     }
 
     public void goToRestraunt(View view) {
-        Intent i = new Intent(SelectRestraunt.this, MenuMain.class);
-        startActivity(i);
+        sendNotification();
     }
 
     @Override
@@ -80,7 +89,7 @@ public class SelectRestraunt extends AppCompatActivity {
     }
 
     public void changeNumber(){
-        //implement later
+
     }
 
     public void signOut(){
@@ -88,5 +97,32 @@ public class SelectRestraunt extends AppCompatActivity {
         startActivity(intent);
         finish();
         //also remove the shared preferences
+    }
+
+
+    public void sendNotification(){
+        String kitchenToken = getToken();
+
+
+
+
+    }
+
+    String token;
+    public String getToken(){
+        Firebase ref = new Firebase(Server.URL+"/KitchenToken");
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String value = (String) dataSnapshot.getValue();
+                token = value;
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+        return token;
     }
 }

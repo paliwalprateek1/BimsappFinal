@@ -144,6 +144,7 @@ public class OrderFoodFinal extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 public void run() {
                     Toast.makeText(OrderFoodFinal.this, "Ordered", Toast.LENGTH_SHORT).show();
+                    sendNotification();
 //                    Intent homeIntent=new Intent(getApplicationContext(),MenuMain.class);
 //
 //                    homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -154,6 +155,12 @@ public class OrderFoodFinal extends AppCompatActivity {
                 }
             });
         }
+
+    }
+
+
+    public void sendNotification(){
+
 
     }
 
