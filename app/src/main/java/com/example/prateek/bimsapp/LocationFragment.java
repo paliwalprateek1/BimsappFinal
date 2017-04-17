@@ -97,7 +97,7 @@ public class LocationFragment extends Fragment {
                 mDialog = new ProgressDialog(getActivity());
                 mDialog.setMessage("Please Wait..");
                 mDialog.show();
-                mHandler.sendEmptyMessageDelayed(CANCEL_DIALOG, 5500);
+                mHandler.sendEmptyMessageDelayed(CANCEL_DIALOG, 3500);
                 status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getActivity());
                 if (status != ConnectionResult.SUCCESS) {
                     if (GooglePlayServicesUtil.isUserRecoverableError(status)) {
