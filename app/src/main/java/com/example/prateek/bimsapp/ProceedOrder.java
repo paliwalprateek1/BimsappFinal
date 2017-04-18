@@ -108,10 +108,11 @@ public class ProceedOrder extends AppCompatActivity {
                     else if(pager.getCurrentItem()==2){
                         nextButton.setVisibility(View.INVISIBLE);
                         doneButton.setVisibility(View.VISIBLE);
+                        remarksNavigator.setTextColor(getResources().getColor(R.color.black));
                         //nextButtonTextOnProceedOrder.setText("DONE");
 //                        summaryNavigator.setTextColor(getResources().getColor(R.color.black));
                         cartNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
-                        remarksNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+                        //remarksNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
                         locationNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
 
                     }

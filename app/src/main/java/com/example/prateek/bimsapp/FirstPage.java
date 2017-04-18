@@ -62,7 +62,7 @@ public class FirstPage extends AppCompatActivity {
                         startActivity(i);
                     }
                     else{
-                        Intent i = new Intent(FirstPage.this, Login.class);
+                        Intent i = new Intent(FirstPage.this, SelectRestraunt.class);
                         startActivity(i);
                     }
 

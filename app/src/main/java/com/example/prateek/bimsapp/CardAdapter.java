@@ -6,6 +6,8 @@ import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -90,7 +92,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
     }
 
 }
-class FeaturedCardAdapter extends RecyclerView.Adapter<FeaturedCardAdapter.MyViewHolder>{
+
+class NCardAdapter extends RecyclerView.Adapter<NCardAdapter.MyViewHolder> {
+
     private List<Food> foodList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -104,6 +108,72 @@ class FeaturedCardAdapter extends RecyclerView.Adapter<FeaturedCardAdapter.MyVie
             foodItemIcon = (ImageView) view.findViewById(R.id.imageViewCard);
             category = (TextView)view.findViewById(R.id.category);
             categoryIcon = (TextView)view.findViewById(R.id.categoryIcon);
+        }
+    }
+
+
+    public NCardAdapter(List<Food> foodList) {
+        this.foodList = foodList;
+    }
+
+    @Override
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.nonvegcard, parent, false);
+
+        return new MyViewHolder(itemView);
+    }
+
+
+    @Override
+    public void onBindViewHolder(MyViewHolder holder, int position) {
+        Food food = foodList.get(position);
+        holder.food.setText(food.getFood());
+
+
+
+        if(food.getCat()!=null) {
+            holder.category.setText("     "+food.getCat());
+            if (food.getCat().equals("Veg")) {
+                holder.categoryIcon.setText("\u25CF");
+                holder.categoryIcon.setTextColor(Color.parseColor("#53f442"));
+            } else {
+                holder.categoryIcon.setText("\u25CF");
+                holder.categoryIcon.setTextColor(Color.parseColor("#ff0000"));
+            }
+        }
+        holder.price.setText(food.getPrice()+" Rs");
+
+
+        Picasso.with(holder.foodItemIcon.getContext())
+                .load(food.getImageUrl())
+                .into(holder.foodItemIcon);
+    }
+
+
+    @Override
+    public int getItemCount() {
+        return foodList.size();
+    }
+
+}
+
+
+class FeaturedCardAdapter extends RecyclerView.Adapter<FeaturedCardAdapter.MyViewHolder>{
+    private List<Food> foodList;
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView food, price, categoryIcon, category;
+        public ImageView foodItemIcon, imageView3;
+
+        public MyViewHolder(View view) {
+            super(view);
+            food = (TextView) view.findViewById(R.id.textViewFood);
+            price = (TextView) view.findViewById(R.id.textViewPrice);
+            foodItemIcon = (ImageView) view.findViewById(R.id.imageViewCard);
+            category = (TextView)view.findViewById(R.id.category);
+            categoryIcon = (TextView)view.findViewById(R.id.categoryIcon);
+            imageView3 = (ImageView)view.findViewById(R.id.imageView3);
         }
     }
 

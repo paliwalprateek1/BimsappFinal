@@ -23,7 +23,7 @@
             <View
                 android:layout_width="5dp"
                 android:layout_height="15dp"
-                android:background="@color/colorPrimary"
+                android:background="@color/colorAccent"
                 android:layout_marginStart="15dp"/>
             <TextView
                 android:layout_marginStart="10dp"
@@ -55,7 +55,7 @@
             <View
                 android:layout_width="5dp"
                 android:layout_height="15dp"
-                android:background="@color/colorPrimary"
+                android:background="@color/colorPrimary2"
                 android:layout_marginStart="15dp"/>
             <TextView
                 android:layout_marginStart="10dp"

@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--<color name="colorPrimary">#6a1b9a</color>-->
-    <!--<color name="colorPrimaryDark">#7b1fa2</color>-->
-
-    <!--<color name="colorPrimary">#0F9D58</color>-->
-
-    <!--<color name="colorPrimary">#E74C3f</color>-->
-    <!--&lt;!&ndash;#E74c5a&ndash;&gt;-->
-    <!--<color name="colorPrimaryDark">#e32f3a</color>-->
 
 
+    <!--<color name="colorPrimary2">#0F9D58</color>-->
+    <!--<color name="colorPrimaryDark2">#0C7E46</color>-->
 
-
+    <color name="colorPrimary2">#a7333f</color>
+    <color name="colorPrimaryDark2">#a51c30</color>
 
     <color name="colorPrimary">#a7333f</color>
-    <!--#E74c5a-->
     <color name="colorPrimaryDark">#a51c30</color>
 
 
 
-    <!--<color name="colorPrimaryDark">#0C7E46</color>-->
+    <!--#E74c5a-->
+
+    <!--<color name="colorPrimary">#3e885b</color>-->
+    <!--<color name="colorPrimaryDark">#2f4b26</color>-->
+
+    <color name="colorPrimary4">#a7333f</color>
+    <color name="colorPrimaryDark4">#a51c30</color>
+    <!--#E74c5a-->
 
     <color name="background">#0f9aa6</color>
 

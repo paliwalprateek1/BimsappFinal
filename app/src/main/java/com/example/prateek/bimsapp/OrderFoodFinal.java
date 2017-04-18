@@ -23,6 +23,8 @@ import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 import com.firebase.client.core.ThreadBackgroundExecutor;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,6 +120,8 @@ public class OrderFoodFinal extends AppCompatActivity {
         mDialog.setMessage("Ordering.. Please Wait..");
         mDialog.show();
         mHandler.sendEmptyMessageDelayed(CANCEL_DIALOG, 5500);
+
+
 
         Firebase.setAndroidContext(getApplicationContext());
         ref = new Firebase(Server.URL);

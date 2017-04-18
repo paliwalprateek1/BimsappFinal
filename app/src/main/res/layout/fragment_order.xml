@@ -7,6 +7,7 @@
 
 
     <android.support.v7.widget.RecyclerView
+        android:textColor="@color/colorPrimary"
         android:id="@+id/recycler_view_order"
         android:scrollbars="vertical"
         android:layout_width="match_parent"

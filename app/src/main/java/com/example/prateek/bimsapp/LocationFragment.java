@@ -165,7 +165,7 @@ public class LocationFragment extends Fragment {
             if (data != null) {
                 place = PlacePicker.getPlace(data, getActivity());
                 LatLngBounds place2 = PlacePicker.getLatLngBounds(data);
-                String toastMsg = String.format("Place: %s", place.getAddress()+" sfd"+place2.toString());
+               // String toastMsg = String.format("Place: %s", place.getAddress()+" sfd"+place2.toString());
                // Toast.makeText(getActivity(), toastMsg, Toast.LENGTH_LONG).show();
                 textViewAddress.setText(place.getAddress());
 

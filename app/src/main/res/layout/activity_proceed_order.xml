@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:fitsSystemWindows="true"
     tools:context="com.example.prateek.bimsapp.ProceedOrder">
 
@@ -15,7 +16,8 @@
         <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
+            android:background="@color/white"
+            app:titleTextColor="@color/colorPrimary"
             android:minHeight="?attr/actionBarSize"
             android:id="@+id/toolbarHere"
             android:titleTextColor="@color/white"
@@ -37,7 +39,7 @@
                     android:background="@null"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:tint="@color/white"
+                    android:tint="@color/colorPrimary"
                     android:src="@drawable/ic_close_dark"/>
 
                 <TextView
@@ -45,7 +47,7 @@
                     android:layout_gravity="right"
                     android:gravity="center"
                     android:textSize="25sp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorPrimary"
                     android:layout_height="match_parent"
                     android:text="Cart"/>
             </LinearLayout>

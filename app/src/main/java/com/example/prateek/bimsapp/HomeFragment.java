@@ -34,7 +34,8 @@ public class HomeFragment extends Fragment {
     private String mParam2;
 
     private RecyclerView mRecyclerView, mRecyclerView2, mRecyclerView3;
-    private CardAdapter mAdapter2, mAdapter3;
+    private CardAdapter mAdapter2;
+    private NCardAdapter mAdapter3;
     private FeaturedCardAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager, mLayoutManager2, mLayoutManager3;
     private List<Food> foodListVeg = new ArrayList<>();
@@ -128,7 +129,7 @@ public class HomeFragment extends Fragment {
             }
         }));
 
-        mAdapter3 = new CardAdapter(foodListNon);
+        mAdapter3 = new NCardAdapter(foodListNon);
         mRecyclerView3.setAdapter(mAdapter3);
         mRecyclerView3.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), mRecyclerView3, new ClickListener() {
             @Override
