@@ -54,7 +54,7 @@ public class SettingsFragment extends Fragment {
     Firebase ref;
     StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
 
-    LinearLayout feedbackLayout;
+    LinearLayout feedbackLayout, linearLayoutTrackOrder;
 
 
     @Override
@@ -67,6 +67,15 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), FeedbackForm.class);
+                startActivity(intent);
+            }
+        });
+
+        linearLayoutTrackOrder = (LinearLayout)view.findViewById(R.id.linearLayoutTrackOrder);
+        linearLayoutTrackOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), PendingOrder.class);
                 startActivity(intent);
             }
         });

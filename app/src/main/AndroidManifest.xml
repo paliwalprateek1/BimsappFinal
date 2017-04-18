@@ -54,7 +54,8 @@
             android:name=".SelectRestraunt"
             android:label="@string/title_activity_select_restraunt"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".FeedbackForm"></activity>
+        <activity android:name=".FeedbackForm" />
+        <activity android:name=".PendingOrder"></activity>
     </application>
 
 </manifest>

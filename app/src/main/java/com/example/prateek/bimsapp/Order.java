@@ -1,5 +1,6 @@
 package com.example.prateek.bimsapp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -64,11 +65,11 @@ public class Order {
         this.coordinates = coordinates;
     }
 
-    public List<Food> getItem() {
+    public ArrayList<FoodQuantity> getItem() {
         return item;
     }
 
-    public void setItem(List item) {
+    public void setItem(ArrayList item) {
         this.item = item;
     }
 
@@ -88,7 +89,7 @@ public class Order {
     private String number;
     private String mail;
     private String coordinates;
-    private List<Food> item;
+    private ArrayList<FoodQuantity> item;
     private String status;
 
 
