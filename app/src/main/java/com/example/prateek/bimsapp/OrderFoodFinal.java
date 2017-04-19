@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,6 +14,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.MenuPopupWindow;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -148,7 +150,7 @@ public class OrderFoodFinal extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 public void run() {
                     Toast.makeText(OrderFoodFinal.this, "Ordered", Toast.LENGTH_SHORT).show();
-                    sendNotification();
+                    sendEmail1();
 //                    Intent homeIntent=new Intent(getApplicationContext(),MenuMain.class);
 //
 //                    homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -163,9 +165,50 @@ public class OrderFoodFinal extends AppCompatActivity {
     }
 
 
-    public void sendNotification(){
+    public void sendEmail1(){
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("message/rfc822");
+        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"prateekp987@gmail.com"});
+        i.putExtra(Intent.EXTRA_SUBJECT, "subject of email");
+        i.putExtra(Intent.EXTRA_TEXT   , "body of email");
+        try {
+            startActivity(Intent.createChooser(i, "Send mail..."));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(OrderFoodFinal.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+        }
+        email3();
+    }
+
+    public void sendEmail2(){
+        Intent intent = new Intent(Intent.ACTION_SENDTO); // it's not ACTION_SEND
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Subject of email");
+        intent.putExtra(Intent.EXTRA_TEXT, "Body of email bapu");
+        intent.setData(Uri.parse("mailto:prateekp987@gmail.com")); // or just "mailto:" for blank
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // this will make such that when user returns to your app, your app is displayed, instead of the email app.
+        startActivity(Intent.createChooser(intent, "Sending"));
+    }
 
 
+    public void email3(){
+        Log.i("Send email", "");
+        String[] TO = {"prateekp987@gmail.comm"};
+        String[] CC = {""};
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.setType("text/plain");
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+        emailIntent.putExtra(Intent.EXTRA_CC, CC);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Your subject");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "Email message goes here");
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Send mail...raha hai"));
+            finish();
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(OrderFoodFinal.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private Handler mHandler;

@@ -13,6 +13,7 @@ import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PendingOrder extends AppCompatActivity {
 
@@ -84,9 +85,37 @@ public class PendingOrder extends AppCompatActivity {
                 amount = (TextView) findViewById(R.id.textViewPendingAmount);
                 amount.setText(pendingOrder.getAmount());
 
+        //System.out.println(pendingOrder.getItem());
+
+        String s = pendingOrder.getItem().toString();
+        System.out.println(s+" otawa");
+        s=s.substring(2, s.length()-2);
+        ArrayList<FoodQuantity> alf = new ArrayList<>();
+        String[] a = s.split(", ");
+        for (int j = 0;j<a.length;j++){
+            System.out.println(a[j]);
+            FoodQuantity fq = new FoodQuantity();
+            String s1[] = a[j].split("=");
+            fq.setQuantity(s1[1]);
+
+            j=j+1;
+            String s2[] = a[j].split("=");
+            fq.setFood(s2[1]);
+
+            j=j+1;
+            String s3[] = a[j++].split("=");
+            fq.setPrice(s3[1]);
+            fq.setUrl(null);
+
+            alf.add(fq);
+        }
+
+
+
+
                 listView = (ListView)findViewById(R.id.listPending);
                 OrderListAdapter orderListAdapter = new OrderListAdapter(this,
-                        (ArrayList<FoodQuantity>) pendingOrder.getItem());
+                        alf);
                 listView.setAdapter(orderListAdapter);
             //}
        // }
