@@ -35,9 +35,12 @@
 
     <EditText
         android:layout_width="300dp"
-        android:layout_height="120dp"
-        android:background="@drawable/box"
+        android:paddingTop="10dp"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:paddingLeft="5dp"
         android:id="@+id/editTextRemarks"
+        android:background="@drawable/box"
         android:layout_marginTop="17dp"
         android:layout_below="@+id/textView10"
         android:layout_centerHorizontal="true" />

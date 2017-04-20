@@ -59,7 +59,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@drawable/box"
         android:id="@+id/linearLayoutTrackOrder"
         android:layout_margin="10dp"
         android:padding="20dp">
@@ -80,7 +80,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@drawable/box"
         android:id="@+id/feedbackLayout"
         android:layout_margin="10dp"
         android:padding="20dp">
@@ -99,7 +99,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@drawable/box"
         android:layout_margin="10dp"
         android:padding="20dp">
         <TextView

@@ -46,8 +46,8 @@ public class PendingOrder extends AppCompatActivity {
 
     private void getPendingOrders(){
         Firebase objRef = ref.child("Order");
-        //Query pendingTask = objRef.orderByChild("mail").equalTo((new StoreSharedPreferences()).getUserEmail(this));
-        final Query pendingTask = objRef.orderByChild("mail").equalTo("bapu");
+        Query pendingTask = objRef.orderByChild("mail").equalTo((new StoreSharedPreferences()).getUserEmail(this));
+        //final Query pendingTask = objRef.orderByChild("mail").equalTo("bapu");
 
         pendingTask.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -70,9 +70,9 @@ public class PendingOrder extends AppCompatActivity {
                 System.out.println("The read failed: " + firebaseError.getMessage());
             }
         });
-
-
     }
+
+
     public void arrangeOrder(Order pendingOrder){
         //for(int i=0;i<pend.size();i++) {
            // if(pend.get(i).getAmount()!=null) {

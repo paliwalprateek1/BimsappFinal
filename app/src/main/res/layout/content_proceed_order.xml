@@ -5,7 +5,6 @@
     android:id="@+id/content_proceed_order"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-android:background="@color/white"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.prateek.bimsapp.ProceedOrder"
     tools:showIn="@layout/activity_proceed_order">
@@ -19,6 +18,7 @@ android:background="@color/white"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:background="#EEEEEE"
         android:id="@+id/linearLayout4">
         <TextView
             android:layout_width="wrap_content"
@@ -176,6 +176,7 @@ android:background="@color/white"
         android:paddingRight="16dp"
         android:paddingTop="8dp"
         android:id="@+id/viewPager"
+        android:background="@drawable/box"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbarAlwaysDrawHorizontalTrack="true"

@@ -17,7 +17,6 @@
         android:paddingRight="12dp"
         android:paddingTop="12dp"
         android:paddingBottom="12dp"
-        android:background="@color/colorPrimary"
         android:id="@+id/relativeLayout2">
 
         <ListView
@@ -35,6 +34,7 @@
     <RelativeLayout
         android:layout_below="@+id/relativeLayout2"
         android:layout_width="match_parent"
+        android:id="@+id/relativeLayout22"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
@@ -51,6 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="18dp"
             android:text="Total"
+            android:textColor="@color/black"
             android:id="@+id/totalTv"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
@@ -59,12 +60,15 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:layout_margin="12dp"
         android:paddingLeft="15sp"
+        android:layout_below="@id/relativeLayout22"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginBottom="13dp"
+        android:id="@+id/linearLayout33"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
         android:orientation="vertical"
-        android:layout_above="@+id/relativeLayout"
+        android:background="@color/white"
         android:layout_alignParentStart="true">
 
 
@@ -86,10 +90,10 @@
         />
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="18dp"
+            android:layout_height="wrap_content"
             android:text="Name"
-            android:textSize="16sp"
-
+            android:textSize="12sp"
+            android:textColor="@color/black"
             android:id="@+id/nameTv"
             android:layout_marginStart="25dp"
             android:layout_alignParentTop="true"
@@ -117,10 +121,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="18dp"
                 android:text="Number"
+                android:gravity="center_vertical"
                 android:id="@+id/numberTv"
                 android:layout_marginStart="12dp"
-                android:textSize="16sp"
-
+                android:textSize="12sp"
+                android:textColor="@color/black"
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/number" />
 
@@ -147,8 +152,8 @@
                 android:layout_height="wrap_content"
                 android:text="Address"
                 android:id="@+id/addressTv"
-                android:textSize="16sp"
-
+                android:textSize="12sp"
+                android:textColor="@color/black"
                 android:layout_marginStart="12dp"
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/address" />
@@ -176,7 +181,8 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:id="@+id/remarksTv"
-                android:textSize="16sp"
+                android:textSize="12sp"
+                android:textColor="@color/black"
                 android:layout_marginStart="10dp"
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/remarks" />
@@ -186,36 +192,71 @@
 
 
     </LinearLayout>
+    <RelativeLayout
+        android:layout_above="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:id="@+id/relativeLayout222"
+        android:background="@color/white"
+        android:layout_margin="12dp"
+        android:padding="9dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Subtotal:"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:layout_toStartOf="@+id/subtotalTv"
+            android:layout_marginEnd="28dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total"
+            android:textSize="20dp"
+            android:id="@+id/subtotalTv"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp" />
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:id="@+id/relativeLayout"
+        android:background="@color/colorPrimary"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <Button
                 android:layout_weight="1"
                 android:onClick="cancel"
                 android:background="@color/white"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
                 android:layout_width="0dp"
                 android:text="CANCEL"
                 android:textColor="@color/colorPrimary"
-                android:layout_height="wrap_content"/>
+                android:layout_height="match_parent"/>
 
             <Button
                 android:layout_weight="1"
                 android:text="ORDER"
                 android:textColor="@color/white"
                 android:background="@color/colorPrimary"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
                 android:layout_width="0dp"
                 android:onClick="order"
-                android:layout_height="wrap_content"/>
+                android:layout_height="match_parent"/>
 
         </LinearLayout>
 

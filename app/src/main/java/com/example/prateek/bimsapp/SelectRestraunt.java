@@ -38,7 +38,7 @@ public class SelectRestraunt extends AppCompatActivity {
         ref = new Firebase(Server.URL);
 
         bims = (LinearLayout)findViewById(R.id.bimsKitchen);
-        midnight = (LinearLayout)findViewById(R.id.midnightScorer);
+        //midnight = (LinearLayout)findViewById(R.id.midnightScorer);
 
         bims.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,21 +50,21 @@ public class SelectRestraunt extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        midnight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                storeSharedPreferences.setKitchenDatabase(getApplicationContext(), "kuch bhi");
-                storeSharedPreferences.setKitchenName(getApplicationContext(), "Midnight Scorer");
-                Toast.makeText(getApplicationContext(), "Midnight", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(SelectRestraunt.this, MenuMain.class);
-                startActivity(i);
-            }
-        });
+//        midnight.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                storeSharedPreferences.setKitchenDatabase(getApplicationContext(), "kuch bhi");
+//                storeSharedPreferences.setKitchenName(getApplicationContext(), "Midnight Scorer");
+//                Toast.makeText(getApplicationContext(), "Midnight", Toast.LENGTH_SHORT).show();
+//                Intent i = new Intent(SelectRestraunt.this, MenuMain.class);
+//                startActivity(i);
+//            }
+//        });
     }
 
-    public void goToRestraunt(View view) {
-        sendNotification();
-    }
+//    //public void goToRestraunt(View view) {
+//        sendNotification();
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -99,30 +99,30 @@ public class SelectRestraunt extends AppCompatActivity {
         //also remove the shared preferences
     }
 
-
-    public void sendNotification(){
-        String kitchenToken = getToken();
-
-
-
-
-    }
-
-    String token;
-    public String getToken(){
-        Firebase ref = new Firebase(Server.URL+"/KitchenToken");
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String value = (String) dataSnapshot.getValue();
-                token = value;
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
-        });
-        return token;
-    }
+//
+//    public void sendNotification(){
+//        String kitchenToken = getToken();
+//
+//
+//
+//
+//    }
+//
+//    String token;
+//    public String getToken(){
+//        Firebase ref = new Firebase(Server.URL+"/KitchenToken");
+//        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                String value = (String) dataSnapshot.getValue();
+//                token = value;
+//            }
+//
+//            @Override
+//            public void onCancelled(FirebaseError firebaseError) {
+//
+//            }
+//        });
+//        return token;
+//    }
 }

@@ -73,7 +73,7 @@ public class LocationFragment extends Fragment {
 
 
         View view = inflater.inflate(R.layout.fragment_location, container, false);
-        textViewAddress =(TextView)view.findViewById(R.id.textViewAddress);
+        //textViewAddress =(TextView)view.findViewById(R.id.textViewAddress);
         textViewAddress2 =(TextView)view.findViewById(R.id.textViewAddress2);
 
         if(storeSharedPreferences.getUserCustomLocation(getActivity())!=null){
@@ -132,22 +132,22 @@ public class LocationFragment extends Fragment {
         });
 
         radioButton = (RadioButton)view.findViewById(R.id.radio_ninjas);
-        radioButton1 = (RadioButton)view.findViewById(R.id.radio_ninjas2);
+       // radioButton1 = (RadioButton)view.findViewById(R.id.radio_ninjas2);
         radioButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                // Toast.makeText(getActivity(), "hi,", Toast.LENGTH_LONG).show();
-                radioButton1.setChecked(false);
+                //radioButton1.setChecked(false);
                 storeSharedPreferences.setUserCustomLocation(getActivity(), textViewAddress2.getText().toString());
             }
         });
-        radioButton1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                radioButton.setChecked(false);
-                storeSharedPreferences.setUserCustomLocation(getActivity(), textViewAddress.getText().toString());
-            }
-        });
+//        radioButton1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                radioButton.setChecked(false);
+//                storeSharedPreferences.setUserCustomLocation(getActivity(), textViewAddress.getText().toString());
+//            }
+//        });
 
 
         return view;
@@ -167,7 +167,7 @@ public class LocationFragment extends Fragment {
                 LatLngBounds place2 = PlacePicker.getLatLngBounds(data);
                // String toastMsg = String.format("Place: %s", place.getAddress()+" sfd"+place2.toString());
                // Toast.makeText(getActivity(), toastMsg, Toast.LENGTH_LONG).show();
-                textViewAddress.setText(place.getAddress());
+                textViewAddress2.setText(place.getAddress());
 
                 storeSharedPreferences.setUserCustomLocation(getActivity(), place.getAddress().toString());
                 storeSharedPreferences.setUserCoordinates(getActivity(), place.getLatLng().toString());

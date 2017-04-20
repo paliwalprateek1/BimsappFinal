@@ -84,10 +84,9 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 app:srcCompat="@drawable/a"
-                android:layout_marginEnd="11dp"
                 android:id="@+id/imageView3"
                 android:background="@drawable/cart_feature"
-                android:layout_alignTop="@+id/textViewFood"
+                android:layout_alignBottom="@+id/textViewType"
                 android:layout_alignParentEnd="true" />
 
         </RelativeLayout>

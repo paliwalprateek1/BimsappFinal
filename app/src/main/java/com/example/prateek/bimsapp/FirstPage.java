@@ -62,7 +62,7 @@ public class FirstPage extends AppCompatActivity {
                         startActivity(i);
                     }
                     else{
-                        Intent i = new Intent(FirstPage.this, SelectRestraunt.class);
+                        Intent i = new Intent(FirstPage.this, Login.class);
                         startActivity(i);
                     }
 
@@ -85,7 +85,7 @@ public class FirstPage extends AppCompatActivity {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        //return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-        return true;
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        //return true;
     }
 }

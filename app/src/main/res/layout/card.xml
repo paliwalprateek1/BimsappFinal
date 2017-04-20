@@ -87,11 +87,10 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginEnd="10dp"
                 app:srcCompat="@drawable/a"
                 android:id="@+id/imageView3"
                 android:background="@drawable/cart_shape_veg"
-                android:layout_centerVertical="true"
+                android:layout_below="@+id/textViewFood"
                 android:layout_alignParentEnd="true" />
 
         </RelativeLayout>

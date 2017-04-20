@@ -5,11 +5,16 @@
     <!--<color name="colorPrimary2">#0F9D58</color>-->
     <!--<color name="colorPrimaryDark2">#0C7E46</color>-->
 
-    <color name="colorPrimary2">#a7333f</color>
-    <color name="colorPrimaryDark2">#a51c30</color>
+    f16767
 
-    <color name="colorPrimary">#a7333f</color>
-    <color name="colorPrimaryDark">#a51c30</color>
+    D10B0C
+
+    initial color primary: a7333f
+    <color name="colorPrimary2">#f16767</color>
+    <color name="colorPrimaryDark2">#E83D3D</color>
+
+    <color name="colorPrimary">#f16767</color>
+    <color name="colorPrimaryDark">#E83D3D</color>
 
 
 
@@ -18,8 +23,8 @@
     <!--<color name="colorPrimary">#3e885b</color>-->
     <!--<color name="colorPrimaryDark">#2f4b26</color>-->
 
-    <color name="colorPrimary4">#a7333f</color>
-    <color name="colorPrimaryDark4">#a51c30</color>
+    <color name="colorPrimary4">#f16767</color>
+    <color name="colorPrimaryDark4">#E83D3D</color>
     <!--#E74c5a-->
 
     <color name="background">#0f9aa6</color>

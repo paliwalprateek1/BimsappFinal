@@ -18,7 +18,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.Query;
+import com.firebase.client.ValueEventListener;
 
 
 public class SettingsFragment extends Fragment {
@@ -62,6 +66,9 @@ public class SettingsFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
+
+        Firebase.setAndroidContext(getActivity());
+        ref = new Firebase(Server.URL);
         feedbackLayout = (LinearLayout)view.findViewById(R.id.feedbackLayout);
         feedbackLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,8 +82,8 @@ public class SettingsFragment extends Fragment {
         linearLayoutTrackOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), PendingOrder.class);
-                startActivity(intent);
+                getPendingOrders();
+
             }
         });
 //        feedbackEditText = (EditText)view.findViewById(R.id.feedbackEditText);
@@ -134,5 +141,46 @@ public class SettingsFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
+    }
+
+int pendingOrder = 1;
+    private boolean getPendingOrders(){
+        Firebase objRef = ref.child("Order");
+        Query pendingTask = objRef.orderByChild("mail").equalTo((new StoreSharedPreferences()).getUserEmail(getActivity()));
+        //final Query pendingTask = objRef.orderByChild("mail").equalTo("bapu");
+
+        pendingTask.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot tasksSnapshot) {
+
+                for (DataSnapshot snapshot: tasksSnapshot.getChildren()) {
+
+                    Object orderStatus = snapshot.child("status").getValue();
+                    if((orderStatus.toString()).equals("pending")){
+                       pendingOrder = 2;
+                        //return;
+                    }
+                }
+
+                if(pendingOrder==2){
+                    Intent intent = new Intent(getActivity(), PendingOrder.class);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(getActivity(), "No pending Orders", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+            }
+        });
+
+        if(pendingOrder==2){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }

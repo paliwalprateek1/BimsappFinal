@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -23,7 +24,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.Query;
+import com.firebase.client.ValueEventListener;
 import com.firebase.client.core.ThreadBackgroundExecutor;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
@@ -45,12 +50,13 @@ public class OrderFoodFinal extends AppCompatActivity {
     ListView listView;
     Toolbar toolbar;
 
+    boolean pendingOrderStatus= false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_food_final);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+
 
         toolbar = (Toolbar) findViewById(R.id.toolbarSummary);
         setSupportActionBar(toolbar);
@@ -59,8 +65,10 @@ public class OrderFoodFinal extends AppCompatActivity {
 
         Firebase.setAndroidContext(this);
         ref = new Firebase(Server.URL);
-//
-          l = storeSharedPreferences.loadFavorites(this);
+
+
+
+        l = storeSharedPreferences.loadFavorites(this);
         int sum=0;
         for(int i=0;i<l.size();i++){
             int j = Integer.valueOf(l.get(i).getPrice())*Integer.valueOf(l.get(i).getQuantity());
@@ -108,6 +116,29 @@ public class OrderFoodFinal extends AppCompatActivity {
     }
 
     public void order(View view) {
+        getPendingOrders();
+    }
+
+    public void checkConditions(){
+
+        if(getApplicationContext()!=null){
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (!pendingOrderStatus) {
+                        startOrdering();
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "You have pending orders", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+
+    }
+
+    public void startOrdering(){
+
 
         mHandler = new Handler(new Handler.Callback() {
             @Override
@@ -140,17 +171,17 @@ public class OrderFoodFinal extends AppCompatActivity {
                 5800
         );
 
-        storeSharedPreferences.removeAllQuant(this);
+        storeSharedPreferences.removeAllQuant(getApplicationContext());
+
+
     }
 
     public void message(){
-
         Context c = getApplicationContext();
         if(c!=null) {
             runOnUiThread(new Runnable() {
                 public void run() {
                     Toast.makeText(OrderFoodFinal.this, "Ordered", Toast.LENGTH_SHORT).show();
-                    sendEmail1();
 //                    Intent homeIntent=new Intent(getApplicationContext(),MenuMain.class);
 //
 //                    homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -161,55 +192,9 @@ public class OrderFoodFinal extends AppCompatActivity {
                 }
             });
         }
-
     }
 
 
-    public void sendEmail1(){
-        Intent i = new Intent(Intent.ACTION_SEND);
-        i.setType("message/rfc822");
-        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"prateekp987@gmail.com"});
-        i.putExtra(Intent.EXTRA_SUBJECT, "subject of email");
-        i.putExtra(Intent.EXTRA_TEXT   , "body of email");
-        try {
-            startActivity(Intent.createChooser(i, "Send mail..."));
-        } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(OrderFoodFinal.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
-        }
-        email3();
-    }
-
-    public void sendEmail2(){
-        Intent intent = new Intent(Intent.ACTION_SENDTO); // it's not ACTION_SEND
-        intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_SUBJECT, "Subject of email");
-        intent.putExtra(Intent.EXTRA_TEXT, "Body of email bapu");
-        intent.setData(Uri.parse("mailto:prateekp987@gmail.com")); // or just "mailto:" for blank
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // this will make such that when user returns to your app, your app is displayed, instead of the email app.
-        startActivity(Intent.createChooser(intent, "Sending"));
-    }
-
-
-    public void email3(){
-        Log.i("Send email", "");
-        String[] TO = {"prateekp987@gmail.comm"};
-        String[] CC = {""};
-        Intent emailIntent = new Intent(Intent.ACTION_SEND);
-
-        emailIntent.setData(Uri.parse("mailto:"));
-        emailIntent.setType("text/plain");
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-        emailIntent.putExtra(Intent.EXTRA_CC, CC);
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Your subject");
-        emailIntent.putExtra(Intent.EXTRA_TEXT, "Email message goes here");
-
-        try {
-            startActivity(Intent.createChooser(emailIntent, "Send mail...raha hai"));
-            finish();
-        } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(OrderFoodFinal.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     private Handler mHandler;
     private ProgressDialog mDialog;
@@ -236,6 +221,47 @@ public class OrderFoodFinal extends AppCompatActivity {
 //        startActivity(homeIntent);
         finish();
     }
+
+
+
+    int pendingOrder = 1;
+    private void getPendingOrders(){
+        Firebase objRef = ref.child("Order");
+        Query pendingTask = objRef.orderByChild("mail").equalTo((new StoreSharedPreferences()).getUserEmail(getApplicationContext()));
+        //final Query pendingTask = objRef.orderByChild("mail").equalTo("bapu");
+
+        pendingTask.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot tasksSnapshot) {
+
+                for (DataSnapshot snapshot: tasksSnapshot.getChildren()) {
+
+                    Object orderStatus = snapshot.child("status").getValue();
+                    if((orderStatus.toString()).equals("pending")){
+                        pendingOrder = 2;
+                    }
+                }
+
+                if(pendingOrder==2){
+                    Toast.makeText(getApplicationContext(), "You Have pending orders", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                else{
+                    startOrdering();
+                }
+            }
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+            }
+        });
+
+
+    }
+
+
+
+
 }
 
 
@@ -278,6 +304,7 @@ class OrderListAdapter extends ArrayAdapter<FoodQuantity> {
     public int getCount() {
         return items.size();
     }
+
 
 
 }
