@@ -9,6 +9,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -43,7 +45,8 @@ public class ProceedOrder extends AppCompatActivity {
 
     private ViewPager pager;
 
-    TextView cartNavigator, locationNavigator, remarksNavigator, summaryNavigator, nextButtonTextOnProceedOrder;
+    ImageView cartNavigator, locationNavigator, remarksNavigator;
+    TextView summaryNavigator, nextButtonTextOnProceedOrder;
     LinearLayout  nextButton, backButton, doneButton;
     StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
 
@@ -69,19 +72,24 @@ public class ProceedOrder extends AppCompatActivity {
 
         nextButtonTextOnProceedOrder =(TextView)findViewById(R.id.nextButtonTextOnProceedOrder);
 
-        cartNavigator = (TextView)findViewById(R.id.cartNavigator);
-        locationNavigator = (TextView)findViewById(R.id.addressNavigator);
+        cartNavigator = (ImageView) findViewById(R.id.cartNavigator);
+        locationNavigator = (ImageView)findViewById(R.id.addressNavigator);
 
         nextButton = (LinearLayout) findViewById(R.id.nextButton);
         backButton =(LinearLayout) findViewById(R.id.backButton);
         doneButton = (LinearLayout)findViewById(R.id.doneButton);
 
-        remarksNavigator = (TextView)findViewById(R.id.remarksNavigator);
+        remarksNavigator = (ImageView)findViewById(R.id.remarksNavigator);
 //        summaryNavigator = (TextView)findViewById(R.id.summaryNavigator);
 
-        cartNavigator.setTextColor(getResources().getColor(R.color.black));
-        locationNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
-        remarksNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+        DrawableCompat.setTint(cartNavigator.getDrawable(),
+                ContextCompat.getColor(getBaseContext(), R.color.black));
+        DrawableCompat.setTint(locationNavigator.getDrawable(),
+                ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+        DrawableCompat.setTint(remarksNavigator.getDrawable(),
+                ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+
+
 //        summaryNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
 
         backButton.setVisibility(View.INVISIBLE);
@@ -92,29 +100,49 @@ public class ProceedOrder extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     backButton.setVisibility(View.VISIBLE);
-                    pager.setCurrentItem(pager.getCurrentItem()+1);
-                    if(pager.getCurrentItem()==1){
-                        locationNavigator.setTextColor(getResources().getColor(R.color.black));
-                        cartNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
-                        remarksNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+                    if(storeSharedPreferences.getUserCustomLocation(getApplicationContext())!=null) {
+                        pager.setCurrentItem(pager.getCurrentItem() + 1);
+                        if (pager.getCurrentItem() == 1) {
+                            DrawableCompat.setTint(cartNavigator.getDrawable(),
+                                    ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                            DrawableCompat.setTint(locationNavigator.getDrawable(),
+                                    ContextCompat.getColor(getBaseContext(), R.color.black));
+                            DrawableCompat.setTint(remarksNavigator.getDrawable(),
+                                    ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+
+//                        locationNavigator.setTextColor(getResources().getColor(R.color.black));
+//                        cartNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+//                        remarksNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
 //                        summaryNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
-                    }
+                        }
 //                    else if(pager.getCurrentItem()==2){
 //                        remarksNavigator.setTextColor(getResources().getColor(R.color.black));
 //                        locationNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
 //                        cartNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
 //                        summaryNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
 //                    }
-                    else if(pager.getCurrentItem()==2){
-                        nextButton.setVisibility(View.INVISIBLE);
-                        doneButton.setVisibility(View.VISIBLE);
-                        remarksNavigator.setTextColor(getResources().getColor(R.color.black));
-                        //nextButtonTextOnProceedOrder.setText("DONE");
-//                        summaryNavigator.setTextColor(getResources().getColor(R.color.black));
-                        cartNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
-                        //remarksNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
-                        locationNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+                        else if (pager.getCurrentItem() == 2) {
+                            nextButton.setVisibility(View.INVISIBLE);
+                            doneButton.setVisibility(View.VISIBLE);
 
+                            DrawableCompat.setTint(cartNavigator.getDrawable(),
+                                    ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                            DrawableCompat.setTint(locationNavigator.getDrawable(),
+                                    ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                            DrawableCompat.setTint(remarksNavigator.getDrawable(),
+                                    ContextCompat.getColor(getBaseContext(), R.color.black));
+
+//                        remarksNavigator.setTextColor(getResources().getColor(R.color.black));
+//                        //nextButtonTextOnProceedOrder.setText("DONE");
+////                        summaryNavigator.setTextColor(getResources().getColor(R.color.black));
+//                        cartNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+//                        //remarksNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+//                        locationNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+
+                        }
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "Please select your location", Toast.LENGTH_SHORT).show();
                     }
 
                 }
@@ -128,27 +156,54 @@ public class ProceedOrder extends AppCompatActivity {
                     doneButton.setVisibility(View.INVISIBLE);
                     //nextButtonTextOnProceedOrder.setText("NEXT");
                     //nextButtonTextOnProceedOrder.setVisibility(V);
-                    locationNavigator.setTextColor(getResources().getColor(R.color.black));
-                    cartNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
-                    remarksNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+                    DrawableCompat.setTint(cartNavigator.getDrawable(),
+                            ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                    DrawableCompat.setTint(locationNavigator.getDrawable(),
+                            ContextCompat.getColor(getBaseContext(), R.color.black));
+                    DrawableCompat.setTint(remarksNavigator.getDrawable(),
+                            ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+
+//                    locationNavigator.setTextColor(getResources().getColor(R.color.black));
+//                    cartNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+//                    remarksNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
 //                    summaryNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
                 }else if(pager.getCurrentItem()==2){
-
-                    remarksNavigator.setTextColor(getResources().getColor(R.color.black));
-                    locationNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
-                    cartNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+                    DrawableCompat.setTint(cartNavigator.getDrawable(),
+                            ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                    DrawableCompat.setTint(locationNavigator.getDrawable(),
+                            ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                    DrawableCompat.setTint(remarksNavigator.getDrawable(),
+                            ContextCompat.getColor(getBaseContext(), R.color.black));
+//
+//                    remarksNavigator.setTextColor(getResources().getColor(R.color.black));
+//                    locationNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+//                    cartNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
 //                    summaryNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
                 }else if(pager.getCurrentItem()==3){
 //                    summaryNavigator.setTextColor(getResources().getColor(R.color.black));
-                    cartNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
-                    remarksNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
-                    locationNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+                    DrawableCompat.setTint(cartNavigator.getDrawable(),
+                            ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                    DrawableCompat.setTint(locationNavigator.getDrawable(),
+                            ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                    DrawableCompat.setTint(remarksNavigator.getDrawable(),
+                            ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+//
+//                    cartNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+//                    remarksNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+//                    locationNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
                 }else if(pager.getCurrentItem()==0){
+                    DrawableCompat.setTint(cartNavigator.getDrawable(),
+                            ContextCompat.getColor(getBaseContext(), R.color.black));
+                    DrawableCompat.setTint(locationNavigator.getDrawable(),
+                            ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+                    DrawableCompat.setTint(remarksNavigator.getDrawable(),
+                            ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+
                     backButton.setVisibility(View.INVISIBLE);
-                    cartNavigator.setTextColor(getResources().getColor(R.color.black));
-//                    summaryNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
-                    remarksNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
-                    locationNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+//                    cartNavigator.setTextColor(getResources().getColor(R.color.black));
+////                    summaryNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+//                    remarksNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
+//                    locationNavigator.setTextColor(getResources().getColor(R.color.colorInactive));
 
                 }
             }
@@ -185,7 +240,10 @@ public class ProceedOrder extends AppCompatActivity {
                 case 0:{
                     return OrderFragment.newInstance(0);}
                 case 1: {
-                    cartNavigator.setTextColor(getResources().getColor(R.color.black));
+                    DrawableCompat.setTint(cartNavigator.getDrawable(),
+                            ContextCompat.getColor(getBaseContext(), R.color.black));
+
+                    //cartNavigator.setTextColor(getResources().getColor(R.color.black));
                     return LocationFragment.newInstance(0);
                 }
                 case 2: return RemarksFragment.newInstance(0);

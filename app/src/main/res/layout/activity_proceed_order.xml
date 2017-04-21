@@ -16,7 +16,7 @@
         <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@color/colorPrimary"
             app:titleTextColor="@color/colorPrimary"
             android:minHeight="?attr/actionBarSize"
             android:id="@+id/toolbarHere"
@@ -39,7 +39,7 @@
                     android:background="@null"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:tint="@color/colorPrimary"
+                    android:tint="@color/white"
                     android:src="@drawable/ic_close_dark"/>
 
                 <TextView
@@ -47,9 +47,9 @@
                     android:layout_gravity="right"
                     android:gravity="center"
                     android:textSize="25sp"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/white"
                     android:layout_height="match_parent"
-                    android:text="Cart"/>
+                    android:text="  Cart"/>
             </LinearLayout>
 
         </android.support.v7.widget.Toolbar>

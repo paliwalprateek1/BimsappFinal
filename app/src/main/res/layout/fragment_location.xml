@@ -51,7 +51,7 @@
             android:textColor="@color/colorPrimary"
             android:layout_height="wrap_content"
             android:id="@+id/buttonPickLocation"
-            android:padding="10dp"
+            android:padding="0dp"
             android:layout_marginRight="20dp"
             android:layout_below="@+id/textViewAddress2"
             android:layout_alignStart="@+id/textViewAddress2"

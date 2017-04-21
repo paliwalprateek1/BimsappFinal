@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.Query;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -32,7 +33,6 @@ public class NumberLocation extends AppCompatActivity {
 
 
         etMobileNumber = (EditText)findViewById(R.id.etMobileNumber);
-        checkPreviousUser();
 
     }
 
@@ -40,13 +40,8 @@ public class NumberLocation extends AppCompatActivity {
         if(etMobileNumber.getText().toString().length()!=10){
             Toast.makeText(NumberLocation.this, "Enter valid mobile number", Toast.LENGTH_SHORT).show();
         }else {
+            checkPreviousUser(storeSharedPreferences.getUserEmail(this));
             storeSharedPreferences.setUserNumber(getApplicationContext(), etMobileNumber.getText().toString());
-            if(checkPreviousUser()){
-                waitTime();
-            }else{
-                createUser();
-            }
-
         }
 
     }
@@ -56,7 +51,7 @@ public class NumberLocation extends AppCompatActivity {
                 new java.util.TimerTask() {
                     @Override
                     public void run() {
-                        Intent intent = new Intent(getApplicationContext(), MenuMain.class);
+                        Intent intent = new Intent(getApplicationContext(), SelectRestraunt.class);
                         startActivity(intent);
                         finish();
                     }
@@ -65,9 +60,34 @@ public class NumberLocation extends AppCompatActivity {
         );
     }
 
-    public boolean checkPreviousUser(){
+    public void checkPreviousUser(String email){
+        Firebase objRef = ref.child("User");
+        Query pendingTasks = objRef.orderByChild("email").equalTo(email);
+        pendingTasks.addListenerForSingleValueEvent(new com.firebase.client.ValueEventListener() {
+            @Override
+            public void onDataChange(com.firebase.client.DataSnapshot tasksSnapshot) {
+                if (tasksSnapshot.exists()){
+                    Toast.makeText(getApplicationContext(), "Already Registered", Toast.LENGTH_SHORT).show();
+                   // getUserData();
+                    waitTime();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "New User", Toast.LENGTH_SHORT).show();
+                    createUser();
+                }
+//                for (DataSnapshot snapshot: tasksSnapshot.getChildren()) {
+//
+//                }
+            }
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+            }
+        });
+    }
 
-        return false;
+    public void getUserData(){
+
     }
 
     public void createUser(){
@@ -75,8 +95,8 @@ public class NumberLocation extends AppCompatActivity {
         user.setEmail(storeSharedPreferences.getUserEmail(this));
         user.setName(storeSharedPreferences.getUserName(this));
         user.setNumber(etMobileNumber.getText().toString());
-        user.setPoints("100");
-        user.setName("0");
+        user.setPoints("0");
+        user.setNumberOfOrders("0");
 
         Firebase newRef = ref.child("User").push();
         newRef.setValue(user);

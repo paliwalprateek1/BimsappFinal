@@ -10,11 +10,11 @@
     D10B0C
 
     initial color primary: a7333f
-    <color name="colorPrimary2">#f16767</color>
-    <color name="colorPrimaryDark2">#E83D3D</color>
+    <color name="colorPrimary2">#0F9D58</color>
+    <color name="colorPrimaryDark2">#0C7E46</color>
 
-    <color name="colorPrimary">#f16767</color>
-    <color name="colorPrimaryDark">#E83D3D</color>
+    <color name="colorPrimary">#0F9D58</color>
+    <color name="colorPrimaryDark">#0C7E46</color>
 
 
 
@@ -23,8 +23,24 @@
     <!--<color name="colorPrimary">#3e885b</color>-->
     <!--<color name="colorPrimaryDark">#2f4b26</color>-->
 
-    <color name="colorPrimary4">#f16767</color>
-    <color name="colorPrimaryDark4">#E83D3D</color>
+    <color name="colorPrimary4">#0F9D58</color>
+    <color name="colorPrimaryDark4">#0C7E46</color>
+
+    <!--<color name="colorPrimary2">#3395ff</color>-->
+    <!--<color name="colorPrimaryDark2">#3395ff</color>-->
+
+    <!--<color name="colorPrimary">#3395ff</color>-->
+    <!--<color name="colorPrimaryDark">#3395ff</color>-->
+
+
+
+    <!--&lt;!&ndash;#E74c5a&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<color name="colorPrimary">#3e885b</color>&ndash;&gt;-->
+    <!--&lt;!&ndash;<color name="colorPrimaryDark">#2f4b26</color>&ndash;&gt;-->
+
+    <!--<color name="colorPrimary4">#3395ff</color>-->
+    <!--<color name="colorPrimaryDark4">#3395ff</color>-->
     <!--#E74c5a-->
 
     <color name="background">#0f9aa6</color>

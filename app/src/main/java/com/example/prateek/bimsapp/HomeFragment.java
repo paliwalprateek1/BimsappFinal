@@ -81,7 +81,7 @@ public class HomeFragment extends Fragment {
             mHandler = new Handler(new Handler.Callback() {
                 @Override
                 public boolean handleMessage(Message msg) {
-                    if (msg.what == CANCEL_DIALOG) {
+                    if (msg.what == CANCEL_DIALOG && mDialog!=null) {
                         mDialog.cancel();
                     }
 
@@ -263,7 +263,7 @@ public class HomeFragment extends Fragment {
 
     public void getVeg() {
         Firebase objRef = ref.child("Menu");
-        Query pendingTasks = objRef.orderByChild("cat").equalTo("veg");
+        Query pendingTasks = objRef.orderByChild("cat").equalTo("veg-special");
         pendingTasks.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot tasksSnapshot) {

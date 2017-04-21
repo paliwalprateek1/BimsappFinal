@@ -156,7 +156,6 @@ public class Login extends AppCompatActivity {
         StoreSharedPreferences.setUserEmail(this, personEmail);
         StoreSharedPreferences.setUserName(this, personGivenName);
         StoreSharedPreferences.setUserImage(this, String.valueOf(personPhoto));
-        checkPreviousUser(personEmail);
         if(StoreSharedPreferences.getUserEmail(this)!=null) {
                 Intent intent = new Intent(Login.this, NumberLocation.class);
                 startActivity(intent);
@@ -166,28 +165,7 @@ public class Login extends AppCompatActivity {
 
 
 
-    public void checkPreviousUser(String email){
-        Firebase objRef = ref.child("User");
-        Query pendingTasks = objRef.orderByChild("email").equalTo(email);
-        pendingTasks.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot tasksSnapshot) {
-                if (tasksSnapshot.exists()){
-                    Toast.makeText(getApplicationContext(), "User Already Exixts", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    //Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT).show();
-                }
-//                for (DataSnapshot snapshot: tasksSnapshot.getChildren()) {
-//
-//                }
-            }
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                System.out.println("The read failed: " + firebaseError.getMessage());
-            }
-        });
-    }
+
 
     public void googleSignIn(View view) {
         signIn();

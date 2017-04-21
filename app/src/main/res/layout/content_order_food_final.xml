@@ -5,7 +5,6 @@
     android:id="@+id/content_order_food_final"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.prateek.bimsapp.OrderFoodFinal"
     tools:showIn="@layout/activity_order_food_final">
@@ -80,7 +79,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:textColor="@color/black"
+        android:textColor="@color/colorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Name:"
@@ -108,7 +107,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:textColor="@color/black"
+                android:textColor="@color/colorPrimary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Number:"
@@ -138,7 +137,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:textColor="@color/black"
+                android:textColor="@color/colorPrimary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Address:"
@@ -167,7 +166,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:textColor="@color/black"
+                android:textColor="@color/colorPrimary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Remarks:"
@@ -207,14 +206,14 @@
             android:layout_height="wrap_content"
             android:text="Subtotal:"
             android:textSize="20dp"
-            android:textColor="@color/black"
+            android:textColor="@color/colorPrimary"
             android:layout_toStartOf="@+id/subtotalTv"
             android:layout_marginEnd="28dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total"
+            android:text="Calculating"
             android:textSize="20dp"
             android:id="@+id/subtotalTv"
             android:layout_alignParentTop="true"
@@ -237,7 +236,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:layout_weight="1"
+                android:layout_weight="0"
                 android:onClick="cancel"
                 android:background="@color/white"
                 android:layout_gravity="center_vertical"
@@ -255,6 +254,7 @@
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
                 android:layout_width="0dp"
+                android:id="@+id/finalOrderButton"
                 android:onClick="order"
                 android:layout_height="match_parent"/>
 

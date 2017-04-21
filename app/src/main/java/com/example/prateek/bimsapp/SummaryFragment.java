@@ -65,7 +65,7 @@ public class SummaryFragment extends Fragment {
 
         order.setAddress(storeSharedPreferences.getUserCustomLocation(getActivity()));
         order.setAmount("120");
-        order.setCoordinates(storeSharedPreferences.getUserCoordinates(getActivity()));
+        //order.setCoordinates(storeSharedPreferences.getUserCoordinates(getActivity()));
 
         Firebase.setAndroidContext(getActivity());
         ref = new Firebase(Server.URL);

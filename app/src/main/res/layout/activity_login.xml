@@ -19,24 +19,28 @@
         android:layout_width="200dp"
         android:layout_height="150dp"
         android:src="@drawable/unnamed"
+        android:id="@+id/imageView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/imageView" />
+        android:layout_marginTop="46dp" />
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="name of the android application"
-        android:layout_below="@+id/imageView"
-        android:layout_alignEnd="@+id/imageView"
-        android:layout_marginTop="60dp" />
+        android:layout_above="@+id/sign_in_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="59dp" />
 
 
-    <com.google.android.gms.common.SignInButton
+    <Button
         android:id="@+id/sign_in_button"
         android:onClick="googleSignIn"
         android:layout_width="200dp"
+        android:textColor="@color/white"
+        android:background="@color/colorPrimaryDark1"
+        android:text="Sign in Using google"
         android:layout_height="wrap_content"
         android:layout_marginBottom="88dp"
         android:layout_alignParentBottom="true"

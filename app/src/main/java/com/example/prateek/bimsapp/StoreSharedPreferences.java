@@ -244,15 +244,29 @@ public class StoreSharedPreferences {
         return getSharedPreferences(ctx).getString("email", "");
     }
 
-    public static void setUserCoordinates(Context ctx, String userCoordinates) {
+
+
+    public static void setUserCoordinatesLatitudes(Context ctx, String userCoordinates) {
         SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();
-        editor.putString("coordinates", userCoordinates);
+        editor.putString("coordinatesL", userCoordinates);
         editor.commit();
     }
 
-    public static String getUserCoordinates(Context ctx) {
-        return getSharedPreferences(ctx).getString("coordinates", "");
+    public static String getUserCoordinatesLatitudes(Context ctx) {
+        return getSharedPreferences(ctx).getString("coordinatesL", "");
     }
+
+    public static void setUserCoordinatesLongitudes(Context ctx, String userCoordinates) {
+        SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();
+        editor.putString("coordinatesLong", userCoordinates);
+        editor.commit();
+    }
+
+    public static String getUserCoordinatesLongitudes(Context ctx) {
+        return getSharedPreferences(ctx).getString("coordinatesLong", "");
+    }
+
+
 
     public static void setUserNumber(Context ctx, String userNumber) {
         SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();

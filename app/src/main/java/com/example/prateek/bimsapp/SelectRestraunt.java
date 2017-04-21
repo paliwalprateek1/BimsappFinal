@@ -96,6 +96,10 @@ public class SelectRestraunt extends AppCompatActivity {
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
         finish();
+        storeSharedPreferences.setUserCoordinatesLatitudes(this, null);
+        storeSharedPreferences.setUserEmail(this, null);
+        storeSharedPreferences.setUserRemarks(this, null);
+        storeSharedPreferences.setUserCustomLocation(this, null);
         //also remove the shared preferences
     }
 

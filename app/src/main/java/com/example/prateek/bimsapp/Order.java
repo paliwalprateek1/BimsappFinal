@@ -57,13 +57,6 @@ public class Order {
         this.mail = mail;
     }
 
-    public String getCoordinates() {
-        return coordinates;
-    }
-
-    public void setCoordinates(String coordinates) {
-        this.coordinates = coordinates;
-    }
 
     public ArrayList<FoodQuantity> getItem() {
         return item;
@@ -88,7 +81,25 @@ public class Order {
     private String amount;
     private String number;
     private String mail;
-    private String coordinates;
+
+    public String getCoordinatesLatitude() {
+        return coordinatesLatitude;
+    }
+
+    public void setCoordinatesLatitude(String coordinatesLatitude) {
+        this.coordinatesLatitude = coordinatesLatitude;
+    }
+
+    public String getCoordinatesLongitude() {
+        return coordinatesLongitude;
+    }
+
+    public void setCoordinatesLongitude(String coordinatesLongitude) {
+        this.coordinatesLongitude = coordinatesLongitude;
+    }
+
+    private String coordinatesLatitude;
+    private String coordinatesLongitude;
     private ArrayList<FoodQuantity> item;
     private String status;
 

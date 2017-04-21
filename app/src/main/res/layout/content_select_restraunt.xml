@@ -22,7 +22,7 @@
         android:id="@+id/bimsKitchen">
 
         <ImageView
-            android:layout_width="150dp"
+            android:layout_width="120dp"
             android:layout_height="match_parent"
             android:src="@drawable/bk3"/>
 
@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Bims' Kitchen"
-                android:textColor="@color/black"
+                android:textColor="@color/colorPrimary"
                 android:layout_weight="1"/>
 
             <TextView
@@ -66,13 +66,6 @@
                 android:layout_height="wrap_content"
                 android:text="bimsattitude86@gmail.com"
                 android:layout_weight="1"/>
-
-
         </LinearLayout>
-
-
     </LinearLayout>
-
-
-
 </RelativeLayout>

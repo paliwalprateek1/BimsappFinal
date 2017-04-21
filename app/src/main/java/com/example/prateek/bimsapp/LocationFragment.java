@@ -168,9 +168,14 @@ public class LocationFragment extends Fragment {
                // String toastMsg = String.format("Place: %s", place.getAddress()+" sfd"+place2.toString());
                // Toast.makeText(getActivity(), toastMsg, Toast.LENGTH_LONG).show();
                 textViewAddress2.setText(place.getAddress());
+                String s = place.getLatLng().toString();
+                s = s.substring(10, s.length()-1);
+                String[] a = s.split(",");
 
                 storeSharedPreferences.setUserCustomLocation(getActivity(), place.getAddress().toString());
-                storeSharedPreferences.setUserCoordinates(getActivity(), place.getLatLng().toString());
+                storeSharedPreferences.setUserCoordinatesLatitudes(getActivity(), a[0]);
+                storeSharedPreferences.setUserCoordinatesLongitudes(getActivity(), a[1]);
+
 
 
             } else {
