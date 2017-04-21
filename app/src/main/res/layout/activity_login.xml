@@ -10,12 +10,37 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.prateek.bimsapp.Login">
 
-    <Button
-        android:text="Login"
-        android:onClick="signIn"
+
+
+
+
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:src="@drawable/unnamed"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/imageView" />
+
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/button" />
+        android:text="name of the android application"
+        android:layout_below="@+id/imageView"
+        android:layout_alignEnd="@+id/imageView"
+        android:layout_marginTop="60dp" />
+
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
+        android:onClick="googleSignIn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="88dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/imageView" />
+
+
 </RelativeLayout>

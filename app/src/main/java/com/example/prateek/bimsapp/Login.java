@@ -164,9 +164,7 @@ public class Login extends AppCompatActivity {
         }
     }
 
-    public void signIn(View view) {
-        signIn();
-    }
+
 
     public void checkPreviousUser(String email){
         Firebase objRef = ref.child("User");
@@ -189,5 +187,9 @@ public class Login extends AppCompatActivity {
                 System.out.println("The read failed: " + firebaseError.getMessage());
             }
         });
+    }
+
+    public void googleSignIn(View view) {
+        signIn();
     }
 }

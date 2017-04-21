@@ -76,6 +76,7 @@ public class NumberLocation extends AppCompatActivity {
         user.setName(storeSharedPreferences.getUserName(this));
         user.setNumber(etMobileNumber.getText().toString());
         user.setPoints("100");
+        user.setName("0");
 
         Firebase newRef = ref.child("User").push();
         newRef.setValue(user);
@@ -89,6 +90,9 @@ class User{
     private String name;
     private String number;
     private String email;
+    private String points;
+    private String numberOfOrders;
+
 
     public String getPoints() {
         return points;
@@ -122,5 +126,11 @@ class User{
         this.name = name;
     }
 
-    private String points;
+    public String getNumberOfOrders() {
+        return numberOfOrders;
+    }
+
+    public void setNumberOfOrders(String numberOfOrders) {
+        this.numberOfOrders = numberOfOrders;
+    }
 }

@@ -44,7 +44,6 @@ public class Bev extends Fragment {
     public Bev() {
     }
 
-
     public static Bev newInstance(String param1, String param2) {
         Bev fragment = new Bev();
         Bundle args = new Bundle();
@@ -58,7 +57,6 @@ public class Bev extends Fragment {
     Button dialogOk, ua, da;
     TextView count;
     FoodQuantity fa = new FoodQuantity();
-
 
     private List<Food> foodList = new ArrayList<>();
     private RecyclerView recyclerView;
