@@ -24,6 +24,10 @@ public class Credits extends AppCompatActivity {
         tv.setText(Html.fromHtml("<a href=http://www.icons8.com> Icons8 "));
         tv.setMovementMethod(LinkMovementMethod.getInstance());
 
+        TextView tv2 = (TextView) findViewById(R.id.UIUX);
+        tv2.setText(Html.fromHtml("<a href=http://ansarimofid.in> Mofid Ansari "));
+        tv2.setMovementMethod(LinkMovementMethod.getInstance());
+
 
     }
 }

@@ -22,10 +22,7 @@ public class FoodQuantity {
     public FoodQuantity() {
     }
 
-//        public Food(String food, String price) {
-//            this.food = food;
-//            this.price = price;
-//        }
+
 
     public FoodQuantity(String food, String price, String quantity, String url){
         this.food = food;

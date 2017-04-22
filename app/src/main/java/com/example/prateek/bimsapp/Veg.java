@@ -200,7 +200,6 @@ public class Veg extends Fragment {
                     Object value = snapshot.child("f").getValue();
                     Object valueF = snapshot.child("p").getValue();
                     Object valueU = snapshot.child("url").getValue();
-                    Log.d(valueU.toString(), "url che");
                     Food food = new Food();
                     food.setPrice(valueF.toString());
                     food.setFood(value.toString());
@@ -209,7 +208,6 @@ public class Veg extends Fragment {
                     food.setRating(null);
                     foodList.add(food);
                     mAdapter.notifyDataSetChanged();
-                    Log.d("food "+value.toString(), "price "+valueF.toString());
                 }
             }
             @Override

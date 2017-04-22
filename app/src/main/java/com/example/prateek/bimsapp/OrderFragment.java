@@ -92,7 +92,6 @@ public class OrderFragment extends Fragment {
                 a.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(getActivity(), ""+c, Toast.LENGTH_SHORT).show();
                         char as = s.charAt(5);
                         int a = Integer.valueOf(as);
                         a=a-48;
@@ -101,7 +100,6 @@ public class OrderFragment extends Fragment {
                         b.setText(" X   "+Integer.toString(a) + "   = ");
                         int basePriceInt = (int)basePrice;
                         quantity.setText(Integer.toString(basePriceInt*Integer.parseInt(Integer.toString(a)))+" ₹");
-                        Log.d("alkfd", "quantity is="+basePriceInt);
 
                         FoodQuantity fff;
                         fff = foodQuantityArrayList.get(c);

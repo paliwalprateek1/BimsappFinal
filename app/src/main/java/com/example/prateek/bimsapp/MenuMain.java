@@ -60,10 +60,6 @@ public class MenuMain extends AppCompatActivity {
 
         ref = new Firebase(Server.URL);
 
-//        toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-
-
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(store.getKitchenName(this));
@@ -83,10 +79,8 @@ public class MenuMain extends AppCompatActivity {
 
 
         if(store.getState(this).length()!=1){
-            Log.d("hover is", "and wasmai yaha hu ##########"+store.getState(this));
         }
         else {
-            Log.d("hover is", "and was aur ab yaa");
             pager.setCurrentItem(Integer.valueOf(store.getState(MenuMain.this)));
             store.setState(this, null);
         }
@@ -127,7 +121,7 @@ public class MenuMain extends AppCompatActivity {
                         ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
                 DrawableCompat.setTint(settingsSmallIcon.getDrawable(),
                         ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
-                //Toast.makeText(getApplicationContext(), "tob", Toast.LENGTH_LONG).show();
+
                 pager.setCurrentItem(0);
             }
         });
@@ -138,7 +132,7 @@ public class MenuMain extends AppCompatActivity {
 
 
                 if(store.loadFavorites(getApplicationContext())!=null) {
-                    Toast.makeText(getApplicationContext(), "order", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Cart", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(getApplicationContext(), ProceedOrder.class);
                     startActivity(intent);
                 }else {
@@ -160,7 +154,6 @@ public class MenuMain extends AppCompatActivity {
                         ContextCompat.getColor(getBaseContext(), R.color.colorPrimary));
                 DrawableCompat.setTint(settingsSmallIcon.getDrawable(),
                         ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
-                //Toast.makeText(getApplicationContext(), "account", Toast.LENGTH_LONG).show();
                 pager.setCurrentItem(3);
             }
         });
@@ -178,7 +171,6 @@ public class MenuMain extends AppCompatActivity {
                         ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
                 DrawableCompat.setTint(settingsSmallIcon.getDrawable(),
                         ContextCompat.getColor(getBaseContext(), R.color.colorPrimary));
-                //Toast.makeText(getApplicationContext(), "settings", Toast.LENGTH_LONG).show();
                 pager.setCurrentItem(4);
             }
         });

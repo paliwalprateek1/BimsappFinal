@@ -72,9 +72,6 @@ public class Bev extends Fragment {
 
         getBevMenu();
         recyclerView.setHasFixedSize(true);
-//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-//        recyclerView.setLayoutManager(mLayoutManager);
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         recyclerView.setAdapter(mAdapter);
@@ -88,7 +85,6 @@ public class Bev extends Fragment {
 
                 Intent intent = new Intent(getActivity(), SetQuantity.class);
                 getActivity().overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
-
                 intent.putExtra("foodItemName", f.getFood());
                 intent.putExtra("foodItemPrice", f.getPrice());
                 intent.putExtra("foodItemUrl", f.getImageUrl());
@@ -120,7 +116,6 @@ public class Bev extends Fragment {
                     Object value = snapshot.child("f").getValue();
                     Object valueF = snapshot.child("p").getValue();
                     Object valueU = snapshot.child("url").getValue();
-                    Log.d(valueU.toString(), "url che");
                     Food food = new Food();
                     food.setPrice(valueF.toString());
                     food.setFood(value.toString());
@@ -129,7 +124,6 @@ public class Bev extends Fragment {
                     food.setRating(null);
                     foodList.add(food);
                     mAdapter.notifyDataSetChanged();
-                    Log.d("food "+value.toString(), "price "+valueF.toString());
                 }
             }
             @Override

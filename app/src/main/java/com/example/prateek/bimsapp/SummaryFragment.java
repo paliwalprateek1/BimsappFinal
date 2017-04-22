@@ -97,7 +97,6 @@ public class SummaryFragment extends Fragment {
         order.setMail(storeSharedPreferences.getUserEmail(getActivity()));
         order.setNumber(storeSharedPreferences.getUserNumber(getActivity()));
         order.setStatus("pending");
-        Toast.makeText(getActivity(), storeSharedPreferences.getUserNumber(getActivity()), Toast.LENGTH_SHORT).show();
 
         nameTv = (TextView)view.findViewById(R.id.nameTv);
         nameTv.setText(storeSharedPreferences.getUserName(getActivity()));

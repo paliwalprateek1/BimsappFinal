@@ -102,7 +102,6 @@ public class OrderFoodFinal extends AppCompatActivity {
         order.setRemarks(storeSharedPreferences.getUserRemarks(this));
 
 
-        //Toast.makeText(this, storeSharedPreferences.getUserNumber(this), Toast.LENGTH_SHORT).show();
 
         nameTv = (TextView)findViewById(R.id.nameTv);
         nameTv.setText(storeSharedPreferences.getUserName(this));
@@ -134,31 +133,24 @@ public class OrderFoodFinal extends AppCompatActivity {
         double longitude = Double.parseDouble(storeSharedPreferences.getUserCoordinatesLongitudes(this));
         double latInfo = 23.1977, sec27 = 23.245326;
         String finalValue = total;
-        Log.d("Location test", "1");
+
         if(lat<latInfo){
             //kudasan
-            Log.d("Location test", "2");
             if(Integer.valueOf(total)<100){
-                Log.d("Location test", "3");
                 finalValue = Integer.toString(Integer.valueOf(total)+20);
             }
         }
         else if(lat>latInfo && lat<sec27){
-            Log.d("Location test", "4");
             if(Integer.valueOf(total)<200){
-                Log.d("Location test", "5");
                 finalValue = Integer.toString(Integer.valueOf(total)+30);
             }
         }
         else if(lat>sec27){
-            Log.d("Location test", "6");
             if(Integer.valueOf(total)<300){
-                Log.d("Location test", "7");
                 finalValue = Integer.toString(Integer.valueOf(total)+50);
             }
         }
         if(lat<23.133 || lat>23.284 || longitude<72.59 || longitude>72.71){
-            Log.d("Location test", "8");
             finish();
             Toast.makeText(this, "Your location is out of our serivce area", Toast.LENGTH_SHORT).show();
         }
@@ -171,19 +163,12 @@ public class OrderFoodFinal extends AppCompatActivity {
             finalValue = Double.toString(i);
         }
 
-        Log.d(Integer.toString(numberOfOrders), "hi" );
 
-
-        Log.d("point  ", Double.toString(points));
         if(points>0){
-            Log.d("I am cuming", Double.toString(points));
             double i = Double.valueOf(finalValue);
             i = i-points/2;
             finalValue = Double.toString(i);
-            Log.d("I am going", finalValue);
-//            if(i>100){
-//                points = 5*(i/100);
-//            }
+
         }
         //info lat = 23.1977
         //kuda = 23.1855
@@ -225,7 +210,6 @@ public class OrderFoodFinal extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-       // Toast.makeText(this, "Kutte order kyon cancel kiya", Toast.LENGTH_SHORT).show();
     }
 
     public void order(View view) {

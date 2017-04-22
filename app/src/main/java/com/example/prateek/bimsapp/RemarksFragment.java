@@ -44,7 +44,7 @@ public class RemarksFragment extends Fragment {
     }
 
     EditText remarks;
-    TextView cartNavigator;
+  //  TextView cartNavigator;
     Button buttonAddRemarks;
     StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
     @Override
@@ -52,7 +52,7 @@ public class RemarksFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_remarks, container, false);
-        cartNavigator = (TextView)view.findViewById(R.id.cartNavigator);
+        //cartNavigator = (TextView)view.findViewById(R.id.cartNavigator);
         remarks = (EditText) view.findViewById(R.id.editTextRemarks);
         buttonAddRemarks = (Button)view.findViewById(R.id.buttonAddRemarks);
         buttonAddRemarks.setOnClickListener(new View.OnClickListener() {

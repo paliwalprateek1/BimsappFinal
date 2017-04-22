@@ -36,12 +36,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/icons"
+        android:layout_margin="5dp"
         android:text="Icons: "/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="www.icons8.com"
+        android:layout_margin="5dp"
+
         android:id="@+id/icons8"
         android:layout_toRightOf="@+id/icons"/>
 
@@ -50,6 +53,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="App Icon: "
+        android:layout_margin="5dp"
+
         android:id="@+id/appIcon"
         android:layout_below="@+id/icons"
         android:textColor="@color/colorPrimary"/>
@@ -57,8 +62,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Eatlo"
+        android:layout_margin="5dp"
+
         android:layout_toRightOf="@+id/appIcon"
         android:layout_alignBaseline="@+id/appIcon"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UIUX: "
+            android:layout_margin="5dp"
+
+            android:id="@+id/tvUIUX"
+            android:layout_below="@+id/appIcon"
+            android:textColor="@color/colorPrimary"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mofid Ansari"
+            android:layout_margin="5dp"
+            android:id="@+id/UIUX"
+            android:layout_toRightOf="@+id/tvUIUX"
+            android:layout_alignBaseline="@+id/tvUIUX"/>
+
+
+
+
 
 
     </RelativeLayout>

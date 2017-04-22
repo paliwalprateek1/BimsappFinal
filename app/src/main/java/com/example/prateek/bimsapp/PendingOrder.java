@@ -84,7 +84,6 @@ public class PendingOrder extends AppCompatActivity {
                         pendingOrder = snapshot.getValue(Order.class);
                         arrangeOrder(pendingOrder);
                         pend.add(pendingOrder);
-                        System.out.println("Here bitches"+ pendingOrder.getAmount());
                         //return;
                     }
                 }
@@ -109,15 +108,12 @@ public class PendingOrder extends AppCompatActivity {
                 amount = (TextView) findViewById(R.id.textViewPendingAmount);
                 amount.setText(pendingOrder.getAmount());
 
-        //System.out.println(pendingOrder.getItem());
 
         String s = pendingOrder.getItem().toString();
-        System.out.println(s+" otawa");
         s=s.substring(2, s.length()-2);
         ArrayList<FoodQuantity> alf = new ArrayList<>();
         String[] a = s.split(", ");
         for (int j = 0;j<a.length;j++){
-            System.out.println(a[j]);
             FoodQuantity fq = new FoodQuantity();
             String s1[] = a[j].split("=");
             fq.setQuantity(s1[1]);

@@ -47,9 +47,6 @@ public class SetQuantity extends AppCompatActivity {
         foodItemUrl = extras.getString("foodItemUrl");
         itemName.setText(foodItemName);
 
-        Log.d("hadf", "adjf  "+foodItemUrl);
-
-
         Picasso.with(this)
                 .load(foodItemUrl)
                 .into(itemImage);

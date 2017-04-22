@@ -62,7 +62,7 @@ public class SettingsFragment extends Fragment {
 
     LinearLayout feedbackLayout, linearLayoutTrackOrder;
 
-    LinearLayout linearLayoutCallPhone;
+    LinearLayout linearLayoutCallPhone, linearLayoutFacebook;
 
 
 
@@ -91,20 +91,9 @@ public class SettingsFragment extends Fragment {
 
             }
         });
-//        feedbackEditText = (EditText)view.findViewById(R.id.feedbackEditText);
-//
-//        Firebase.setAndroidContext(getActivity());
-//        ref = new Firebase(Server.URL);
-//
-//        feedbackButton = (Button)view.findViewById(R.id.feedbackButton);
-//        feedbackButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                sendFeedback();
-//            }
-//        });
 
-        linearLayoutCallPhone = (LinearLayout)view.findViewById(R.id.linearLayoutCallPhone);
+
+        linearLayoutCallPhone = (LinearLayout)view.findViewById(R.id.linearLayoutCallUs);
         linearLayoutCallPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,21 +107,19 @@ public class SettingsFragment extends Fragment {
             }
         });
 
+        linearLayoutFacebook = (LinearLayout)view.findViewById(R.id.linearLayoutFacebook);
+        linearLayoutFacebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri uri = Uri.parse("https://www.facebook.com/BIMS-Kitchen-1643269752591950/");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
-//
-//    public void sendFeedback(){
-//        //send feedback firebase logic
-//        Feedback feedback = new Feedback();
-//        feedback.setEmail(storeSharedPreferences.getUserEmail(getActivity()));
-//        feedback.setName(storeSharedPreferences.getUserName(getActivity()));
-//        feedback.setNumber(storeSharedPreferences.getUserNumber(getActivity()));
-//        feedback.setFeedback(feedbackEditText.getText().toString());
-//        Firebase newRef = ref.child("Feedback").push();
-//        newRef.setValue(feedback);
-//        feedbackEditText.setText(null);
-//        Toast.makeText(getActivity(), "Feedback submitted", Toast.LENGTH_SHORT).show();
-//    }
+
 
     public void signingOut(){
         StoreSharedPreferences s = new StoreSharedPreferences();
@@ -166,7 +153,6 @@ int pendingOrder = 1;
     private boolean getPendingOrders(){
         Firebase objRef = ref.child("Order");
         Query pendingTask = objRef.orderByChild("mail").equalTo((new StoreSharedPreferences()).getUserEmail(getActivity()));
-        //final Query pendingTask = objRef.orderByChild("mail").equalTo("bapu");
 
         pendingTask.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

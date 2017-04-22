@@ -72,7 +72,7 @@ public class NumberLocation extends AppCompatActivity {
                     waitTime();
                 }
                 else {
-                    Toast.makeText(getApplicationContext(), "New User", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Registration Succesfull", Toast.LENGTH_SHORT).show();
                     createUser();
                 }
 //                for (DataSnapshot snapshot: tasksSnapshot.getChildren()) {

@@ -38,7 +38,6 @@ public class FirstPage extends AppCompatActivity {
         //this one is the real shit
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_page);
-        //Toast.makeText(this, "12", Toast.LENGTH_SHORT).show();
 
         Firebase.setAndroidContext(this);
         ref = new Firebase(Server.URL);
@@ -55,23 +54,19 @@ public class FirstPage extends AppCompatActivity {
 
                 @Override
                 public void run() {
-//                     This method will be executed once the timer is over
-//                     Start your app main activity
                     if(StoreSharedPreferences.getUserEmail(getApplicationContext()).length()!=0) {
                         Intent i = new Intent(FirstPage.this, SelectRestraunt.class);
                         startActivity(i);
                     }
                     else{
-                        Intent i = new Intent(FirstPage.this, SelectRestraunt.class);
+                        Intent i = new Intent(FirstPage.this, Login.class);
                         startActivity(i);
                     }
-
                     // close this activity
                     finish();
                 }
             }, SPLASH_TIME_OUT);
 
-        //getAllMenu();
 
         }
         else{
@@ -86,6 +81,5 @@ public class FirstPage extends AppCompatActivity {
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-        //return true;
     }
 }

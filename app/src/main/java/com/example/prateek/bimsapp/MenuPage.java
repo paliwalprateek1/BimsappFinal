@@ -62,73 +62,6 @@ public class MenuPage extends AppCompatActivity {
             }
         });
 
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
-//
-//        home = (LinearLayout) findViewById(R.id.homeSmallIconrl);
-//        menuHere = (LinearLayout) findViewById(R.id.menuSmallIconrl);
-//        user = (LinearLayout) findViewById(R.id.accountSmallIconrl);
-//        order = (LinearLayout) findViewById(R.id.orderSmallIconrl);
-//        settings = (LinearLayout) findViewById(R.id.settingsSmallIconrl);
-//
-//        menuSmallIcon = (ImageView)findViewById(R.id.menuSmallIcon);
-//        homeSmallIcon = (ImageView)findViewById(R.id.homeSmallIcon);
-//        orderSmallIcon = (ImageView)findViewById(R.id.orderSmallIcon);
-//        accountSmallIcon = (ImageView)findViewById(R.id.accountSmallIcon);
-//        settingsSmallIcon = (ImageView)findViewById(R.id.settingsSmallIcon);
-//
-//
-//        home.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                storeSharedPreferences.setState(getApplicationContext(), "0");
-//                Intent intent = new Intent(getApplicationContext(), MenuMain.class);
-//                startActivity(intent);
-//                finish();
-//
-//            }
-//        });
-//        menuHere.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
-//        user.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                storeSharedPreferences.setState(getApplicationContext(), "3");
-//                Toast.makeText(MenuPage.this, "home",Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(getApplicationContext(), MenuMain.class);
-//                startActivity(intent);
-//                finish();
-//
-//            }
-//        });
-//        order.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                storeSharedPreferences.setState(getApplicationContext(), "2");
-//                if(storeSharedPreferences.loadFavorites(getApplicationContext())!=null) {
-//                    Toast.makeText(getApplicationContext(), "order", Toast.LENGTH_LONG).show();
-//                    Intent intent = new Intent(getApplicationContext(), ProceedOrder.class);
-//                    startActivity(intent);
-//                }else {
-//                    Toast.makeText(getApplicationContext(), "No Items Selected", Toast.LENGTH_LONG).show();
-//                }
-//
-//            }
-//        });
-//        settings.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                storeSharedPreferences.setState(getApplicationContext(), "4");
-//                Intent intent = new Intent(getApplicationContext(), MenuMain.class);
-//                startActivity(intent);
-//                finish();
-//
-//            }
-//        });
 
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -138,18 +71,7 @@ public class MenuPage extends AppCompatActivity {
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-//
-//
-//                        DrawableCompat.setTint(orderSmallIcon.getDrawable(),
-//                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
-//                DrawableCompat.setTint(menuSmallIcon.getDrawable(),
-//                        ContextCompat.getColor(getBaseContext(), R.color.colorPrimary));
-//                DrawableCompat.setTint(homeSmallIcon.getDrawable(),
-//                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
-//                DrawableCompat.setTint(accountSmallIcon.getDrawable(),
-//                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
-//                DrawableCompat.setTint(settingsSmallIcon.getDrawable(),
-//                        ContextCompat.getColor(getBaseContext(), R.color.colorInactive));
+
 
     }
 

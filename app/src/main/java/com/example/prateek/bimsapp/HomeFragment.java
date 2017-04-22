@@ -240,7 +240,6 @@ public class HomeFragment extends Fragment {
                     Object value = snapshot.child("f").getValue();
                     Object valueF = snapshot.child("p").getValue();
                     Object valueU = snapshot.child("url").getValue();
-                    Log.d(valueU.toString(), "url che");
                     Food food = new Food();
                     food.setPrice(valueF.toString());
                     food.setFood(value.toString());
@@ -250,7 +249,6 @@ public class HomeFragment extends Fragment {
                     food.setCat("Featured");
                     foodListFeature.add(food);
                     mAdapter.notifyDataSetChanged();
-                    Log.d("food " + value.toString(), "price " + valueF.toString());
                 }
             }
 
@@ -271,7 +269,6 @@ public class HomeFragment extends Fragment {
                     Object value = snapshot.child("f").getValue();
                     Object valueF = snapshot.child("p").getValue();
                     Object valueU = snapshot.child("url").getValue();
-                    Log.d(valueU.toString(), "url che");
                     Food food = new Food();
                     food.setPrice(valueF.toString());
                     food.setFood(value.toString());
@@ -281,7 +278,6 @@ public class HomeFragment extends Fragment {
                     food.setCat("Veg");
                     foodListVeg.add(food);
                     mAdapter2.notifyDataSetChanged();
-                    Log.d("food " + value.toString(), "price " + valueF.toString());
                 }
             }
 
@@ -302,7 +298,6 @@ public class HomeFragment extends Fragment {
                     Object value = snapshot.child("f").getValue();
                     Object valueF = snapshot.child("p").getValue();
                     Object valueU = snapshot.child("url").getValue();
-                    Log.d(valueU.toString(), "url che");
                     Food food = new Food();
                     food.setPrice(valueF.toString());
                     food.setFood(value.toString());
@@ -312,7 +307,6 @@ public class HomeFragment extends Fragment {
                     food.setCat("Non-Veg");
                     foodListNon.add(food);
                     mAdapter3.notifyDataSetChanged();
-                    Log.d("food " + value.toString(), "price " + valueF.toString());
                 }
             }
 

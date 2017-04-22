@@ -72,10 +72,8 @@ public class Login extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
                     // User is signed out
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
             }
         };
@@ -97,16 +95,12 @@ public class Login extends AppCompatActivity {
 
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
-
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
                         if (!task.isSuccessful()) {
-                            Log.d("Reached", "2");
                             Log.w(TAG, "signInWithCredential", task.getException());
                             Toast.makeText(Login.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
@@ -127,15 +121,12 @@ public class Login extends AppCompatActivity {
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
-            Log.d("Reached", "1");
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             if (result.isSuccess()) {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
-                Log.d("Success", "1");
             } else {
-                Log.d("failed", "1");
             }
         }
         GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
@@ -147,11 +138,7 @@ public class Login extends AppCompatActivity {
         String personId = acct.getId();
         Uri personPhoto = acct.getPhotoUrl();
 
-        Log.d("here is", "  " + personName);
-        Log.d("here is", "  " + personGivenName);
-        Log.d("here is", "  " + personFamilyName);
-        Log.d("here is", "  " + personEmail);
-        Log.d("here is", "  " + personId);
+
 
         StoreSharedPreferences.setUserEmail(this, personEmail);
         StoreSharedPreferences.setUserName(this, personGivenName);

@@ -80,8 +80,8 @@
 
 
     <ImageView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:tint="@color/colorPrimary"
         android:src="@drawable/ic_account_circle_black_24dp"
         android:id="@+id/imageView2" />
@@ -118,8 +118,8 @@
 
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:tint="@color/colorPrimary"
                 android:src="@drawable/ic_phone_black_24dp"
                 android:id="@+id/imageView3" />
@@ -157,8 +157,8 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:tint="@color/colorPrimary"
                 android:src="@drawable/location"
                 android:id="@+id/imageView4" />
@@ -196,8 +196,8 @@
 
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:tint="@color/colorPrimary"
                 android:src="@drawable/ppp"
                 android:id="@+id/imageView5" />

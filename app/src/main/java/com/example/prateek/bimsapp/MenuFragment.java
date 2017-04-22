@@ -84,34 +84,6 @@ public class MenuFragment extends Fragment {
 
 
 
-    private void getVegMenu(){
-        Firebase objRef = ref.child("Menu");
-        Query pendingTasks = objRef.orderByKey();
-        pendingTasks.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot tasksSnapshot) {
-                for (DataSnapshot snapshot: tasksSnapshot.getChildren()) {
-                    Object value = snapshot.child("f").getValue();
-                    Object valueF = snapshot.child("p").getValue();
-                    Object valueU = snapshot.child("url").getValue();
-                    Log.d(valueU.toString(), "url che");
-                    Food food = new Food();
-                    food.setPrice(valueF.toString());
-                    food.setFood(value.toString());
-                    food.setImageUrl(valueU.toString());
-                    food.setAvailability(null);
-                    food.setRating(null);
-                    foodList.add(food);
-                    mAdapter.notifyDataSetChanged();
-                    Log.d("food "+value.toString(), "price "+valueF.toString());
-                }
-            }
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                System.out.println("The read failed: " + firebaseError.getMessage());
-            }
-        });
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

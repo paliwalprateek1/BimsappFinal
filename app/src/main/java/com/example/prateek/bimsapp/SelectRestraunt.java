@@ -62,9 +62,7 @@ public class SelectRestraunt extends AppCompatActivity {
 //        });
     }
 
-//    //public void goToRestraunt(View view) {
-//        sendNotification();
-//    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -77,9 +75,6 @@ public class SelectRestraunt extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case R.id.changeNumber:
-                changeNumber();
-                return true;
             case R.id.signOut:
                 signOut();
                 return true;
@@ -107,30 +102,5 @@ public class SelectRestraunt extends AppCompatActivity {
         startActivity(new Intent(this, Credits.class));
     }
 
-//
-//    public void sendNotification(){
-//        String kitchenToken = getToken();
-//
-//
-//
-//
-//    }
-//
-//    String token;
-//    public String getToken(){
-//        Firebase ref = new Firebase(Server.URL+"/KitchenToken");
-//        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                String value = (String) dataSnapshot.getValue();
-//                token = value;
-//            }
-//
-//            @Override
-//            public void onCancelled(FirebaseError firebaseError) {
-//
-//            }
-//        });
-//        return token;
-//    }
+
 }
