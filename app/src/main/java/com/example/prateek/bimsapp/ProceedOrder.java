@@ -215,14 +215,13 @@ public class ProceedOrder extends AppCompatActivity {
                     return LocationFragment.newInstance(0);
                 }
                 case 2: return RemarksFragment.newInstance(0);
-                case 3: return SummaryFragment.newInstance(0);
                 default: return HomeFragment.newInstance(0);
             }
         }
 
         @Override
         public int getCount() {
-            return 4;
+            return 3;
         }
     }
 

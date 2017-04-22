@@ -122,6 +122,7 @@ public class HomeFragment extends Fragment {
                 intent.putExtra("foodItemName", f.getFood());
                 intent.putExtra("foodItemPrice", f.getPrice());
                 intent.putExtra("foodItemUrl", f.getImageUrl());
+                intent.putExtra("foodItemTag", f.getTag());
                 startActivity(intent);
             }
 
@@ -143,6 +144,7 @@ public class HomeFragment extends Fragment {
                 intent.putExtra("foodItemName", f.getFood());
                 intent.putExtra("foodItemPrice", f.getPrice());
                 intent.putExtra("foodItemUrl", f.getImageUrl());
+                intent.putExtra("foodItemTag", f.getTag());
                 startActivity(intent);
             }
 
@@ -167,6 +169,7 @@ public class HomeFragment extends Fragment {
                 intent.putExtra("foodItemName", f.getFood());
                 intent.putExtra("foodItemPrice", f.getPrice());
                 intent.putExtra("foodItemUrl", f.getImageUrl());
+                intent.putExtra("foodItemTag", f.getTag());
                 startActivity(intent);
             }
             @Override
@@ -232,7 +235,7 @@ public class HomeFragment extends Fragment {
 
     public void getAllMenu() {
         Firebase objRef = ref.child("Menu");
-        Query pendingTasks = objRef.orderByChild("cat").equalTo("feature");
+        Query pendingTasks = objRef.orderByChild("cat").equalTo("featur02e");
         pendingTasks.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot tasksSnapshot) {
@@ -240,6 +243,7 @@ public class HomeFragment extends Fragment {
                     Object value = snapshot.child("f").getValue();
                     Object valueF = snapshot.child("p").getValue();
                     Object valueU = snapshot.child("url").getValue();
+                    Object valueT = snapshot.child("tag").getValue();
                     Food food = new Food();
                     food.setPrice(valueF.toString());
                     food.setFood(value.toString());
@@ -247,6 +251,7 @@ public class HomeFragment extends Fragment {
                     food.setAvailability(null);
                     food.setRating(null);
                     food.setCat("Featured");
+                    food.setTag(valueT.toString());
                     foodListFeature.add(food);
                     mAdapter.notifyDataSetChanged();
                 }
@@ -269,6 +274,7 @@ public class HomeFragment extends Fragment {
                     Object value = snapshot.child("f").getValue();
                     Object valueF = snapshot.child("p").getValue();
                     Object valueU = snapshot.child("url").getValue();
+                    Object valueT = snapshot.child("tag").getValue();
                     Food food = new Food();
                     food.setPrice(valueF.toString());
                     food.setFood(value.toString());
@@ -276,6 +282,7 @@ public class HomeFragment extends Fragment {
                     food.setAvailability(null);
                     food.setRating(null);
                     food.setCat("Veg");
+                    food.setTag(valueT.toString());
                     foodListVeg.add(food);
                     mAdapter2.notifyDataSetChanged();
                 }
@@ -298,6 +305,7 @@ public class HomeFragment extends Fragment {
                     Object value = snapshot.child("f").getValue();
                     Object valueF = snapshot.child("p").getValue();
                     Object valueU = snapshot.child("url").getValue();
+                    Object valueT = snapshot.child("tag").getValue();
                     Food food = new Food();
                     food.setPrice(valueF.toString());
                     food.setFood(value.toString());
@@ -305,6 +313,7 @@ public class HomeFragment extends Fragment {
                     food.setAvailability(null);
                     food.setRating(null);
                     food.setCat("Non-Veg");
+                    food.setTag(valueT.toString());
                     foodListNon.add(food);
                     mAdapter3.notifyDataSetChanged();
                 }

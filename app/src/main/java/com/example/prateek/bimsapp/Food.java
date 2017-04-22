@@ -10,6 +10,16 @@ public class Food {
     private String rating;
     private String availability;
 
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    private String tag;
+
     public String getCat() {
         return cat;
     }
@@ -23,13 +33,14 @@ public class Food {
         public Food() {
         }
 
-        public Food(String food, String price, String imageUrl, String rating, String availability, String cat) {
+        public Food(String food, String price, String imageUrl, String rating, String availability, String cat, String tag) {
             this.food = food;
             this.price = price;
             this.imageUrl = imageUrl;
             this.rating = rating;
             this.availability= availability;
             this.cat = cat;
+            this.tag = tag;
         }
 
 

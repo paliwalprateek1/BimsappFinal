@@ -11,6 +11,7 @@
         android:id="@+id/card_view"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        app:cardElevation="2dp"
         app:cardUseCompatPadding="true"
         android:background="@color/cardview_shadow_end_color"
         android:layout_alignParentTop="true"
@@ -47,50 +48,31 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="55dp"
             android:paddingLeft="8dp"
             android:gravity="center"
             android:layout_gravity="bottom">
 
         <TextView
-            android:gravity="center"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:text="FoodItem"
-            android:textSize="14sp"
             android:layout_height="wrap_content"
             android:id="@+id/textViewFood"
+            android:textSize="14sp"
             android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/categoryIcon" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textColor="#53f442"
-                android:layout_below="@+id/textViewFood"
-                android:id="@+id/categoryIcon"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:textSize="12sp"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:id="@+id/category"
-                android:layout_alignBaseline="@+id/categoryIcon"/>
+    />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textSize="10sp"
-                android:id="@+id/textViewType"
-                android:layout_below="@+id/categoryIcon"/>
+
+
+
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 app:srcCompat="@drawable/a"
                 android:id="@+id/imageView3"
+                android:layout_alignParentBottom="true"
                 android:background="@drawable/cart_shape_veg"
-                android:layout_below="@+id/textViewFood"
                 android:layout_alignParentEnd="true" />
 
         </RelativeLayout>

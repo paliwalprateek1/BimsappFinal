@@ -88,6 +88,7 @@ public class Bev extends Fragment {
                 intent.putExtra("foodItemName", f.getFood());
                 intent.putExtra("foodItemPrice", f.getPrice());
                 intent.putExtra("foodItemUrl", f.getImageUrl());
+                intent.putExtra("foodItemTag", f.getTag());
                 startActivity(intent);
             }
 
@@ -116,12 +117,14 @@ public class Bev extends Fragment {
                     Object value = snapshot.child("f").getValue();
                     Object valueF = snapshot.child("p").getValue();
                     Object valueU = snapshot.child("url").getValue();
+                    Object valueT = snapshot.child("tag").getValue();
                     Food food = new Food();
                     food.setPrice(valueF.toString());
                     food.setFood(value.toString());
                     food.setImageUrl(valueU.toString());
                     food.setAvailability(null);
                     food.setRating(null);
+                    food.setTag(valueT.toString());
                     foodList.add(food);
                     mAdapter.notifyDataSetChanged();
                 }

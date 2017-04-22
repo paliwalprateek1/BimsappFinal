@@ -18,11 +18,11 @@ import org.w3c.dom.Text;
 
 public class SetQuantity extends AppCompatActivity {
 
-    TextView itemName, itemPrice, itemQuantity, priceHere, amount;
+    TextView itemName, itemPrice, itemQuantity, priceHere, amount, textViewFoodTag;
     ImageView itemImage;
     FoodQuantity foodQuantity = new FoodQuantity();
     ImageView upCount,downCount;
-    String foodItemName, foodItemPrice, foodItemUrl;
+    String foodItemName, foodItemPrice, foodItemUrl, foodItemTag;
     StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
     int count;
 
@@ -39,13 +39,17 @@ public class SetQuantity extends AppCompatActivity {
         itemQuantity = (TextView)findViewById(R.id.foodItemQuant);
         priceHere = (TextView)findViewById(R.id.priceHere);
         amount = (TextView)findViewById(R.id.amountNow);
+        textViewFoodTag = (TextView)findViewById(R.id.textViewFoodTag);
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         foodItemName = extras.getString("foodItemName");
         foodItemPrice = extras.getString("foodItemPrice");
         foodItemUrl = extras.getString("foodItemUrl");
+        foodItemTag = extras.getString("foodItemTag");
         itemName.setText(foodItemName);
+
+        textViewFoodTag.setText(foodItemTag);
 
         Picasso.with(this)
                 .load(foodItemUrl)
