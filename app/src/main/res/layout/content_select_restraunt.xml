@@ -56,7 +56,8 @@
                 android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Contact Number"
+                android:text="(+91) 75750 11864"
+                android:textColor="@color/black"
                 android:layout_weight="1"/>
 
             <TextView
@@ -70,6 +71,16 @@
     </LinearLayout>
 
 
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:tint="#d3d3d3"
+        android:src="@drawable/resta"
+        android:layout_above="@+id/textView11"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="63dp" />
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -78,5 +89,6 @@
         android:onClick="credits"
         android:gravity="center_horizontal"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:id="@+id/textView11" />
 </RelativeLayout>

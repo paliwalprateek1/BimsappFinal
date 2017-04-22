@@ -20,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/llout"
+        android:elevation="2dp"
         android:padding="8dp"
         android:layout_below="@+id/viewpager"
         android:layout_alignParentBottom="true"

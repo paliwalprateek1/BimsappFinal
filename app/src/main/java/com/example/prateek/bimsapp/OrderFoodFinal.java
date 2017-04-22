@@ -278,6 +278,7 @@ public class OrderFoodFinal extends AppCompatActivity {
         );
 
         storeSharedPreferences.removeAllQuant(getApplicationContext());
+        storeSharedPreferences.setUserRemarks(this, null);
 
 
     }

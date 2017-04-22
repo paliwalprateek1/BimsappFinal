@@ -139,7 +139,7 @@ class NCardAdapter extends RecyclerView.Adapter<NCardAdapter.MyViewHolder> {
                 holder.categoryIcon.setTextColor(Color.parseColor("#53f442"));
             } else {
                 holder.categoryIcon.setText("\u25CF");
-                holder.categoryIcon.setTextColor(Color.parseColor("#ff0000"));
+                holder.categoryIcon.setTextColor(Color.parseColor("#ffff00"));
             }
         }
         holder.price.setText(food.getPrice()+" Rs");

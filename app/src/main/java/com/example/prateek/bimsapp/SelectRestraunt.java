@@ -43,11 +43,8 @@ public class SelectRestraunt extends AppCompatActivity {
         bims.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                storeSharedPreferences.setKitchenDatabase(getApplicationContext(), "email");
-                storeSharedPreferences.setKitchenName(getApplicationContext(), "Bims' Kitchen");
-                Toast.makeText(getApplicationContext(), "bims", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(SelectRestraunt.this, MenuMain.class);
-                startActivity(i);
+                kitchenStatus();
+
             }
         });
 //        midnight.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +59,32 @@ public class SelectRestraunt extends AppCompatActivity {
 //        });
     }
 
+
+    public void kitchenStatus(){
+        Firebase objRef = ref.child("Status");
+        Query pendingTasks = objRef.orderByChild("mail").equalTo("mine");
+        pendingTasks.addListenerForSingleValueEvent(new com.firebase.client.ValueEventListener() {
+            @Override
+            public void onDataChange(com.firebase.client.DataSnapshot tasksSnapshot) {
+                for (com.firebase.client.DataSnapshot snapshot : tasksSnapshot.getChildren()){
+                    Object v = snapshot.child("status").getValue();
+                    if(v.toString().equals("ON")){
+                        storeSharedPreferences.setKitchenDatabase(getApplicationContext(), "email");
+                        storeSharedPreferences.setKitchenName(getApplicationContext(), "Bims' Kitchen");
+                        Toast.makeText(getApplicationContext(), "Bims' Kitchen", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(SelectRestraunt.this, MenuMain.class));
+                    }else{
+                        Toast.makeText(getApplicationContext(), "Kithcen is Closed", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+            }
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+            }
+        });
+    }
 
 
     @Override

@@ -105,7 +105,7 @@
             android:textColor="@color/black"
             android:id="@+id/nameTv"
             android:layout_marginStart="25dp"
-            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/name" />
 
 </RelativeLayout>
@@ -145,7 +145,7 @@
                 android:layout_marginStart="12dp"
                 android:textSize="12sp"
                 android:textColor="@color/black"
-                android:layout_alignParentTop="true"
+                android:layout_centerVertical="true"
                 android:layout_toEndOf="@+id/number" />
 
         </RelativeLayout>
@@ -182,8 +182,10 @@
                 android:id="@+id/addressTv"
                 android:textSize="12sp"
                 android:textColor="@color/black"
+                android:layout_centerInParent="true"
+                android:gravity="center_vertical"
                 android:layout_marginStart="12dp"
-                android:layout_alignParentTop="true"
+                android:layout_centerVertical="true"
                 android:layout_toEndOf="@+id/address" />
 
         </RelativeLayout>
@@ -219,6 +221,7 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:id="@+id/remarksTv"
+                android:layout_centerVertical="true"
                 android:textSize="12sp"
                 android:textColor="@color/black"
                 android:layout_marginStart="10dp"

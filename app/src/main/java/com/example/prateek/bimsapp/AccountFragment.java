@@ -78,7 +78,11 @@ public class AccountFragment extends Fragment {
             public void onDataChange(DataSnapshot tasksSnapshot) {
                 for (DataSnapshot snapshot : tasksSnapshot.getChildren()){
                     Object v = snapshot.child("points").getValue();
-                    textViewPoints.setText(v.toString().substring(0, 5));
+                    if(v.toString().length()>5){
+                    textViewPoints.setText(v.toString().substring(0, 5));}
+                    else{
+                        textViewPoints.setText(v.toString());
+                    }
                 }
 
             }

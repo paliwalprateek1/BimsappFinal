@@ -75,7 +75,7 @@ public class HomeFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         if(foodListVeg.size()==0) {
-            //getNonVeg();
+            getNonVeg();
             getVeg();
             getAllMenu();
             mHandler = new Handler(new Handler.Callback() {
@@ -101,8 +101,8 @@ public class HomeFragment extends Fragment {
         mRecyclerView2 = (RecyclerView) view.findViewById(R.id.hrlist_recycler_view1);
         mRecyclerView2.setHasFixedSize(true);
 
-//        mRecyclerView3 = (RecyclerView) view.findViewById(R.id.hrlist_recycler_view2);
-//        mRecyclerView3.setHasFixedSize(true);
+        mRecyclerView3 = (RecyclerView) view.findViewById(R.id.hrlist_recycler_view2);
+        mRecyclerView3.setHasFixedSize(true);
 
 
         mLayoutManager2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
@@ -130,28 +130,28 @@ public class HomeFragment extends Fragment {
             }
         }));
 
-//        mAdapter3 = new NCardAdapter(foodListNon);
-//        mRecyclerView3.setAdapter(mAdapter3);
-//        mRecyclerView3.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), mRecyclerView3, new ClickListener() {
-//            @Override
-//            public void onClick(View view, int position) {
-//                Food f;
-//                f = foodListNon.get(position);
-//                foodQuantity.setPrice(f.getPrice());
-//                foodQuantity.setFood(f.getFood());
-//                Intent intent = new Intent(getActivity(), SetQuantity.class);
-//                intent.putExtra("foodItemName", f.getFood());
-//                intent.putExtra("foodItemPrice", f.getPrice());
-//                intent.putExtra("foodItemUrl", f.getImageUrl());
-//                startActivity(intent);
-//            }
-//
-//            @Override
-//            public void onLongClick(View view, int position) {
-//            }
-//        }));
-//        mLayoutManager3 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-//        mRecyclerView3.setLayoutManager(mLayoutManager3);
+        mAdapter3 = new NCardAdapter(foodListNon);
+        mRecyclerView3.setAdapter(mAdapter3);
+        mRecyclerView3.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), mRecyclerView3, new ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Food f;
+                f = foodListNon.get(position);
+                foodQuantity.setPrice(f.getPrice());
+                foodQuantity.setFood(f.getFood());
+                Intent intent = new Intent(getActivity(), SetQuantity.class);
+                intent.putExtra("foodItemName", f.getFood());
+                intent.putExtra("foodItemPrice", f.getPrice());
+                intent.putExtra("foodItemUrl", f.getImageUrl());
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+            }
+        }));
+        mLayoutManager3 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        mRecyclerView3.setLayoutManager(mLayoutManager3);
 
         mAdapter = new FeaturedCardAdapter(foodListFeature);
         mRecyclerView.setAdapter(mAdapter);
@@ -290,7 +290,7 @@ public class HomeFragment extends Fragment {
 
     public void getNonVeg() {
         Firebase objRef = ref.child("Menu");
-        Query pendingTasks = objRef.orderByChild("cat").equalTo("nonveg");
+        Query pendingTasks = objRef.orderByChild("cat").equalTo("sweets");
         pendingTasks.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot tasksSnapshot) {
