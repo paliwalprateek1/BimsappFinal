@@ -202,9 +202,11 @@ public class OrderFoodFinal extends AppCompatActivity {
             public void onDataChange(DataSnapshot tasksSnapshot) {
                 for (DataSnapshot snapshot : tasksSnapshot.getChildren()){
                     Object v = snapshot.child("points").getValue();
-                    points = Double.valueOf(v.toString());
                     Object vv = snapshot.child("numberOfOrders").getValue();
-                    numberOfOrders = Integer.valueOf(vv.toString());
+                    if(v!=null && vv!=null) {
+                        points = Double.valueOf(v.toString());
+                        numberOfOrders = Integer.valueOf(vv.toString());
+                    }
 
                 }
                 String finalAnswer = getSubtotal(Integer.toString(sum));

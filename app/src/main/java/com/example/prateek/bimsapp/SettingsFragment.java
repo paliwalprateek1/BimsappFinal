@@ -2,8 +2,10 @@ package com.example.prateek.bimsapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
@@ -60,6 +62,9 @@ public class SettingsFragment extends Fragment {
 
     LinearLayout feedbackLayout, linearLayoutTrackOrder;
 
+    LinearLayout linearLayoutCallPhone;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -98,6 +103,20 @@ public class SettingsFragment extends Fragment {
 //                sendFeedback();
 //            }
 //        });
+
+        linearLayoutCallPhone = (LinearLayout)view.findViewById(R.id.linearLayoutCallPhone);
+        linearLayoutCallPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.CALL_PHONE)!=
+                        PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.CALL_PHONE
+                    },3);
+                }
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + Server.NUMBER));
+                startActivity(intent);
+            }
+        });
 
         return view;
     }

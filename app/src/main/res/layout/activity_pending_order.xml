@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:text="Address: "
                 android:id="@+id/textView"
-                android:textColor="@color/black"
+                android:textColor="@color/colorPrimary"
                 android:textStyle="bold"/>
 
             <TextView
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:text="Status: "
                 android:id="@+id/textViewOfStatus"
-                android:textColor="@color/black"
+                android:textColor="@color/colorPrimary"
                 android:textStyle="bold"/>
 
             <TextView
@@ -101,7 +101,7 @@
             android:layout_height="wrap_content"
             android:text="Amount: "
             android:id="@+id/textViewAmount"
-            android:textColor="@color/black"
+            android:textColor="@color/colorPrimary"
             android:textStyle="bold"/>
 
         <TextView
@@ -116,6 +116,7 @@
             android:background="@drawable/box"
             android:layout_width="match_parent"
             android:padding="10dp"
+            android:id="@+id/linearLayoutCallPhone"
             android:layout_margin="10dp"
             android:orientation="horizontal"
             android:layout_height="wrap_content">

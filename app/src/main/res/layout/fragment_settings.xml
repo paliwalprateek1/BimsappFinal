@@ -66,7 +66,6 @@
         >
 
         <ImageView
-            android:layout_weight="1"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:tint="@color/black"
@@ -76,7 +75,7 @@
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
             android:layout_gravity="center_vertical"
-            android:gravity="left"
+            android:gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Track Your Order"/>
@@ -94,7 +93,6 @@
         android:padding="10dp">
 
         <ImageView
-            android:layout_weight="1"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:src="@drawable/ic_feedback_black_24dp"/>
@@ -103,7 +101,7 @@
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
             android:layout_gravity="center_vertical"
-            android:gravity="left"
+            android:gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Give Feedback"/>
@@ -115,11 +113,12 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:layout_margin="10dp"
+        android:id="@+id/linearLayoutCallUs"
         android:padding="10dp">
 
         <ImageView
-            android:layout_weight="1"
             android:layout_width="25dp"
+            android:layout_gravity="left"
             android:layout_height="25dp"
             android:src="@drawable/ic_phone_black_24dp"/>
         <TextView
@@ -127,10 +126,10 @@
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
             android:layout_gravity="center_vertical"
-            android:gravity="left"
+            android:gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Contact Us"/>
+            android:text="Call Us"/>
 
     </LinearLayout>
 

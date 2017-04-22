@@ -1,8 +1,15 @@
 package com.example.prateek.bimsapp;
 
+import android.*;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,6 +32,8 @@ public class PendingOrder extends AppCompatActivity {
 
     ArrayList<Order> pend = new ArrayList<>();
 
+    LinearLayout linearLayoutCallPhone;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +46,21 @@ public class PendingOrder extends AppCompatActivity {
 
         Firebase.setAndroidContext(this);
         ref=new Firebase(Server.URL);
+
+
+        linearLayoutCallPhone = (LinearLayout)findViewById(R.id.linearLayoutCallPhone);
+        linearLayoutCallPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (ActivityCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CALL_PHONE)!=
+                        PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(PendingOrder.this, new String[]{android.Manifest.permission.CALL_PHONE
+                    },3);
+                }
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + Server.NUMBER));
+                startActivity(intent);
+            }
+        });
 
         getPendingOrders();
 

@@ -131,16 +131,16 @@ public class LocationFragment extends Fragment {
             }
         });
 
-        radioButton = (RadioButton)view.findViewById(R.id.radio_ninjas);
-       // radioButton1 = (RadioButton)view.findViewById(R.id.radio_ninjas2);
-        radioButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               // Toast.makeText(getActivity(), "hi,", Toast.LENGTH_LONG).show();
-                //radioButton1.setChecked(false);
-                storeSharedPreferences.setUserCustomLocation(getActivity(), textViewAddress2.getText().toString());
-            }
-        });
+//        radioButton = (RadioButton)view.findViewById(R.id.radio_ninjas);
+//       // radioButton1 = (RadioButton)view.findViewById(R.id.radio_ninjas2);
+//        radioButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//               // Toast.makeText(getActivity(), "hi,", Toast.LENGTH_LONG).show();
+//                //radioButton1.setChecked(false);
+//                storeSharedPreferences.setUserCustomLocation(getActivity(), textViewAddress2.getText().toString());
+//            }
+//        });
 //        radioButton1.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {

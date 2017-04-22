@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.DataSnapshot;
@@ -15,6 +16,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
+import com.google.android.gms.vision.text.Text;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -49,6 +51,8 @@ public class AccountFragment extends Fragment {
         }
     }
 
+    TextView textViewPoints;
+
     Firebase ref;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,57 +62,23 @@ public class AccountFragment extends Fragment {
         Firebase.setAndroidContext(getActivity());
         ref = new Firebase(Server.URL);
 
+        method();
+        textViewPoints = (TextView)view.findViewById(R.id.textViewPoints);
 
-
-
-        Button b = (Button)view.findViewById(R.id.button);
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                method();
-            }
-        });
-
-        Button change = (Button)view.findViewById(R.id.change);
-        change.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                changeMehtod();
-            }
-        });
         return view;
     }
 
 
-    public void changeMehtod(){
-        //Firebase m_objFireBaseRef = new Firebase(AppConstants.FIREBASE_URL);
-        Firebase objRef = ref.child("User");
-        Query pendingTasks = objRef.orderByChild("email").equalTo(new StoreSharedPreferences().getUserEmail(getActivity()));
-        pendingTasks.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot tasksSnapshot) {
-                for (DataSnapshot snapshot: tasksSnapshot.getChildren()) {
-                    snapshot.getRef().child("points").setValue("25");
-                }
-            }
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                System.out.println("The read failed: " + firebaseError.getMessage());
-            }
-        });
-
-    }
     public void method(){
         Firebase objRef = ref.child("User");
-        Query pendingTasks = objRef.orderByChild("email").equalTo((new StoreSharedPreferences()).getUserEmail(getActivity()));
-       // Query pendingTasks = objRef.orderByChild("email").equalTo("prateekp987@gmail.com");
+        //Query pendingTasks = objRef.orderByChild("email").equalTo((new StoreSharedPreferences()).getUserEmail(getActivity()));
+        Query pendingTasks = objRef.orderByChild("email").equalTo("prateekp987@gmail.com");
         pendingTasks.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot tasksSnapshot) {
                 for (DataSnapshot snapshot : tasksSnapshot.getChildren()){
                     Object v = snapshot.child("points").getValue();
-                    Object vv = snapshot.child("number").getValue();
-                    System.out.println(v + " adg "+vv);
+                    textViewPoints.setText(v.toString());
                 }
 
             }
