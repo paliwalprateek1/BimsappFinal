@@ -103,6 +103,10 @@ public class SelectRestraunt extends AppCompatActivity {
         //also remove the shared preferences
     }
 
+    public void credits(View view) {
+
+    }
+
 //
 //    public void sendNotification(){
 //        String kitchenToken = getToken();

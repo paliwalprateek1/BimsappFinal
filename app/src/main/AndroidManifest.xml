@@ -58,6 +58,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".FeedbackForm" />
         <activity android:name=".PendingOrder" />
+        <activity android:name=".Credits"></activity>
     </application>
 
 </manifest>
