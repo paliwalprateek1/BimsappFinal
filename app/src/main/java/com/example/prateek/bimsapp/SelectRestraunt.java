@@ -104,7 +104,7 @@ public class SelectRestraunt extends AppCompatActivity {
     }
 
     public void credits(View view) {
-
+        startActivity(new Intent(this, Credits.class));
     }
 
 //

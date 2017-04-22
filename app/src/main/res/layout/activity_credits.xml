@@ -4,10 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
     tools:context="com.example.prateek.bimsapp.Credits">
 
 
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:id="@+id/appBarLayout2">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:titleTextColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+
+
+    <RelativeLayout
+        android:padding="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/appBarLayout2"
+        android:layout_alignParentStart="true">
     <TextView
         android:textColor="@color/colorPrimary"
         android:layout_width="wrap_content"
@@ -19,6 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="www.icons8.com"
+        android:id="@+id/icons8"
         android:layout_toRightOf="@+id/icons"/>
 
 
@@ -35,6 +59,9 @@
         android:text="Eatlo"
         android:layout_toRightOf="@+id/appIcon"
         android:layout_alignBaseline="@+id/appIcon"/>
+
+
+    </RelativeLayout>
 
 
 
