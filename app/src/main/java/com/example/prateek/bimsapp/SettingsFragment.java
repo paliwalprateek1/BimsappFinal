@@ -97,13 +97,15 @@ public class SettingsFragment extends Fragment {
         linearLayoutCallPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.CALL_PHONE)!=
-                        PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.CALL_PHONE
-                    },3);
-                }
+            if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.CALL_PHONE)!=
+                    PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.CALL_PHONE
+                },3);
+            }else {
+
                 Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + Server.NUMBER));
                 startActivity(intent);
+            }
             }
         });
 

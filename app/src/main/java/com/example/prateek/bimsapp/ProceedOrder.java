@@ -27,6 +27,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.Query;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -49,6 +52,7 @@ public class ProceedOrder extends AppCompatActivity {
     TextView summaryNavigator, nextButtonTextOnProceedOrder;
     LinearLayout  nextButton, backButton, doneButton;
     StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
+    Firebase ref;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -56,6 +60,9 @@ public class ProceedOrder extends AppCompatActivity {
         setContentView(R.layout.activity_proceed_order);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Firebase.setAndroidContext(this);
+        ref  = new Firebase(Server.URL);
 
         pager = (ViewPager) findViewById(R.id.viewPager);
         pager.setAdapter(new ProceedOrder.MyOrderPagerAdapter(getSupportFragmentManager()));
@@ -181,14 +188,44 @@ public class ProceedOrder extends AppCompatActivity {
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent in = new Intent(getApplicationContext(), OrderFoodFinal.class);
-                startActivity(in);
-                finish();
+
+                if(storeSharedPreferences.getUserCoordinatesLatitudes(getApplicationContext()).equals("")) {
+                    Toast.makeText(getApplicationContext(), "Please Select a location", Toast.LENGTH_SHORT).show();
+                }else{
+                    kitchenStatus();
+                }
+
             }
         });
 
 
 
+    }
+
+    public void kitchenStatus(){
+        Firebase objRef = ref.child("Status");
+        Query pendingTasks = objRef.orderByChild("mail").equalTo("mine");
+        pendingTasks.addListenerForSingleValueEvent(new com.firebase.client.ValueEventListener() {
+            @Override
+            public void onDataChange(com.firebase.client.DataSnapshot tasksSnapshot) {
+                for (com.firebase.client.DataSnapshot snapshot : tasksSnapshot.getChildren()){
+                    Object v = snapshot.child("status").getValue();
+                    if(v.toString().equals("ON")){
+
+                    startActivity(new Intent(ProceedOrder.this, OrderFoodFinal.class));
+                        finish();
+                    }else{
+                        Toast.makeText(getApplicationContext(), "Kithcen is Closed Can't take order", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+            }
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+                Toast.makeText(getApplicationContext(), "Network Error", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void cancelDialog(View view) {finish();

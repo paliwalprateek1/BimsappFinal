@@ -2,11 +2,8 @@ package com.example.prateek.bimsapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,12 +11,9 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
-import com.firebase.client.ValueEventListener;
-import com.google.android.gms.vision.text.Line;
 
 public class SelectRestraunt extends AppCompatActivity {
     StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
@@ -43,7 +37,10 @@ public class SelectRestraunt extends AppCompatActivity {
         bims.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                kitchenStatus();
+                storeSharedPreferences.setKitchenDatabase(getApplicationContext(), "email");
+                storeSharedPreferences.setKitchenName(getApplicationContext(), "Bims' Kitchen");
+                Toast.makeText(getApplicationContext(), "Bims' Kitchen", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(SelectRestraunt.this, QQ.class));
 
             }
         });
@@ -53,39 +50,14 @@ public class SelectRestraunt extends AppCompatActivity {
 //                storeSharedPreferences.setKitchenDatabase(getApplicationContext(), "kuch bhi");
 //                storeSharedPreferences.setKitchenName(getApplicationContext(), "Midnight Scorer");
 //                Toast.makeText(getApplicationContext(), "Midnight", Toast.LENGTH_SHORT).show();
-//                Intent i = new Intent(SelectRestraunt.this, MenuMain.class);
+//                Intent i = new Intent(SelectRestraunt.this, QQ.class);
 //                startActivity(i);
 //            }
 //        });
     }
 
 
-    public void kitchenStatus(){
-        Firebase objRef = ref.child("Status");
-        Query pendingTasks = objRef.orderByChild("mail").equalTo("mine");
-        pendingTasks.addListenerForSingleValueEvent(new com.firebase.client.ValueEventListener() {
-            @Override
-            public void onDataChange(com.firebase.client.DataSnapshot tasksSnapshot) {
-                for (com.firebase.client.DataSnapshot snapshot : tasksSnapshot.getChildren()){
-                    Object v = snapshot.child("status").getValue();
-                    if(v.toString().equals("ON")){
-                        storeSharedPreferences.setKitchenDatabase(getApplicationContext(), "email");
-                        storeSharedPreferences.setKitchenName(getApplicationContext(), "Bims' Kitchen");
-                        Toast.makeText(getApplicationContext(), "Bims' Kitchen", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(SelectRestraunt.this, MenuMain.class));
-                    }else{
-                        Toast.makeText(getApplicationContext(), "Kithcen is Closed", Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-            }
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                System.out.println("The read failed: " + firebaseError.getMessage());
-            }
-        });
-    }
-
+   
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

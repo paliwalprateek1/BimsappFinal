@@ -11,7 +11,7 @@
         android:id="@+id/card_view"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        app:cardElevation="2dp"
+        android:elevation="4dp"
         app:cardUseCompatPadding="true"
         android:background="@color/cardview_shadow_end_color"
         android:layout_alignParentTop="true"
@@ -58,13 +58,35 @@
             android:text="FoodItem"
             android:layout_height="wrap_content"
             android:id="@+id/textViewFood"
-            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:textSize="13sp"
             android:layout_alignParentTop="true"
     />
 
 
 
 
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:layout_alignParentBottom="true"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:id="@+id/categoryIcon"/>
+
+    <TextView
+        android:layout_toEndOf="@+id/categoryIcon"
+        android:text=""
+        android:textSize="12sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/category"/>
 
             <ImageView
                 android:layout_width="30dp"
@@ -74,6 +96,8 @@
                 android:layout_alignParentBottom="true"
                 android:background="@drawable/cart_shape_veg"
                 android:layout_alignParentEnd="true" />
+
+</RelativeLayout>
 
         </RelativeLayout>
 

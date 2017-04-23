@@ -49,23 +49,7 @@
         android:layout_toRightOf="@+id/icons"/>
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="App Icon: "
-        android:layout_margin="5dp"
 
-        android:id="@+id/appIcon"
-        android:layout_below="@+id/icons"
-        android:textColor="@color/colorPrimary"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Eatlo"
-        android:layout_margin="5dp"
-
-        android:layout_toRightOf="@+id/appIcon"
-        android:layout_alignBaseline="@+id/appIcon"/>
 
 
         <TextView
@@ -75,7 +59,7 @@
             android:layout_margin="5dp"
 
             android:id="@+id/tvUIUX"
-            android:layout_below="@+id/appIcon"
+            android:layout_below="@+id/icons"
             android:textColor="@color/colorPrimary"/>
         <TextView
             android:layout_width="wrap_content"
@@ -86,12 +70,72 @@
             android:layout_toRightOf="@+id/tvUIUX"
             android:layout_alignBaseline="@+id/tvUIUX"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Admin App Developer: "
+            android:layout_margin="5dp"
 
+            android:id="@+id/adminDev"
+            android:layout_below="@+id/UIUX"
+            android:textColor="@color/colorPrimary"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rajeev Singh"
+            android:layout_margin="5dp"
+            android:id="@+id/adminDEvtv"
+            android:layout_toRightOf="@+id/adminDev"
+            android:layout_alignBaseline="@+id/adminDev"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ravi Shankar Kiradoo"
+            android:layout_margin="5dp"
+            android:id="@+id/ravi"
+            android:layout_toRightOf="@+id/adminDev"
+            android:layout_below="@+id/adminDEvtv"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ravi Patel"
+            android:layout_margin="5dp"
+            android:id="@+id/ravipatel"
+            android:layout_toRightOf="@+id/adminDev"
+            android:layout_below="@+id/ravi"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_below="@+id/ravipatel"
+            android:text="User App Developer: "
+            android:textColor="@color/colorPrimary"
+            android:id="@+id/tvUserAppDev"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/prateekPaliwal"
+            android:layout_toRightOf="@+id/tvUserAppDev"
+            android:layout_below="@+id/ravipatel"
+            android:text="Prateek Paliwal"
+            android:layout_marginTop="5dp"/>
 
     </RelativeLayout>
+
+
+    <TextView
+        android:layout_margin="5dp"
+        android:textSize="12dp"
+        android:textStyle="italic"
+        android:text="@string/disclaimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"/>
 
 
 

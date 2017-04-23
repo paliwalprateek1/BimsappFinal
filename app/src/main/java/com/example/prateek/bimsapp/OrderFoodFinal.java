@@ -46,6 +46,7 @@ public class OrderFoodFinal extends AppCompatActivity {
 
     private String address, coordinates, remarks;
     TextView nameTv, addressTv, totalTv, remarksTv, foodItemList, numberTv, subtotalTV;
+
     Order order = new Order();
     Firebase ref;
     StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
@@ -195,7 +196,11 @@ public class OrderFoodFinal extends AppCompatActivity {
 
                 }
                 String finalAnswer = getSubtotal(Integer.toString(sum));
-                subtotalTV.setText(finalAnswer);
+                if(finalAnswer.length()>6) {
+                    subtotalTV.setText(finalAnswer.substring(0, 5));
+                }else{
+                    subtotalTV.setText(finalAnswer);
+                }
                 order.setAmount(finalAnswer);
             }
             @Override
@@ -328,12 +333,7 @@ public class OrderFoodFinal extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 public void run() {
                     Toast.makeText(OrderFoodFinal.this, "Your order has been submitted", Toast.LENGTH_SHORT).show();
-//                    Intent homeIntent=new Intent(getApplicationContext(),MenuMain.class);
-//
-//                    homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                    homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//
-//                    startActivity(homeIntent);
+
                     finish();
                 }
             });
@@ -348,18 +348,12 @@ public class OrderFoodFinal extends AppCompatActivity {
     private Handler mHandler2 = new Handler();
 
     public void cancelOrder(View view) {
-//        Intent homeIntent=new Intent(this,MenuMain.class);
-//
-//        homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//
-//        startActivity(homeIntent);
         finish();
     }
 
     public void cancel(View view) {
 //
-//        Intent homeIntent=new Intent(this,MenuMain.class);
+//        Intent homeIntent=new Intent(this,QQ.class);
 //
 //        homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

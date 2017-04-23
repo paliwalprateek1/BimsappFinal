@@ -235,7 +235,7 @@ public class HomeFragment extends Fragment {
 
     public void getAllMenu() {
         Firebase objRef = ref.child("Menu");
-        Query pendingTasks = objRef.orderByChild("cat").equalTo("featur02e");
+        Query pendingTasks = objRef.orderByChild("cat").equalTo("feature");
         pendingTasks.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot tasksSnapshot) {
@@ -312,7 +312,7 @@ public class HomeFragment extends Fragment {
                     food.setImageUrl(valueU.toString());
                     food.setAvailability(null);
                     food.setRating(null);
-                    food.setCat("Non-Veg");
+                    food.setCat("Sweets");
                     food.setTag(valueT.toString());
                     foodListNon.add(food);
                     mAdapter3.notifyDataSetChanged();

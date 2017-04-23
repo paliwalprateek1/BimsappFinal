@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Bimsapp</string>
+    <string name="app_name">Haylo</string>
     <string name="title_activity_menu_page">MenuPage</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -13,4 +13,8 @@
     <string name="title_activity_order_food_final">OrderFoodFinal</string>
     <string name="title_activity_menu_main">MenuMain</string>
     <string name="title_activity_select_restraunt">SelectRestraunt</string>
+
+
+    <string name="disclaimer">This is a test app for kitchens who want an interface to reach out to their customers.
+    If you run a kitchen or restraunt and you want to be a part of this application then contact the developers.</string>
 </resources>

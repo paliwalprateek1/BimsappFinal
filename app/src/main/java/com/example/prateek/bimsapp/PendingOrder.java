@@ -48,17 +48,22 @@ public class PendingOrder extends AppCompatActivity {
         ref=new Firebase(Server.URL);
 
 
+
+
         linearLayoutCallPhone = (LinearLayout)findViewById(R.id.linearLayoutCallPhone);
         linearLayoutCallPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (ActivityCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CALL_PHONE)!=
-                        PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(PendingOrder.this, new String[]{android.Manifest.permission.CALL_PHONE
-                    },3);
-                }
+
+            if (ActivityCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CALL_PHONE)!=
+                    PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(PendingOrder.this, new String[]{android.Manifest.permission.CALL_PHONE
+                },3);
+            }else {
+
                 Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + Server.NUMBER));
                 startActivity(intent);
+            }
             }
         });
 
