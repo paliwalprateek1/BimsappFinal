@@ -97,7 +97,7 @@
                 app:srcCompat="@drawable/a"
                 android:id="@+id/imageView3"
                 android:layout_alignParentBottom="true"
-                android:background="@drawable/cart_shape_veg"
+                android:background="@drawable/cart_shape"
                 android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
