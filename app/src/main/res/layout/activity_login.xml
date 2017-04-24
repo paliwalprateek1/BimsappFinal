@@ -15,7 +15,7 @@
     <ImageView
         android:layout_width="200dp"
         android:layout_height="150dp"
-        android:src="@drawable/unnamed"
+        android:src="@drawable/desk23"
         android:id="@+id/imageView"
         android:layout_marginTop="73dp"
         android:layout_alignParentTop="true"
@@ -38,7 +38,7 @@
         android:onClick="googleSignIn"
         android:layout_width="200dp"
         android:textColor="@color/white"
-        android:background="@color/colorPrimaryDark1"
+        android:background="#3395ff"
         android:text="Sign in Using google"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"

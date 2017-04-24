@@ -54,7 +54,7 @@
             <View
                 android:layout_width="5dp"
                 android:layout_height="15dp"
-                android:background="@color/colorPrimary2"
+                android:background="@color/colorPrimary"
                 android:layout_marginStart="15dp"/>
             <TextView
                 android:layout_marginStart="10dp"
@@ -112,7 +112,7 @@
         </android.support.v7.widget.RecyclerView>
 
         <LinearLayout
-            android:layout_below="@id/hrlist_recycler_view1"
+            android:layout_below="@id/hrlist_recycler_view2"
             android:layout_width="match_parent"
             android:layout_height="80dp"></LinearLayout>
 

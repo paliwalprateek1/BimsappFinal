@@ -60,7 +60,6 @@ public class OrderFragment extends Fragment {
     ArrayList<FoodQuantity> foodQuantityArrayList = new ArrayList<>();
     RecyclerView recyclerView;
     private ProceedFoodAdapter proceedFoodAdapter;
-    Button continueToOrder;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -116,7 +115,7 @@ public class OrderFragment extends Fragment {
                 e.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(getActivity(), ""+c, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(), ""+c, Toast.LENGTH_SHORT).show();
                         char as = s.charAt(5);
                         int a = Integer.valueOf(as);
                         if(a>20){

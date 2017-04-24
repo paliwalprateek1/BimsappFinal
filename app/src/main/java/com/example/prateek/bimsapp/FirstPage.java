@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
+import android.support.multidex.MultiDex;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,12 +33,20 @@ public class FirstPage extends AppCompatActivity {
     Firebase ref;
     StoreSharedPreferences storeSharedPreferences = new StoreSharedPreferences();
 
+
+    @Override
+    protected void attachBaseContext(Context context) {
+        super.attachBaseContext(context);
+        MultiDex.install(this);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         //this one is the real shit
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_page);
+
 
         Firebase.setAndroidContext(this);
         ref = new Firebase(Server.URL);

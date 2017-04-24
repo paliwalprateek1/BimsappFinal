@@ -86,7 +86,7 @@ public class Veg extends Fragment {
         View view = inflater.inflate(R.layout.fragment_veg, container, false);
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
 
         mAdapter = new CardAdapter(foodList);
         recyclerView.setAdapter(mAdapter);

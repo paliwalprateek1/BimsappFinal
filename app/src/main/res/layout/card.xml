@@ -12,6 +12,9 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:elevation="4dp"
+        app:cardElevation="2dp"
+        app:cardMaxElevation="3dp"
+
         app:cardUseCompatPadding="true"
         android:background="@color/cardview_shadow_end_color"
         android:layout_alignParentTop="true"
@@ -39,7 +42,7 @@
                 android:id="@+id/textViewPrice"
                 android:textStyle="bold"
                 android:textColor="#fff"
-                android:background="@color/colorPrimary2"
+                android:background="@color/colorPrimary"
                 android:layout_marginBottom="5dp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true" />
