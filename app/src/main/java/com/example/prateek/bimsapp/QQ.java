@@ -109,7 +109,6 @@ public class QQ extends AppCompatActivity {
 
 
                 if(store.loadFavorites(getApplicationContext())!=null) {
-                    Toast.makeText(getApplicationContext(), "Cart", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(getApplicationContext(), ProceedOrder.class);
                     startActivity(intent);
                 }else {

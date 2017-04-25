@@ -152,11 +152,13 @@ public class LocationFragment extends Fragment {
                 s = s.substring(10, s.length()-1);
                 String[] a = s.split(",");
 
-                storeSharedPreferences.setUserCustomLocation(getActivity(), place.getAddress().toString());
+                if(place.getAddress()!=null) {
+                    storeSharedPreferences.setUserCustomLocation(getActivity(), place.getAddress().toString());
+                }else{
+                    Toast.makeText(getActivity(), "Select Precise Address", Toast.LENGTH_SHORT).show();
+                }
                 storeSharedPreferences.setUserCoordinatesLatitudes(getActivity(), a[0]);
                 storeSharedPreferences.setUserCoordinatesLongitudes(getActivity(), a[1]);
-
-
 
             } else {
                 Toast.makeText(getActivity(), "Select your location", Toast.LENGTH_LONG).show();

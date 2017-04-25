@@ -233,12 +233,12 @@ public class OrderFoodFinal extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    if (!pendingOrderStatus) {
+                    //if (!pendingOrderStatus) {
                         startOrdering();
-                    }
-                    else{
-                        Toast.makeText(getApplicationContext(), "You have pending orders", Toast.LENGTH_SHORT).show();
-                    }
+                    //}
+                    //else{
+                      //  Toast.makeText(getApplicationContext(), "You have pending orders", Toast.LENGTH_SHORT).show();
+                    //}
                 }
             });
         }

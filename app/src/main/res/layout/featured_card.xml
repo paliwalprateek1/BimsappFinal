@@ -90,7 +90,7 @@
                 android:layout_height="35dp"
                 app:srcCompat="@drawable/a"
                 android:id="@+id/imageView3"
-                android:background="@drawable/cart_feature"
+                android:background="@drawable/cart_shape"
                 android:layout_alignBottom="@+id/textViewType"
                 android:layout_alignParentEnd="true" />
 

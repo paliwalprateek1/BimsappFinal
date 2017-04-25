@@ -48,6 +48,10 @@ public class FirstPage extends AppCompatActivity {
         setContentView(R.layout.activity_first_page);
 
 
+        Toast.makeText(this, "2", Toast.LENGTH_SHORT).show();
+        
+
+
         Firebase.setAndroidContext(this);
         ref = new Firebase(Server.URL);
 
@@ -68,7 +72,7 @@ public class FirstPage extends AppCompatActivity {
                         startActivity(i);
                     }
                     else{
-                        Intent i = new Intent(FirstPage.this, Login.class);
+                        Intent i = new Intent(FirstPage.this, SelectRestraunt.class);
                         startActivity(i);
                     }
                     // close this activity
