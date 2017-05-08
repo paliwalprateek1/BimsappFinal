@@ -366,6 +366,7 @@ public class OrderFoodFinal extends AppCompatActivity {
 
     int pendingOrder = 1;
     private void getPendingOrders(){
+        Toast.makeText(this, "Checking Validations", Toast.LENGTH_SHORT).show();
         Firebase objRef = ref.child("Order");
         Query pendingTask = objRef.orderByChild("mail").equalTo((new StoreSharedPreferences()).getUserEmail(getApplicationContext()));
         //final Query pendingTask = objRef.orderByChild("mail").equalTo("bapu");

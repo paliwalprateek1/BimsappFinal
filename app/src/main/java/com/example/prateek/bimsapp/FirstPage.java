@@ -48,7 +48,7 @@ public class FirstPage extends AppCompatActivity {
         setContentView(R.layout.activity_first_page);
 
 
-        Toast.makeText(this, "2", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "2", Toast.LENGTH_SHORT).show();
         
 
 
@@ -72,7 +72,7 @@ public class FirstPage extends AppCompatActivity {
                         startActivity(i);
                     }
                     else{
-                        Intent i = new Intent(FirstPage.this, SelectRestraunt.class);
+                        Intent i = new Intent(FirstPage.this, Login.class);
                         startActivity(i);
                     }
                     // close this activity
